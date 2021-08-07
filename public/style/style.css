@@ -1,0 +1,423 @@
+* {
+  border: 0;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-decoration: none;
+  font-family: sans-serif;
+}
+
+body {
+  background-color: #ebebeb;
+}
+
+body::-webkit-scrollbar-track {
+  background: #ebebeb;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #bebebe;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #414141;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+@media (max-width: 768px) {
+  body::-webkit-scrollbar {
+    width: 0;
+    display: none;
+  }
+}
+
+header {
+  width: 100vw;
+}
+
+header form {
+  background-color: #20344c;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media (max-width: 768px) {
+  header form {
+    padding: 5px;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+}
+
+header form input {
+  height: 40px;
+  padding: 10px;
+  font-size: 1.1rem;
+  border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+  header form input {
+    font-size: 1rem;
+    padding: 5px 10px;
+    height: 30px;
+  }
+}
+
+header form input:nth-child(1) {
+  width: 150px;
+  margin-right: 20px;
+}
+
+@media (max-width: 768px) {
+  header form input:nth-child(1) {
+    width: 100px;
+    margin-right: 8px;
+  }
+}
+
+header form input:nth-child(2) {
+  width: 250px;
+}
+
+@media (max-width: 768px) {
+  header form input:nth-child(2) {
+    width: 150px;
+    padding: 5px 5px;
+  }
+}
+
+header form div.search-service {
+  background-color: white;
+  padding-left: 10px;
+  border-radius: 3px;
+  margin-right: 20px;
+}
+
+@media (max-width: 768px) {
+  header form div.search-service {
+    padding-left: 5px;
+    margin-right: 8px;
+  }
+}
+
+header form button[type='submit'] {
+  height: 40px;
+  width: 60px;
+  font-size: 1.2rem;
+  border-radius: 3px;
+  color: white;
+  background-color: #263a78;
+}
+
+header form button[type='submit']:hover {
+  background-color: #425ca8;
+}
+
+@media (max-width: 768px) {
+  header form button[type='submit'] {
+    height: 30px;
+    font-size: 1rem;
+    width: 40px;
+  }
+}
+
+header form div.nav-links {
+  margin-left: 200px;
+}
+
+@media (max-width: 768px) {
+  header form div.nav-links {
+    margin-left: 50px;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  header form div.nav-links {
+    margin-left: 0;
+  }
+}
+
+header form div.nav-links a {
+  color: white;
+  margin-right: 10px;
+}
+
+header form div.nav-links a:hover {
+  color: blueviolet;
+}
+
+header div.header-info-back {
+  padding: 8px;
+  background-color: #d5e2f5;
+}
+
+header div.header-info-back ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  list-style-type: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media (max-width: 768px) {
+  header div.header-info-back ul {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+}
+
+header div.header-info-back ul li {
+  float: left;
+  margin-right: 20px;
+}
+
+header div.header-info-back ul li:last-child {
+  margin-right: 0;
+}
+
+header div.header-info-back ul li a {
+  color: black;
+}
+
+main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main div.image-top-main {
+  background: url("../images/back.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 200px;
+  width: 80%;
+}
+
+@media (max-width: 768px) {
+  main div.image-top-main {
+    width: 100%;
+  }
+}
+
+main div.main-details {
+  margin: 0 10% 0 10%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media (max-width: 768px) {
+  main div.main-details {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
+main div.main-details ul.listed-services {
+  list-style-type: none;
+  width: 350px;
+  margin-right: 50px;
+  background-color: white;
+  -webkit-box-shadow: -6px 0px 15px 0px #929292;
+          box-shadow: -6px 0px 15px 0px #929292;
+}
+
+@media (max-width: 768px) {
+  main div.main-details ul.listed-services {
+    width: 94vw;
+    margin-right: 0;
+  }
+}
+
+main div.main-details ul.listed-services li {
+  border-bottom: 1px solid #7c7c7c;
+  margin: 12px 15px 8px 15px;
+  font-weight: 600;
+}
+
+main div.main-details ul.listed-services li:nth-child(1) {
+  background-color: #20344c;
+  margin: 0;
+  font-size: 1.5rem;
+  padding: 15px;
+  color: white;
+}
+
+main div.main-details div.info-card-section {
+  margin-top: 50px;
+}
+
+@media (max-width: 768px) {
+  main div.main-details div.info-card-section {
+    margin-top: 20px;
+  }
+}
+
+main div.main-details div.info-card-section div.card {
+  background-color: white;
+  margin-bottom: 30px;
+  padding: 20px 20px 30px 20px;
+  border-radius: 5px;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 500px) {
+  main div.main-details div.info-card-section div.card {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-direction: column;
+        flex-direction: column;
+  }
+}
+
+main div.main-details div.info-card-section div.card:hover {
+  background-color: #fdf2d4;
+  -webkit-box-shadow: 0px 0px 15px 0px #a7a7a7;
+          box-shadow: 0px 0px 15px 0px #a7a7a7;
+}
+
+main div.main-details div.info-card-section div.card h1 {
+  margin-bottom: 10px;
+}
+
+main div.main-details div.info-card-section div.card p.name {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+main div.main-details div.info-card-section div.card p.address {
+  margin-bottom: 5px;
+}
+
+main div.main-details div.info-card-section div.card div.call {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  float: left;
+}
+
+@media (max-width: 500px) {
+  main div.main-details div.info-card-section div.card div.call {
+    float: none;
+  }
+}
+
+main div.main-details div.info-card-section div.card div.call i {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+main div.main-details div.info-card-section div.card div.message {
+  margin-bottom: 25px;
+  margin-left: 250px;
+}
+
+@media (max-width: 500px) {
+  main div.main-details div.info-card-section div.card div.message {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+}
+
+main div.main-details div.info-card-section div.card a.button {
+  height: 40px;
+  padding: 10px 15px;
+  border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+  main div.main-details div.info-card-section div.card a.button {
+    margin-bottom: 5px;
+  }
+  main div.main-details div.info-card-section div.card a.button:last-child {
+    margin-bottom: 0;
+  }
+}
+
+main div.main-details div.info-card-section div.card a.button:hover {
+  font-weight: 600;
+}
+
+main div.main-details div.info-card-section div.card a.back-black {
+  background-color: white;
+  color: black;
+  border: 2px solid #d3d3d3;
+}
+
+main div.main-details div.info-card-section div.card a.back-black:hover {
+  background-color: #343c42;
+  color: white;
+  border: 0;
+}
+
+main div.main-details div.info-card-section div.card a.back-red {
+  color: white;
+  background-color: #f44336;
+  border: 1px solid #f44336;
+}
+
+footer div.actual-footer {
+  width: 100%;
+  height: 500px;
+  background-color: #141f31;
+}
+/*# sourceMappingURL=style.css.map */

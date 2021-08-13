@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Detail = require('../models/home')
+const User = require('../models/home')
 
 
 router.get('/', (req, res) => {

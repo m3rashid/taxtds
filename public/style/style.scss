@@ -132,10 +132,10 @@ main{
     flex-direction: column;
     align-items: center;
     div.image-top-main{
-        background: url('../images/back.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 200px;
+        img{
+            width: 100%;
+            height: 100%;
+        }
         width: 80%;
         @media(max-width: 900px){ width: 92% }
         @media(max-width: 768px){ width: 100% }
@@ -242,28 +242,35 @@ main{
 
 footer{
     background-color: rgb(20, 31, 49);
-    @include center-row-wise();
-    flex-direction: column;
-    padding: 50px 10% 0 10%;
     color: white;
     div.carousel-links{
         // not something here
     }
 
     div.actual-footer-one{
-        @include center-row-wise();
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        padding: 50px 10% 0 10%;
+        @media(max-width: 900px){ padding: 30px 4% 0 4% }
+        @media(max-width: 786px){ padding: 10px }
+        @media(max-width: 700px){
+            grid-template-columns: 1fr;
+            padding: 0;
+        }
         .container{
-            flex-grow: 1;
-            flex-basis: 0;
             padding-left: 50px;
+            @media(max-width: 900px){ padding-left: 25px }
+            @media(max-width: 768px){ padding-left: 10px }
             div.inner-container-one{
-                img{
-                    width: 110%
-                }
+                text-align: center;
             }
             div.inner-container-two{
+                text-align: center;
                 margin-top: 80px;
+                @media(max-width: 700px){
+                    margin-top: 30px;
+                    margin-bottom: 30px;
+                }
                 .social-icons-container{
                     padding-top: 10px;
                     a{
@@ -285,6 +292,9 @@ footer{
                 &:first-child{
                     font-size: 1.5rem;
                     margin-bottom: 10px;
+                    @media(max-width: 700px){
+                        margin-top: 30px;
+                    }
                 }
             }
             ul{
@@ -304,6 +314,9 @@ footer{
     div.actual-footer-two{
         text-align: center;
         padding: 50px;
+        @media(max-width: 900px){ padding: 25px }
+        @media(max-width: 768px){ padding: 10px }
+        @media(max-width: 700px){ margin-top: 30px }
         p{
             &:first-child{
                 font-size: 1.5rem;
@@ -316,7 +329,10 @@ footer{
     }
     #footer-copyright{
         text-align: center;
-        margin-bottom: 5px;
+        padding-bottom: 5px;
         color: rgba(206, 206, 206, 0.6);
+        @media(max-width: 700px){
+            margin-top: 20px;
+        }
     }
 }

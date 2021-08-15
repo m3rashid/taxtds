@@ -7,7 +7,7 @@ app.set('view engine', 'ejs')
 app.set('views')
 app.use(express.static('public'))
 
-mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
 const db = mongoose.connection
 db.on('err', err => console.log(err))
 db.once('open', () => console.log('connected to mongoose'))

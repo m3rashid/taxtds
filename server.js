@@ -12,15 +12,8 @@ const db = mongoose.connection
 db.on('err', err => console.log(err))
 db.once('open', () => console.log('connected to mongoose'))
 
-// Requiring routes
-const indexRouter = require('./routes/home')
-
-
 // Routing
-app.use('/', indexRouter)
-
-
-
+app.use('/', require('./routes/home'))
 
 
 const port = process.env.PORT || 3000

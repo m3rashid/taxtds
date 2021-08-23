@@ -11,39 +11,39 @@
 }
 
 *::-moz-selection {
-  background-color: #d768f3;
+  background-color: #f3de68;
   color: black;
 }
 
 *::selection {
-  background-color: #d768f3;
+  background-color: #f3de68;
   color: black;
 }
 
-body {
+body, div.carousel-links {
   background-color: #ebebeb;
   overflow-x: hidden;
 }
 
-body::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track, div.carousel-links::-webkit-scrollbar-track {
   background: #ebebeb;
 }
 
-body::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb, div.carousel-links::-webkit-scrollbar-thumb {
   background: #bebebe;
 }
 
-body::-webkit-scrollbar-thumb:hover {
+body::-webkit-scrollbar-thumb:hover, div.carousel-links::-webkit-scrollbar-thumb:hover {
   background: #414141;
 }
 
-body::-webkit-scrollbar {
+body::-webkit-scrollbar, div.carousel-links::-webkit-scrollbar {
   width: 10px;
   display: none;
 }
 
 @media (max-width: 768px) {
-  body::-webkit-scrollbar {
+  body::-webkit-scrollbar, div.carousel-links::-webkit-scrollbar {
     display: none;
   }
 }
@@ -250,12 +250,7 @@ main {
 }
 
 main div.image-top-main {
-  width: 80%;
-}
-
-main div.image-top-main img {
-  width: 100%;
-  height: 100%;
+  max-width: 80%;
 }
 
 @media (max-width: 900px) {
@@ -264,13 +259,14 @@ main div.image-top-main img {
   }
 }
 
-@media (max-width: 768px) {
-  main div.image-top-main {
-    width: 100%;
-  }
+main div.image-top-main img {
+  width: 100%;
+  height: 100%;
 }
 
 main div.main-details {
+  max-width: 80%;
+  min-width: 80%;
   margin: 0 10% 0 10%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -287,6 +283,8 @@ main div.main-details {
 @media (max-width: 900px) {
   main div.main-details {
     margin: 0 4% 0 4%;
+    max-width: 92%;
+    min-width: 92%;
   }
 }
 
@@ -330,8 +328,16 @@ main div.main-details ul.listed-services {
 
 main div.main-details ul.listed-services li {
   border-bottom: 1px solid #7c7c7c;
-  margin: 12px 15px 8px 15px;
-  font-weight: 600;
+  padding-bottom: 5px;
+  margin: 12px 10px 8px 10px;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  main div.main-details ul.listed-services li {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
 }
 
 main div.main-details ul.listed-services li:nth-child(1) {
@@ -340,6 +346,14 @@ main div.main-details ul.listed-services li:nth-child(1) {
   font-size: 1.5rem;
   padding: 15px;
   color: white;
+}
+
+main div.main-details ul.listed-services li a {
+  color: black;
+}
+
+main div.main-details ul.listed-services li a:hover {
+  color: blue;
 }
 
 main div.main-details div.info-card-section {
@@ -465,6 +479,17 @@ footer {
   color: white;
 }
 
+footer div.carousel-links {
+  background-color: white;
+  height: 150px;
+  overflow-x: hidden;
+}
+
+footer div.carousel-links a img {
+  display: inline;
+  float: left;
+}
+
 footer div.actual-footer-one {
   display: -ms-grid;
   display: grid;
@@ -506,6 +531,7 @@ footer div.actual-footer-one .container {
 @media (max-width: 768px) {
   footer div.actual-footer-one .container {
     padding-left: 10px;
+    padding-top: 20px;
   }
 }
 

@@ -26,180 +26,21 @@
 </head>
 
 <body>
-    <header>
-        <form action="" method="GET">
-            <input type="text" placeholder="Enter State" name="state">
-            <div class="search-service">
-                <i class="fas fa-search"></i>
-                <input type="text" name="service"
-                    placeholder="Search your services like income tax consultant, gst consultants and more">
-            </div>
-            <button type="submit" class="search-icon">
-                <i class="fas fa-search"></i>
-            </button>
-
-            <div class="nav-links">
-                <a href="">Advertise</a>
-                <a href="">Login</a>
-                <a href="">Signup</a>
-            </div>
-        </form>
-
-        <div class="header-info-back">
-            <ul>
-                <li><a href="">Chartered Accountant</a></li>
-                <li><a href="">Cost Accountant</a></li>
-                <li><a href="">Company Secretory</a></li>
-                <li><a href="">Other Professional</a></li>
-            </ul>
-        </div>
-    </header>
+    <%- include('partials/_header.ejs') %> 
 
     <main>
         <div class="image-top-main">
             <img src="images/back.jpg" alt="">
         </div>
         <div class="main-details">
-            <ul class="listed-services">
-                <li class="services-list">Listed Services</li>
-                <li class="services-list"><a href="">Registration Services</a></li>
-                <li class="services-list"><a href="">Company compliance</a></li>
-                <li class="services-list"><a href="">Tax filling</a></li>
-                <li class="services-list"><a href="">Audit and Insurance</a></li>
-                <li class="services-list"><a href="">Taxation Advisory and Personal Advisory</a></li>
-                <li class="services-list"><a href="">FCRA FEMA NGOs</a></li>
-                <li class="services-list"><a href="">Valuations</a></li>
-                <li class="services-list"><a href="">Accounting Services</a></li>
-                <li class="services-list"><a href="">Investment Planning</a></li>
-                <li class="services-list"><a href="">GST Return</a></li>
-                <li class="services-list"><a href="">GST Registration</a></li>
-                <li class="services-list"><a href="">GST Registration for foreigners</a></li>
-                <li class="services-list"><a href="">Cancel GST Registration</a></li>
-                <li class="services-list"><a href="">Temporary Registration</a></li>
-                <li class="services-list"><a href="">Income Tax Registration</a></li>
-                <li class="services-list"><a href="">company Registration</a></li>
-                <li class="services-list"><a href="">Private Limited company</a></li>
-                <li class="services-list"><a href="">Public Limited company</a></li>
-                <li class="services-list"><a href="">Proprietorship Registration</a></li>
-                <li class="services-list"><a href="">Partnership Registration</a></li>
-                <li class="services-list"><a href="">LLP Registration</a></li>
-                <li class="services-list"><a href="">Society Registration</a></li>
-                <li class="services-list"><a href="">Trust Registration</a></li>
-                <li class="services-list"><a href="">PF Registration</a></li>
-                <li class="services-list"><a href="">ESI Registration</a></li>
-                <li class="services-list"><a href="">MSME Registration</a></li>
-                <li class="services-list"><a href="">FSSAI Registration</a></li>
-                <li class="services-list"><a href="">Digital Registration</a></li>
-                <li class="services-list"><a href="">Patent Registration</a></li>
-                <li class="services-list"><a href="">Import Export Code</a></li>
-                <li class="services-list"><a href="">Copy Right Registration</a></li>
-                <li class="services-list"><a href="">Trademark Registration</a></li>
-                <li class="services-list"><a href="">Trademark Rectification</a></li>
-                <li class="services-list"><a href="">Trade mark Objection</a></li>
-                <li class="services-list"><a href="">Trademark Renewal</a></li>
-                <li class="services-list"><a href="">Logo Registration</a></li>
-                <li class="services-list"><a href="">Provisional Patent Registration</a></li>
-                <li class="services-list"><a href="">Partnership deed</a></li>
-                <li class="services-list"><a href="">Company name change</a></li>
-                <li class="services-list"><a href="">Registration office Change</a></li>
-                <li class="services-list"><a href="">Add Directors</a></li>
-                <li class="services-list"><a href="">Remove directores</a></li>
-                <li class="services-list"><a href="">Increase Authorized Capital</a></li>
-                <li class="services-list"><a href="">Shares Transfer</a></li>
-                <li class="services-list"><a href="">MOA Amendment</a></li>
-                <li class="services-list"><a href="">Add Partner</a></li>
-                <li class="services-list"><a href="">Winding Up company</a></li>
-                <li class="services-list"><a href="">Winding Up LLP</a></li>
-                <li class="services-list"><a href="">Filing of Income tax</a></li>
-                <li class="services-list"><a href="">Wealth tax returns</a></li>
-                <li class="services-list"><a href="">TDS Return</a></li>
-                <li class="services-list"><a href="">ESI Return</a></li>
-                <li class="services-list"><a href="">Statutory Audits</a></li>
-                <li class="services-list"><a href="">Tax Audits</a></li>
-                <li class="services-list"><a href="">Internal and Management Audits</a></li>
-                <li class="services-list"><a href="">Internal Control Review</a></li>
-                <li class="services-list"><a href="">Due diligence</a></li>
-                <li class="services-list"><a href="">Business and Asset Valuation</a></li>
-                <li class="services-list"><a href="">System Audit</a></li>
-                <li class="services-list"><a href="">Risk Assessment and Management</a></li>
-                <li class="services-list"><a href="">Corporate and personal tax compliance including income-tax
-                        assessments</a></li>
-                <li class="services-list"><a href="">Appeals before the Commissioner (Appeals)</a></li>
-                <li class="services-list"><a href="">International and Domestic Tax Planning</a></li>
-                <li class="services-list"><a href="">Filing of Income tax</a></li>
-                <li class="services-list"><a href="">Wealth-tax returns of residents and non-residents individuals</a></li>
-                <li class="services-list"><a href="">Tax and tds services</a></li>
-                <li class="services-list"><a href="">domestic and foreign companies and other entities</a></li>
-                <li class="services-list"><a href="">Compliance with law relating to Indirect taxes</a></li>
-                <li class="services-list"><a href="">Personal financial planning</a></li>
-                <li class="services-list"><a href="">Insurance and pension planning</a></li>
-                <li class="services-list"><a href="">Advice on various foreign exchange matters under the Act</a></li>
-                <li class="services-list"><a href="">Trust/Society Formation</a></li>
-                <li class="services-list"><a href="">Registration u/s 12A and 80G of Income Tax Act</a></li>
-                <li class="services-list"><a href="">Registration under FCRA</a></li>
-                <li class="services-list"><a href="">Business Valuation</a></li>
-                <li class="services-list"><a href="">Partnership Valuation</a></li>
-                <li class="services-list"><a href="">Fair Valuation for IFRS Valuation in Shareholder Disputes</a></li>
-                <li class="services-list"><a href="">Intangible Asset Valuation</a></li>
-                <li class="services-list"><a href="">Maintenance of statutory records registers and minutes books</a></li>
-                <li class="services-list"><a href="">Book Keeping and general accounting services</a></li>
-                <li class="services-list"><a href="">Preparation of Financial Statements</a></li>
-                <li class="services-list"><a href="">Payroll Processing</a></li>
-                <li class="services-list"><a href="">Cash Forecasting Design, implementation and review of accounting
-                        manuals</a></li>
-                <li class="services-list"><a href="">Book Keeping and general accounting services</a></li>
-                <li class="services-list"><a href="">Preparation of Financial Statements</a></li>
-                <li class="services-list"><a href="">Payroll Processing</a></li>
-                <li class="services-list"><a href="">Cash Forecasting Design</a></li>
-                <li class="services-list"><a href="">implementation and review of accounting manuals</a></li>
-                <li class="services-list"><a href="">Life Insurance Policy (LIC)</a></li>
-                <li class="services-list"><a href="">Public Provident Fund</a></li>
-                <li class="services-list"><a href="">Mutual fund</a></li>
-                <li class="services-list"><a href="">Equity Share</a></li>
-                <li class="services-list"><a href="">Real estate investment</a></li>
-                <li class="services-list"><a href="">Gold ETF</a></li>
-                <li class="services-list"><a href="">Post Office investment</a></li>
-                <li class="services-list"><a href="">Company Fixed Deposits</a></li>
-                <li class="services-list"><a href="">Bank fixed deposits</a></li>
-                <li class="services-list"><a href="">Recurring Deposits</a></li>
-                <li class="services-list"><a href="">Double Accounting System</a></li>
-                <li class="services-list"><a href="">Economics - Micro</a></li>
-                <li class="services-list"><a href="">Economics - Macro</a></li>
-                <li class="services-list"><a href="">Business Studies</a></li>
-                <li class="services-list"><a href="">Fundamentals of Accounting</a></li>
-                <li class="services-list"><a href="">Mercantile Law</a></li>
-                <li class="services-list"><a href="">General Economics</a></li>
-                <li class="services-list"><a href="">Quantitative Aptitude</a></li>
-                <li class="services-list"><a href="">Accounting</a></li>
-                <li class="services-list"><a href="">Cost Accounting and Financial Management</a></li>
-                <li class="services-list"><a href="">Advanced Accounting</a></li>
-                <li class="services-list"><a href="">Taxation</a></li>
-                <li class="services-list"><a href="">Auditing and Assurance</a></li>
-                <li class="services-list"><a href="">Business Laws, Ethics and Communication</a></li>
-                <li class="services-list"><a href="">Information Technology and Strategic Management</a></li>
-                <li class="services-list"><a href="">Corporate and other Laws</a></li>
-                <li class="services-list"><a href="">Advanced Auditing and Professional Ethics</a></li>
-                <li class="services-list"><a href="">Financial Reporting</a></li>
-                <li class="services-list"><a href="">Strategic Financial Management</a></li>
-                <li class="services-list"><a href="">Strategic Cost Management and Performance Evaluation</a></li>
-                <li class="services-list"><a href="">Corporate and Economic Laws</a></li>
-                <li class="services-list"><a href="">Direct Tax Laws and International Taxation</a></li>
-                <li class="services-list"><a href="">Indirect Tax Laws</a></li>
-                <li class="services-list"><a href="">Risk Management</a></li>
-                <li class="services-list"><a href="">International Taxation</a></li>
-                <li class="services-list"><a href="">Economic Laws</a></li>
-                <li class="services-list"><a href="">Financial Services and Capital Markets</a></li>
-                <li class="services-list"><a href="">Global Financial Reporting Standards</a></li>
-                <li class="services-list"><a href="">Multidisciplinary Case Study</a></li>
-            </ul>
+            <%- include('partials/_listed_services.ejs') %> 
     
             <div class="info-card-section">
                 <% for(let i=0; i<20; i++){ %>
                     <div class="card">
                         <h1 class="brand">Ankit Sehra and Assosiates</h1>
                         <p class="name">Mr. Ankit Sehra, New Delhi</p>
-                        <p class="address">Address: Visit Us WZ-246 B1, Opp. Metro Pillar No.660, Chatrapati Shivaji Marg, Uttam
-                            Nagar, New Delhi, Delhi, 110059</p>
+                        <p class="address">Address: Visit Us WZ-246 B1, Opp. Metro Pillar No.660, Chatrapati Shivaji Marg, Uttam Nagar, New Delhi, Delhi, 110059</p>
                         <div class="call"><i class="fas fa-phone-volume"></i> 9891571973</div>
                         <div class="message"><i class="far fa-envelope"></i> contact@expi</div>
                         <a href="" class="button back-black"><i class="far fa-star"></i> Write Review</a>
@@ -211,67 +52,7 @@
         </div>
     </main>
 
-    <footer>
-        <div class="carousel-links"></div>
-
-        <div class="actual-footer-one">
-            <div class="container">
-                <div class="inner-container-one">
-                    <img src="images/foot-logo.png" alt="">
-                    <p>Worlds's No. 1 Local Business Directory Website.</p>
-                </div>
-                
-                <div class="inner-container-two">
-                    <p>Follow with us</p>
-                    <p>Follow with Us where thousand of professionals available on India's 1st professionals Hub</p>
-                    <div class="social-icons-container">
-                        <a href=""><i class="fab fa-facebook-square"></i></a>
-                        <a href=""><i class="fab fa-google-plus-square"></i></a>
-                        <a href=""><i class="fab fa-twitter-square"></i></a>
-                        <a href=""><i class="fab fa-linkedin"></i></a>
-                        <a href=""><i class="fab fa-youtube-square"></i></a>
-                        <a href=""><i class="fab fa-whatsapp-square"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container">
-                <p>Support & Help</p>
-                <ul>
-                    <li>About Us</li>
-                    <li>Register</li>
-                    <li>Quick Enquiry</li>
-                    <li>Terms & Conditions</li>
-                    <li>Login</li>
-                </ul>
-            </div>
-
-            <div class="container">
-                <p>Popular Services</p>
-                <ul>
-                    <li>Registration Services</li>
-                    <li>Tax Filing</li>
-                    <li>Taxation Advisory & Personal advisory</li>
-                    <li>Investment Planning</li>
-                    <li>Company Compliance</li>
-                    <li>Audit & Insurance</li>
-                    <li>FCRA FEMA NGOs</li>
-                    <li>Valuations</li>
-                    <li>Accounting</li>
-                    <li>Services</li>
-                    <li>GST Return</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="actual-footer-two">
-            <div class="container">
-                <p>Free Listing to All over Cities</p>
-                <p>Ahmedabad / Bangalore / Chandigarh / Chennai / Coimbatore / Delhi-NCR / Goa/Hyderabad / Indore / Jaipur / Kolkata / Mumbai / Mysore / Nagpur / Nashik / Pune / Surat / Vadodara / Rajasthan / Noida / Gurgaon / All Over India</p>
-            </div>
-        </div>
-        <div id="footer-copyright"></div>
-    </footer>
+    <%- include('partials/_footer.ejs') %> 
 
 </body>
 </html>

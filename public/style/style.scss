@@ -5,7 +5,8 @@
     padding: 0; 
     box-sizing: border-box; 
     text-decoration: none; 
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
     &::selection{
         background-color: rgb(243, 222, 104);
         color: black;
@@ -18,7 +19,7 @@
     justify-content: center;
 }
 
-body, div.carousel-links{
+body{
     background-color: rgb(235, 235, 235);
     overflow-x: hidden;
     &::-webkit-scrollbar-track { background: rgb(235, 235, 235) }
@@ -200,7 +201,7 @@ main{
                 margin-bottom: 30px;
                 padding: 20px 20px 30px 20px;
                 border-radius: 5px;
-                font-size: 1.1rem;        
+                font-size: 1rem;        
                 @media(max-width: 520px){
                     @include center-row-wise();
                     flex-direction: column;
@@ -209,12 +210,21 @@ main{
                     background-color: rgb(253, 242, 212);
                     box-shadow: 0px 0px 15px 0px rgb(167, 167, 167);
                 }
-                h1{ margin-bottom: 10px }
+                h1{
+                    margin-bottom: 10px;
+                    font-weight: bold;
+                }
                 p.name{
                     font-size: 1.2rem;
                     margin-bottom: 5px;
+                    font-weight: bold;
                 }
-                p.address{ margin-bottom: 5px }
+                p.address{ 
+                    margin-bottom: 5px;
+                    span{
+                        font-weight: bold;
+                    }
+                }
                 div.call{
                     font-size: 1.2rem;
                     margin-bottom: 5px;
@@ -230,7 +240,7 @@ main{
                     height: 40px;
                     padding: 10px 15px;
                     border-radius: 3px;
-                    &:hover{ font-weight: 600 }
+                    &:hover{ font-weight: bold }
                     @media(max-width: 768px){
                         margin-bottom: 5px;
                         &:last-child{ margin-bottom: 0 }
@@ -262,13 +272,25 @@ footer{
     div.carousel-links{
         background-color: white;
         height: 150px;
-        overflow-x: hidden;
-        a{
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        .images{
+            width: 100%;
+            height: 100%;
+            animation: carousel 15s linear infinite;
+            &:hover{
+                animation-play-state: paused;
+            }
             img{
                 display: inline;
                 float: left;
             }
         }
+        @keyframes carousel {
+            100%{ transform: translateX(-1050px); }
+        }
+    
     }
 
     div.actual-footer-one{

@@ -7,7 +7,8 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   text-decoration: none;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
 }
 
 *::-moz-selection {
@@ -20,30 +21,30 @@
   color: black;
 }
 
-body, div.carousel-links {
+body {
   background-color: #ebebeb;
   overflow-x: hidden;
 }
 
-body::-webkit-scrollbar-track, div.carousel-links::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track {
   background: #ebebeb;
 }
 
-body::-webkit-scrollbar-thumb, div.carousel-links::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
   background: #bebebe;
 }
 
-body::-webkit-scrollbar-thumb:hover, div.carousel-links::-webkit-scrollbar-thumb:hover {
+body::-webkit-scrollbar-thumb:hover {
   background: #414141;
 }
 
-body::-webkit-scrollbar, div.carousel-links::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 10px;
   display: none;
 }
 
 @media (max-width: 768px) {
-  body::-webkit-scrollbar, div.carousel-links::-webkit-scrollbar {
+  body::-webkit-scrollbar {
     display: none;
   }
 }
@@ -371,7 +372,7 @@ main div.main-details div.info-card-section div.card {
   margin-bottom: 30px;
   padding: 20px 20px 30px 20px;
   border-radius: 5px;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 @media (max-width: 520px) {
@@ -399,15 +400,21 @@ main div.main-details div.info-card-section div.card:hover {
 
 main div.main-details div.info-card-section div.card h1 {
   margin-bottom: 10px;
+  font-weight: bold;
 }
 
 main div.main-details div.info-card-section div.card p.name {
   font-size: 1.2rem;
   margin-bottom: 5px;
+  font-weight: bold;
 }
 
 main div.main-details div.info-card-section div.card p.address {
   margin-bottom: 5px;
+}
+
+main div.main-details div.info-card-section div.card p.address span {
+  font-weight: bold;
 }
 
 main div.main-details div.info-card-section div.card div.call {
@@ -444,7 +451,7 @@ main div.main-details div.info-card-section div.card a.button {
 }
 
 main div.main-details div.info-card-section div.card a.button:hover {
-  font-weight: 600;
+  font-weight: bold;
 }
 
 @media (max-width: 768px) {
@@ -482,12 +489,40 @@ footer {
 footer div.carousel-links {
   background-color: white;
   height: 150px;
-  overflow-x: hidden;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-footer div.carousel-links a img {
+footer div.carousel-links .images {
+  width: 100%;
+  height: 100%;
+  -webkit-animation: carousel 15s linear infinite;
+          animation: carousel 15s linear infinite;
+}
+
+footer div.carousel-links .images:hover {
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+
+footer div.carousel-links .images img {
   display: inline;
   float: left;
+}
+
+@-webkit-keyframes carousel {
+  100% {
+    -webkit-transform: translateX(-1050px);
+            transform: translateX(-1050px);
+  }
+}
+
+@keyframes carousel {
+  100% {
+    -webkit-transform: translateX(-1050px);
+            transform: translateX(-1050px);
+  }
 }
 
 footer div.actual-footer-one {

@@ -1,36 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>taxtds</title>
-
-    <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- User Defined Styles -->
-    <link rel="stylesheet" href="style/style.css">
-
-    <!-- Scripts -->
-    <script src="frontendJs/script.js" defer></script>
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/png" href="images/fav.ico"/>
-
-    <!-- Google Fonts CDN -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- SEO Meta Descriptions -->
-    <!--  -->
-</head>
-
-<body>
+<%- include('partials/_topLinks.ejs') %> 
     <%- include('partials/_header.ejs') %> 
-
     <main>
         <div class="image-top-main">
             <img src="images/back.jpg" alt="">
@@ -39,8 +8,8 @@
             <%- include('partials/_listed_services.ejs') %> 
     
             <div class="info-card-section">
-                <% for(let i=0; i<20; i++){ %>
-                    <div class="card">
+                <% for(let i=0; i<15; i++){ %>
+                    <div class="card" id="card<%= i %>">
                         <h1 class="brand">Ankit Sehra and Assosiates</h1>
                         <p class="name">Mr. Ankit Sehra, New Delhi</p>
                         <p class="address"><span>Address:</span> Visit Us WZ-246 B1, Opp. Metro Pillar No.660, Chatrapati Shivaji Marg, Uttam Nagar, New Delhi, Delhi, 110059</p>
@@ -54,8 +23,6 @@
             </div>
         </div>
     </main>
-
     <%- include('partials/_footer.ejs') %> 
-
 </body>
 </html>

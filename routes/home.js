@@ -4,12 +4,25 @@ const User = require('../models/home')
 
 
 router.get('/', (req, res) => {
-    res.render('index.ejs')
+    res.render('index.ejs', {
+        titleTop: 'taxtds'
+    })
 })
 
 router.get('/search', async (req, res) => {
-    const state = req.body.state
-    const service = req.body.service
+    const state = req.query.state
+    const service = req.query.service
+
+    console.log(state, service)
+    res.render('index.ejs', {
+        titleTop: 'taxtds'
+    })
+})
+
+router.get('/details', (req, res) => {
+    res.render('details.ejs', {
+        titleTop: 'detail'
+    })
 })
 
 module.exports = router;

@@ -18,7 +18,13 @@
     flex-direction: row;
     justify-content: center;
 }
+@mixin center-column-wise{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
+// Main Page Starts
 body{
     background-color: rgb(235, 235, 235);
     overflow-x: hidden;
@@ -95,6 +101,7 @@ header{
         }
         div.nav-links{
             margin-left: 200px;
+            cursor: pointer;
             @media(max-width: 950px){ margin-left: 100px }
             @media(max-width: 875px){ margin-left: 30px }
             @media(max-width: 768px){
@@ -129,8 +136,7 @@ header{
 }
 
 main{
-    @include center-row-wise();
-    flex-direction: column;
+    @include center-column-wise();
     align-items: center;
     div.image-top-main{
         max-width: 80%;
@@ -203,8 +209,7 @@ main{
                 border-radius: 5px;
                 font-size: 1rem;        
                 @media(max-width: 520px){
-                    @include center-row-wise();
-                    flex-direction: column;
+                    @include center-column-wise();
                 }
                 &:hover{
                     background-color: rgb(253, 242, 212);
@@ -382,6 +387,99 @@ footer{
         color: rgba(206, 206, 206, 0.6);
         @media(max-width: 700px){
             margin-top: 20px;
+        }
+    }
+}
+// Main Page ends
+
+
+
+// Modals Start
+.blur{
+    filter: blur(3px);
+    opacity: 0.6;
+}
+div#loginMain, div#signupMain, div#advertiseMain{
+    background-color: lightblue;
+    display: none;
+    position: fixed;
+    padding: 40px; 
+    border-radius: 10px;
+    z-index: 1;
+    left: calc(50vw - 240px);
+    top: calc(50vh - 250px);
+    @media(max-width: 450px){
+        padding: 15px;
+        width: 100%;
+        left: 0;
+    }
+    span.close{
+        position: relative;
+        left: 90%;
+        top: -10px;
+        font-size: 3rem;
+        padding-left: 5px;
+        padding-right: 5px;
+        &:hover{
+            color: red;
+            cursor: pointer;
+        }
+    }
+    .loginCard{
+        @include center-column-wise();
+        align-items: center;
+        width: 400px;
+        background-color: rgb(255, 153, 0);
+        border-radius: 10px;
+        margin-top: 40px;
+        padding: 20px;
+        padding-top: 0;
+        @media(max-width: 450px){
+            width: 100%;
+        }
+        img{
+            position: relative;
+            height: 120px;
+            width: 120px;
+            border-radius: 50%;
+            border: 7px solid lightblue;
+            top: -60px;
+        }
+        form{
+            margin-top: -30px;
+            @include center-column-wise();
+            align-items: center;
+            .loginUsername, .loginPassword{
+                @include center-row-wise();
+                align-items: center;
+                background-color: rgb(255, 51, 0);
+                margin-bottom: 10px;
+                padding-left: 8px;
+                height: 35px;
+                border-radius: 5px;
+                i{
+                    background-color: rgb(255, 51, 0);
+                    font-size: 1.5rem;
+                    margin-right: 8px;
+                }
+                input{
+                    height: 35px;
+                    width: 250px;
+                    padding-left: 10px;
+                    font-size: 1.2rem;
+                    border-top-right-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                }
+            }
+            button{
+                font-size: 1.5rem;
+                padding: 5px;
+                width: 200px;
+                background-color: rgb(255, 51, 0);
+                color: white;
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
         }
     }
 }

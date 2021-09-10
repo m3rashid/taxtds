@@ -154,6 +154,7 @@ header form button[type='submit']:hover {
 
 header form div.nav-links {
   margin-left: 200px;
+  cursor: pointer;
 }
 
 @media (max-width: 950px) {
@@ -236,15 +237,13 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -ms-flex-direction: column;
-      flex-direction: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -380,15 +379,13 @@ main div.main-details div.info-card-section div.card {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: horizontal;
+    -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
+        -ms-flex-direction: column;
+            flex-direction: column;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    -ms-flex-direction: column;
-        flex-direction: column;
   }
 }
 
@@ -691,5 +688,144 @@ footer #footer-copyright {
   footer #footer-copyright {
     margin-top: 20px;
   }
+}
+
+.blur {
+  -webkit-filter: blur(3px);
+          filter: blur(3px);
+  opacity: 0.6;
+}
+
+div#loginMain, div#signupMain, div#advertiseMain {
+  background-color: lightblue;
+  display: none;
+  position: fixed;
+  padding: 40px;
+  border-radius: 10px;
+  z-index: 1;
+  left: calc(50vw - 240px);
+  top: calc(50vh - 250px);
+}
+
+@media (max-width: 450px) {
+  div#loginMain, div#signupMain, div#advertiseMain {
+    padding: 15px;
+    width: 100%;
+    left: 0;
+  }
+}
+
+div#loginMain span.close, div#signupMain span.close, div#advertiseMain span.close {
+  position: relative;
+  left: 90%;
+  top: -10px;
+  font-size: 3rem;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+div#loginMain span.close:hover, div#signupMain span.close:hover, div#advertiseMain span.close:hover {
+  color: red;
+  cursor: pointer;
+}
+
+div#loginMain .loginCard, div#signupMain .loginCard, div#advertiseMain .loginCard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 400px;
+  background-color: #ff9900;
+  border-radius: 10px;
+  margin-top: 40px;
+  padding: 20px;
+  padding-top: 0;
+}
+
+@media (max-width: 450px) {
+  div#loginMain .loginCard, div#signupMain .loginCard, div#advertiseMain .loginCard {
+    width: 100%;
+  }
+}
+
+div#loginMain .loginCard img, div#signupMain .loginCard img, div#advertiseMain .loginCard img {
+  position: relative;
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  border: 7px solid lightblue;
+  top: -60px;
+}
+
+div#loginMain .loginCard form, div#signupMain .loginCard form, div#advertiseMain .loginCard form {
+  margin-top: -30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+div#loginMain .loginCard form .loginUsername, div#loginMain .loginCard form .loginPassword, div#signupMain .loginCard form .loginUsername, div#signupMain .loginCard form .loginPassword, div#advertiseMain .loginCard form .loginUsername, div#advertiseMain .loginCard form .loginPassword {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #ff3300;
+  margin-bottom: 10px;
+  padding-left: 8px;
+  height: 35px;
+  border-radius: 5px;
+}
+
+div#loginMain .loginCard form .loginUsername i, div#loginMain .loginCard form .loginPassword i, div#signupMain .loginCard form .loginUsername i, div#signupMain .loginCard form .loginPassword i, div#advertiseMain .loginCard form .loginUsername i, div#advertiseMain .loginCard form .loginPassword i {
+  background-color: #ff3300;
+  font-size: 1.5rem;
+  margin-right: 8px;
+}
+
+div#loginMain .loginCard form .loginUsername input, div#loginMain .loginCard form .loginPassword input, div#signupMain .loginCard form .loginUsername input, div#signupMain .loginCard form .loginPassword input, div#advertiseMain .loginCard form .loginUsername input, div#advertiseMain .loginCard form .loginPassword input {
+  height: 35px;
+  width: 250px;
+  padding-left: 10px;
+  font-size: 1.2rem;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+div#loginMain .loginCard form button, div#signupMain .loginCard form button, div#advertiseMain .loginCard form button {
+  font-size: 1.5rem;
+  padding: 5px;
+  width: 200px;
+  background-color: #ff3300;
+  color: white;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 /*# sourceMappingURL=style.css.map */

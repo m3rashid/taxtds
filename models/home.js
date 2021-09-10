@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
-
-const userSchema = new mongoose.Schema({
+const advertisementSchema = new mongoose.Schema({
     brandName: {
         type: String,
         required: true
@@ -13,7 +12,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    phoneNo: {
+    phone: {
         type: String,
         required: true
     },
@@ -21,10 +20,29 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
+    }
+})
+
+const userSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    phone: {
+        type: Number,
+        required: true
     },
     password: {
         type: String,
         required: true
-    }
+    },
+    admin: {
+        type: Boolean,
+        default: 0
+    },
+    ads: [advertisementSchema]
 })
-module.exports = new mongoose.model('User', userSchema)
+
+module.exports.advertisemnt = new mongoose.model('Advertisement', advertisementSchema)
+module.exports.user = new mongoose.model('User', userSchema)

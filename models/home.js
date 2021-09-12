@@ -1,20 +1,29 @@
 const mongoose = require('mongoose')
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+
 const advertisementSchema = new mongoose.Schema({
     brandName: {
         type: String,
         required: true
     },
-    name: {
+    owner: {
         type: String,
         required: true
     },
-    address: {
+    address: String,
+    state: {
+        type: String,
+        required: true
+    },
+    service: {
         type: String,
         required: true
     },
     phone: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     email: {
         type: String,
@@ -29,10 +38,6 @@ const userSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
-    phone: {
-        type: Number,
-        required: true
-    },
     password: {
         type: String,
         required: true
@@ -43,6 +48,9 @@ const userSchema = new mongoose.Schema({
     },
     ads: [advertisementSchema]
 })
+
+userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(findOrCreate);
 
 module.exports.advertisemnt = new mongoose.model('Advertisement', advertisementSchema)
 module.exports.user = new mongoose.model('User', userSchema)

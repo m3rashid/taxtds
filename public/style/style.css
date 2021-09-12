@@ -1,4 +1,18 @@
 @charset "UTF-8";
+:root {
+  --accent-color-one: #141f31;
+  --accent-color-two: #d5e2f5;
+  --light-bg-one: white;
+  --light-bg-two: #ebebeb;
+  --dark-bg-one: #424242;
+  --dark-bg-two: #121212;
+  --light-fg-one: black;
+  --dark-fg-one: #f5f5f5;
+  --dark-fg-two: #616161;
+  --light-hover: #fdf2d4;
+  --dark-hover: #757575;
+}
+
 * {
   border: 0;
   outline: 0;
@@ -54,7 +68,7 @@ header {
 }
 
 header form {
-  background-color: #20344c;
+  background-color: #141f31;
   padding: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -697,7 +711,7 @@ footer #footer-copyright {
 }
 
 div#loginMain, div#signupMain, div#advertiseMain {
-  background-color: lightblue;
+  background-color: #d5e2f5;
   display: none;
   position: fixed;
   padding: 40px;
@@ -744,7 +758,7 @@ div#loginMain .loginCard, div#signupMain .loginCard, div#advertiseMain .loginCar
       -ms-flex-align: center;
           align-items: center;
   width: 400px;
-  background-color: #ff9900;
+  background-color: #20344c;
   border-radius: 10px;
   margin-top: 40px;
   padding: 20px;
@@ -762,7 +776,7 @@ div#loginMain .loginCard img, div#signupMain .loginCard img, div#advertiseMain .
   height: 120px;
   width: 120px;
   border-radius: 50%;
-  border: 7px solid lightblue;
+  border: 7px solid #d5e2f5;
   top: -60px;
 }
 
@@ -798,7 +812,7 @@ div#loginMain .loginCard form .loginUsername, div#loginMain .loginCard form .log
       -ms-flex-align: center;
           align-items: center;
   background-color: #ff3300;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   padding-left: 8px;
   height: 35px;
   border-radius: 5px;

@@ -33,15 +33,12 @@ const advertisementSchema = new mongoose.Schema({
 })
 
 const userSchema = new mongoose.Schema({
-    email: {
+    username: {
         type: String,
         trim: true,
         required: true
     },
-    password: {
-        type: String,
-        required: true
-    },
+    password: String,
     admin: {
         type: Boolean,
         default: 0
@@ -50,7 +47,7 @@ const userSchema = new mongoose.Schema({
 })
 
 userSchema.plugin(passportLocalMongoose);
-userSchema.plugin(findOrCreate);
+// userSchema.plugin(findOrCreate());
 
 module.exports.advertisemnt = new mongoose.model('Advertisement', advertisementSchema)
 module.exports.user = new mongoose.model('User', userSchema)

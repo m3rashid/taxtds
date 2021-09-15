@@ -5,7 +5,7 @@ module.exports = (comment) => {
 
     nodemailer.transporter.sendMail({
         from: process.env.GMAIL_ID,
-        to: user.email,
+        to: user.username,
         subject: 'Successfully signed up in taxtds',
         html: html
     }, (err, info) => {

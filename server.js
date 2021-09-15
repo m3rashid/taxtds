@@ -6,6 +6,7 @@ const flash = require('connect-flash')
 
 const session = require('express-session')
 const passport = require("passport")
+const flashMiddleware = require('./config/flashmessage')
 
 const app = express()
 app.set('view engine', 'ejs')
@@ -25,12 +26,11 @@ db.on('err', err => console.log(err))
 db.once('open', () => console.log('connected to mongoose'))
 
 // Controllers
+app.use(flash())
+app.use('/', flashMiddleware.setFlash)
+
 app.use('/', require('./routes/home'))
 app.use('/', require('./routes/auth'))
-
-app.use(flash())
-app.use('/', require('./config/flashmessage').setFlash)
-
 
 
 const port = process.env.PORT || 3000

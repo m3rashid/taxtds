@@ -3,27 +3,6 @@ const copyright = document.getElementById('footer-copyright')
 const date = new Date()
 copyright.innerHTML = `copyrights &copy; ${date.getFullYear()}, &nbsp;&nbsp; All rights reserved.`
 
-// Noty flash Messages
-if(flash.success && flash.success.length>0){
-    new Noty({
-        theme: 'relax',
-        text: flash.success,
-        type: 'success',
-        layout: 'topRight',
-        timeout: 2000
-    })
-}
-if(flash.error && flash.error.length>0){
-    new Noty({
-        theme: 'relax',
-        text: flash.error,
-        type: 'error',
-        layout: 'topRight',
-        timeout: 2000
-    })
-}
-
-
 // Modals for login and signup 
 const modals = [
     document.getElementById('advertiseMain'),
@@ -61,3 +40,24 @@ for(let i=0; i<btns.length; i++){
     })
 
 }
+
+
+// // Noty flash Messages
+// if(flash.success && flash.success.length>0){
+//     new Noty({
+//         theme: 'relax',
+//         text: flash.success,
+//         type: 'success',
+//         layout: 'topRight',
+//         timeout: 2000
+//     })
+// }
+// if(flash.error && flash.error.length>0){
+//     new Noty({
+//         theme: 'relax',
+//         text: flash.error,
+//         type: 'error',
+//         layout: 'topRight',
+//         timeout: 2000
+//     })
+// }

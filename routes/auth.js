@@ -13,8 +13,8 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 router.get("/user", (req, res) => {
-    if(req.isAuthenticated()) res.render("/user")
-    else res.redirect("/login")
+    if(req.isAuthenticated()) res.send('<h1>users page</h1>')
+    else res.redirect('/')
 })
 
 router.post('/login', (req, res) => {
@@ -22,11 +22,13 @@ router.post('/login', (req, res) => {
         username: req.body.email,
         password: req.body.password
     })
+    console.log(user);
     req.login(user, err => {
         if(err) {
             console.log(err)
+            console.log('Error in loggin in. Check your credentials and try again')
             req.flash('error', 'Error in loggin in. Check your credentials and try again')
-            res.redirect('/login')
+            res.redirect('/')
         }
         else {
             passport.authenticate("local")(req, res, () => {
@@ -38,14 +40,16 @@ router.post('/login', (req, res) => {
 })
 
 router.post('/signup', (req, res) => {
+    console.log(req.body.email, req.body.password)
     User.register({username: req.body.email}, req.body.password, (err, user) => {
         if(err){
             console.log(err)
             req.flash('error', 'Error in signup')
-            res.redirect("/signup")
+            console.log('Error in signup');
+            res.redirect("/")
         }
         else{
-            Passport.authenticate("local")(req, res, () => {
+            passport.authenticate("local")(req, res, () => {
                 req.flash('success', 'Signed up successfully')
                 res.redirect("/user")
             })
@@ -53,7 +57,7 @@ router.post('/signup', (req, res) => {
     })
 })
 
-app.get("/logout", (req, res) => {
+router.get("/logout", (req, res) => {
     req.logout()
     req.flash('success', 'Logged out successfully')
     res.redirect("/")

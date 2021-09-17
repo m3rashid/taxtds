@@ -1,5 +1,5 @@
-const nodemailer = require('nodemailer')
-const ejs = require('ejs')
+const nodemailer = require('nodemailer');
+const ejs = require('ejs');
 
 let transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -10,21 +10,21 @@ let transporter = nodemailer.createTransport({
         user: process.env.GMAIL_USERNAME,
         pass: process.env.GMAIL_PASSWORD
     }
-})
+});
 
 let renderTemplate = (data, path) => {
-    let mailHTML
-    ejs.renderFile('./views/mailer/ ........'), data, (err, template) => {
+    let mailHTML;
+    ejs.renderFile('../views/mailer/signup'), data, (err, template) => {
         if(err) {
-            console.log(err)
-            return
+            console.log(err);
+            return;
         }
-        mailHTML = template
+        mailHTML = template;
     }
-    return mailHTML
+    return mailHTML;
 }
 
 module.exports = {
     transporter: transporter,
     renderTemplate: renderTemplate
-}
+};

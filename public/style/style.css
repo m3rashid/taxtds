@@ -842,4 +842,30 @@ div#loginMain .loginCard form button, div#signupMain .loginCard form button, div
   border-radius: 5px;
   margin-bottom: 10px;
 }
+
+main#user-profile .user-profile-header {
+  background-color: #141f31;
+  color: white;
+  width: 100%;
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 700px) {
+  main#user-profile .user-profile-header {
+    padding: 30px 10px;
+  }
+}
+
+main#user-profile h1.user-profile-äd-here {
+  margin-bottom: 10px;
+}
+
+main#user-profile .grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 50px;
+}
 /*# sourceMappingURL=style.css.map */

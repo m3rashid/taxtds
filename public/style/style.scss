@@ -64,7 +64,7 @@ $dark-hover: #757575;
 
 // Main Page Starts
 body{
-    background-color: rgb(235, 235, 235); //
+    background-color: rgb(235, 235, 235); 
     overflow-x: hidden;
     &::-webkit-scrollbar-track { background: rgb(235, 235, 235) }
     &::-webkit-scrollbar-thumb { background: rgb(190, 190, 190) }
@@ -432,6 +432,10 @@ footer{
 
 
 
+
+
+
+
 // Modals Start
 .blur{
     filter: blur(3px);
@@ -521,3 +525,45 @@ div#loginMain, div#signupMain, div#advertiseMain{
         }
     }
 }
+// Modlals End
+main#user-profile{
+    .user-profile-header{
+        background-color: $accent-color-one;
+        color: white;
+        width: 100%;
+        padding: 30px;
+        margin-bottom: 20px;
+        @media(max-width: 700px){
+            padding: 30px 10px; 
+        }
+    }
+    h1.user-profile-äd-here{
+        margin-bottom: 10px;
+    }
+    .grid{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 50px;
+        .user-profile-advert{
+
+        }
+    }
+    
+
+}
+
+
+
+// User page start
+
+
+
+
+
+
+
+
+
+// user page end
+
+

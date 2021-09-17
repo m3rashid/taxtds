@@ -1,15 +1,15 @@
-<%- include('partials/_topLinks.ejs') %> 
-    <%- include('partials/_header.ejs') %> 
+<%- include('partials/header/_topLinks.ejs') %> 
+    <%- include('partials/header/titleBar.ejs') %>
+    <%- include('partials/header/subTitleBar.ejs') %>
     
-    <%- include('partials/advertise.ejs') %>
-    <%- include('partials/login.ejs') %>
-    <%- include('partials/signup.ejs') %>
+    <%- include('partials/modals/login.ejs') %>
+    <%- include('partials/modals/signup.ejs') %>
     <main>
         <div class="image-top-main">
             <img src="images/back.jpg" alt="">
         </div>
         <div class="main-details">
-            <%- include('partials/_listed_services.ejs') %> 
+            <%- include('partials/content/_listed_services.ejs') %> 
     
             <div class="info-card-section">
                 <% for(let i=0; i<15; i++){ %>
@@ -27,4 +27,6 @@
             </div>
         </div>
     </main>
-    <%- include('partials/_footer.ejs') %> 
+
+    <%- include('partials/footer/footerCarousel.ejs') %> 
+    <%- include('partials/footer/actualFooter.ejs') %> 

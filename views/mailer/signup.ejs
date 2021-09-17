@@ -1,1 +1,67 @@
-<!-- Learn the best practices for mailer templates like use of tables etc. for responsiveness good look in all screen sizes -->
+<!-- TODO Modularize this -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google Fonts CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+    <!-- User Defined Styles -->
+    <link rel="stylesheet" href="style-mailer/style.css">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="images/fav.ico"/>
+</head>
+<body>
+    
+    <!-- header -->
+    <div class="mailer">
+        <div class="signup-mailer-template">
+            <div class="signup-mailer-header">
+                <img src="foot-logo.png" alt="">
+                <p>World's largest public directory website</p>
+                <br>
+                <img src="back.jpg" alt="">
+            </div>
+    
+            <div class="signup-mailer-info">
+                <p>This is to inform you that you have successfully signed up in the taxtds domain. Feel free to reach out to us in case of any need</p>
+                <br>
+                <p>other info related to sign in shown here</p>
+                <br>
+                <table>
+                    <tr><td>Email: </td>    <td>Email</td></tr>
+                    <tr><td>Name: </td>     <td>name</td></tr>
+                    <tr><td>Platform: </td> <td>chrome on windows</td></tr>
+                </table>
+            </div>
+            
+            <div class="signup-mailer-footer">
+                <!-- social links -->
+                <div class="social-icons-container">
+                    <a href=""><i class="fab fa-facebook-square"></i></a>
+                    <a href=""><i class="fab fa-google-plus-square"></i></a>
+                    <a href=""><i class="fab fa-twitter-square"></i></a>
+                    <a href=""><i class="fab fa-linkedin"></i></a>
+                    <a href=""><i class="fab fa-youtube-square"></i></a>
+                    <a href=""><i class="fab fa-whatsapp-square"></i></a>
+                </div>
+    
+                <p>This is a system generated mail, please dont reply to this mail</p>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

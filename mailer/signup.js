@@ -1,7 +1,7 @@
-const nodemailer = require('./config/nodemailer')
+const nodemailer = require('./config/nodemailer');
 
 module.exports = (comment) => {
-    let html = nodemailer.renderTemplate({user: user}, '/mailer/signup.ejs')
+    let html = nodemailer.renderTemplate({user: user}, '/mailer/signup.ejs');
 
     nodemailer.transporter.sendMail({
         from: process.env.GMAIL_ID,
@@ -10,10 +10,10 @@ module.exports = (comment) => {
         html: html
     }, (err, info) => {
         if(err){
-            console.log(err)
-            return
+            console.log(err);
+            return;
         }
-        console.log('Message sent', info)
-        return // Optional as this needs to run asynchronous
+        console.log('Message sent', info);
+        return; // Optional as this needs to run asynchronous
     })
 }

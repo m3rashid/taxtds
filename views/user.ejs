@@ -1,0 +1,37 @@
+<%- include('partials/header/_topLinks.ejs') %>
+    <main id="user-profile">
+        <!-- user details -->
+        <div class="user-profile-header">
+            <h1 >Hello <%= username %></h1>
+            <p>This is your profile page, add or remove advertisements here (and/or other settings)</p>
+        </div>
+
+        <h1 class="user-profile-äd-here">Your Advertisements here</h1>
+
+        <div class="grid">
+            <% advertisements.forEach((ad) => { %>
+                <div class="user-profile-advert">
+                    <p>Brand: <%= ad.brandname %></p>
+                    <p>Owner: <%= ad.owner %></p>
+                    <p>Address: <%= ad.service %></p>
+                    <p>State: <%= ad.state %></p>
+                    <p>Service: <%= ad.service %></p>
+                    <p>Phone: <%= ad.phone %></p>
+                    <p>Email: <%= ad.email %></p>
+                </div>
+            <% }) %>
+        </div>
+            
+
+
+        <h1>Register your service</h1>
+        <form action="/user/<%= username %>/add-service">
+            <h1>forms here</h1>
+        </form>
+
+
+        
+    </main>
+    
+    <footer>
+        <%- include('partials/footer/actualFooter.ejs') %> 

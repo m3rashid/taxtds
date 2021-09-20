@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const advertisementSchema = new mongoose.Schema({
+const serviceSchema = new mongoose.Schema({
     brandName: {
         type: String,
         required: true
@@ -25,8 +25,12 @@ const advertisementSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true
+    },
+    addedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 });
 
 
-module.exports = new mongoose.model('Advertisement', advertisementSchema);
+module.exports = new mongoose.model('Service', serviceSchema);

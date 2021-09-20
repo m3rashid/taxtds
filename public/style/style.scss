@@ -441,7 +441,7 @@ footer{
     filter: blur(3px);
     opacity: 0.6;
 }
-div#loginMain, div#signupMain, div#advertiseMain{
+div#loginMain, div#signupMain, div#logoutMain{
     background-color: rgb(213, 226, 245);
     display: none;
     position: fixed;
@@ -526,15 +526,39 @@ div#loginMain, div#signupMain, div#advertiseMain{
     }
 }
 // Modlals End
+
+
+
+
+// User page start
 main#user-profile{
+    background-color: $light-bg-two;
     .user-profile-header{
         background-color: $accent-color-one;
         color: white;
         width: 100%;
         padding: 30px;
         margin-bottom: 20px;
+        @include center-row-wise();
+        align-items: center;
+        justify-content: space-between;
         @media(max-width: 700px){
             padding: 30px 10px; 
+        }
+        div{
+            &:nth-child(2){
+                span{
+                    margin-right: 20px;
+                }
+                a{
+                    text-decoration: none;
+                    color: white;
+                    cursor: pointer;
+                    &:hover{
+                        color: blueviolet;
+                    }
+                }
+            }
         }
     }
     h1.user-profile-äd-here{
@@ -551,16 +575,6 @@ main#user-profile{
     
 
 }
-
-
-
-// User page start
-
-
-
-
-
-
 
 
 

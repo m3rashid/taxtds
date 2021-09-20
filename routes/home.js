@@ -5,11 +5,12 @@ const passport = require('passport');
 const session = require('express-session');
 
 const User = require('../models/user');
-const Advertisement = require('../models/advertisement');
+const Service = require('../models/service');
 
 router.get('/', (req, res) => {
     res.render('index.ejs', {
-        titleTop: 'Taxtds'
+        titleTop: 'Taxtds',
+        user: req.user
     })
 })
 
@@ -20,13 +21,15 @@ router.get('/search', async (req, res) => {
     // Nothing is done here as of now
     console.log(state, service);
     res.render('index.ejs', {
-        titleTop: 'Taxtds'
+        titleTop: 'Taxtds',
+        user: req,user
     });
 });
 
 router.get('/details', (req, res) => {
     res.render('details.ejs', {
-        titleTop: 'Taxtds'
+        titleTop: 'Taxtds',
+        user: req.user
     })
 })
 

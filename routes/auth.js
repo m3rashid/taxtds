@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 const User = require('../models/user')
+const Service = require('../models/service')
+
+const signupMailer = require('../mailer/signup');
 
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
@@ -32,7 +35,7 @@ router.get('/user', (req, res) => {
         res.render('user.ejs', {
             titleTop: 'User',
             username: user,
-            advertisements: advert
+            services: advert
         });
     }
     else{
@@ -41,6 +44,29 @@ router.get('/user', (req, res) => {
     }
     
 });
+
+router.post('/user/add-service', (req, res) => {
+    if(!req.isAuthenticated()){
+        return res.redirect('/');
+    }
+    else{
+        const service = new Service ({
+            brandName: req.body.brandName,
+            owner: req.body.owner,
+            address: req.body.address,
+            state: req.body.state,
+            service: req.body.service,
+            phone: req.body.phone,
+            email: req.body.email,
+            addedBy: req.user.id
+        });
+        service.save((err, doc) => {
+            if(err) console.log(err);
+            else console.log(doc);
+            res.redirect('back');
+        });
+    }
+})
 
 router.post('/login', (req, res) => {
     const user = new User({
@@ -56,14 +82,11 @@ router.post('/login', (req, res) => {
         }
         else{
             passport.authenticate('local')(req, res, () => {
+                // signupMailer();
                 return res.redirect('/user');
-            })
+            });
         }
-    })
-
-    // if authenticated direct to /user/username
-    // else back to home page (same with signup)
-    
+    });
 });
 
 router.post('/signup', (req, res) => {
@@ -99,6 +122,7 @@ router.post('/signup', (req, res) => {
 
     
 });
+
 
 router.get("/logout", (req, res) => {
     req.logout();

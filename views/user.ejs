@@ -1,15 +1,26 @@
 <%- include('partials/header/_topLinks.ejs') %>
+
     <main id="user-profile">
-        <!-- user details -->
         <div class="user-profile-header">
-            <h1 >Hello <%= username %></h1>
-            <p>This is your profile page, add or remove advertisements here (and/or other settings)</p>
+            <div>
+                <h1 >Hello <%= username %></h1>
+                <p>This is your profile page, add or remove advertisements here (and/or other settings)</p>
+            </div>
+            <div>
+                <span>settings</span>
+                <a id="logoutBtn" onclick="logoutUser()">Logout</a>
+                <script>
+                    function logoutUser(){
+                        if(confirm('Are you sure you want to logout? ')) window.location.href = '/logout';
+                    };
+                </script>
+            </div>
         </div>
 
-        <h1 class="user-profile-äd-here">Your Advertisements here</h1>
+        <h1 class="user-profile-ad-here">Your Services here</h1>
 
         <div class="grid">
-            <% advertisements.forEach((ad) => { %>
+            <% services.forEach((ad) => { %>
                 <div class="user-profile-advert">
                     <p>Brand: <%= ad.brandname %></p>
                     <p>Owner: <%= ad.owner %></p>
@@ -21,12 +32,39 @@
                 </div>
             <% }) %>
         </div>
-            
-
+        
 
         <h1>Register your service</h1>
-        <form action="/user/<%= username %>/add-service">
-            <h1>forms here</h1>
+        <form id="add-service" action="/user/add-service" method="POST">
+            <div>
+                <i class="fas fa-star-half-alt"></i>
+                <input type="text" name="brandName" placeholder="name of your brand" required>
+            </div>
+            <div>
+                <i class="fas fa-user-tie"></i>
+                <input type="text" name="owner" placeholder="name of the owner" required>
+            </div>
+            <div>
+                <i class="fas fa-street-view"></i>
+                <input type="text" name="address" placeholder="address of the service">
+            </div>
+            <div>
+                <i class="fab fa-font-awesome-flag"></i>
+                <input type="text" name="state" placeholder="state" required>
+            </div>
+            <div>
+                <i class="fas fa-briefcase"></i>
+                <input type="text" name="service" placeholder="name of the service" required>
+            </div>
+            <div>
+                <i class="fas fa-phone-alt"></i>
+                <input type="text" name="phone" placeholder="phone number of the office/owner" required>
+            </div>
+            <div>
+                <i class="fas fa-envelope-open-text"></i>
+                <input type="email" name="email" placeholder="email of the service/owner">
+            </div>
+            <button type="submit">Add this service</button>
         </form>
 
 

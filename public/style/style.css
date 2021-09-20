@@ -710,7 +710,7 @@ footer #footer-copyright {
   opacity: 0.6;
 }
 
-div#loginMain, div#signupMain, div#advertiseMain {
+div#loginMain, div#signupMain, div#logoutMain {
   background-color: #d5e2f5;
   display: none;
   position: fixed;
@@ -722,14 +722,14 @@ div#loginMain, div#signupMain, div#advertiseMain {
 }
 
 @media (max-width: 450px) {
-  div#loginMain, div#signupMain, div#advertiseMain {
+  div#loginMain, div#signupMain, div#logoutMain {
     padding: 15px;
     width: 100%;
     left: 0;
   }
 }
 
-div#loginMain span.close, div#signupMain span.close, div#advertiseMain span.close {
+div#loginMain span.close, div#signupMain span.close, div#logoutMain span.close {
   position: relative;
   left: 90%;
   top: -10px;
@@ -738,12 +738,12 @@ div#loginMain span.close, div#signupMain span.close, div#advertiseMain span.clos
   padding-right: 5px;
 }
 
-div#loginMain span.close:hover, div#signupMain span.close:hover, div#advertiseMain span.close:hover {
+div#loginMain span.close:hover, div#signupMain span.close:hover, div#logoutMain span.close:hover {
   color: red;
   cursor: pointer;
 }
 
-div#loginMain .loginCard, div#signupMain .loginCard, div#advertiseMain .loginCard {
+div#loginMain .loginCard, div#signupMain .loginCard, div#logoutMain .loginCard {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -766,12 +766,12 @@ div#loginMain .loginCard, div#signupMain .loginCard, div#advertiseMain .loginCar
 }
 
 @media (max-width: 450px) {
-  div#loginMain .loginCard, div#signupMain .loginCard, div#advertiseMain .loginCard {
+  div#loginMain .loginCard, div#signupMain .loginCard, div#logoutMain .loginCard {
     width: 100%;
   }
 }
 
-div#loginMain .loginCard img, div#signupMain .loginCard img, div#advertiseMain .loginCard img {
+div#loginMain .loginCard img, div#signupMain .loginCard img, div#logoutMain .loginCard img {
   position: relative;
   height: 120px;
   width: 120px;
@@ -780,7 +780,7 @@ div#loginMain .loginCard img, div#signupMain .loginCard img, div#advertiseMain .
   top: -60px;
 }
 
-div#loginMain .loginCard form, div#signupMain .loginCard form, div#advertiseMain .loginCard form {
+div#loginMain .loginCard form, div#signupMain .loginCard form, div#logoutMain .loginCard form {
   margin-top: -30px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -797,7 +797,7 @@ div#loginMain .loginCard form, div#signupMain .loginCard form, div#advertiseMain
           align-items: center;
 }
 
-div#loginMain .loginCard form .loginUsername, div#loginMain .loginCard form .loginPassword, div#signupMain .loginCard form .loginUsername, div#signupMain .loginCard form .loginPassword, div#advertiseMain .loginCard form .loginUsername, div#advertiseMain .loginCard form .loginPassword {
+div#loginMain .loginCard form .loginUsername, div#loginMain .loginCard form .loginPassword, div#signupMain .loginCard form .loginUsername, div#signupMain .loginCard form .loginPassword, div#logoutMain .loginCard form .loginUsername, div#logoutMain .loginCard form .loginPassword {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -818,13 +818,13 @@ div#loginMain .loginCard form .loginUsername, div#loginMain .loginCard form .log
   border-radius: 5px;
 }
 
-div#loginMain .loginCard form .loginUsername i, div#loginMain .loginCard form .loginPassword i, div#signupMain .loginCard form .loginUsername i, div#signupMain .loginCard form .loginPassword i, div#advertiseMain .loginCard form .loginUsername i, div#advertiseMain .loginCard form .loginPassword i {
+div#loginMain .loginCard form .loginUsername i, div#loginMain .loginCard form .loginPassword i, div#signupMain .loginCard form .loginUsername i, div#signupMain .loginCard form .loginPassword i, div#logoutMain .loginCard form .loginUsername i, div#logoutMain .loginCard form .loginPassword i {
   background-color: #ff3300;
   font-size: 1.5rem;
   margin-right: 8px;
 }
 
-div#loginMain .loginCard form .loginUsername input, div#loginMain .loginCard form .loginPassword input, div#signupMain .loginCard form .loginUsername input, div#signupMain .loginCard form .loginPassword input, div#advertiseMain .loginCard form .loginUsername input, div#advertiseMain .loginCard form .loginPassword input {
+div#loginMain .loginCard form .loginUsername input, div#loginMain .loginCard form .loginPassword input, div#signupMain .loginCard form .loginUsername input, div#signupMain .loginCard form .loginPassword input, div#logoutMain .loginCard form .loginUsername input, div#logoutMain .loginCard form .loginPassword input {
   height: 35px;
   width: 250px;
   padding-left: 10px;
@@ -833,7 +833,7 @@ div#loginMain .loginCard form .loginUsername input, div#loginMain .loginCard for
   border-bottom-right-radius: 5px;
 }
 
-div#loginMain .loginCard form button, div#signupMain .loginCard form button, div#advertiseMain .loginCard form button {
+div#loginMain .loginCard form button, div#signupMain .loginCard form button, div#logoutMain .loginCard form button {
   font-size: 1.5rem;
   padding: 5px;
   width: 200px;
@@ -843,18 +843,52 @@ div#loginMain .loginCard form button, div#signupMain .loginCard form button, div
   margin-bottom: 10px;
 }
 
+main#user-profile {
+  background-color: #ebebeb;
+}
+
 main#user-profile .user-profile-header {
   background-color: #141f31;
   color: white;
   width: 100%;
   padding: 30px;
   margin-bottom: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 @media (max-width: 700px) {
   main#user-profile .user-profile-header {
     padding: 30px 10px;
   }
+}
+
+main#user-profile .user-profile-header div:nth-child(2) span {
+  margin-right: 20px;
+}
+
+main#user-profile .user-profile-header div:nth-child(2) a {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+main#user-profile .user-profile-header div:nth-child(2) a:hover {
+  color: blueviolet;
 }
 
 main#user-profile h1.user-profile-äd-here {

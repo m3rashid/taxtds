@@ -1,16 +1,16 @@
-const nodemailer = require('./config/nodemailer');
+const nodemailer = require('../config/nodemailer');
 
-module.exports = (comment) => {
-    let html = nodemailer.renderTemplate({user: user}, '/mailer/signup.ejs');
+module.exports = () => {
+    let html = nodemailer.renderTemplate(/*{data: 'MD Rashid Hussain'},*/ 'signup.ejs');
 
     nodemailer.transporter.sendMail({
-        from: process.env.GMAIL_ID,
-        to: user.username,
+        from: 'Sam Billings',
+        to: 'coold1741@gmail.com',
         subject: 'Successfully signed up in taxtds',
         html: html
     }, (err, info) => {
         if(err){
-            console.log(err);
+            console.log('Error in sending mail', err);
             return;
         }
         console.log('Message sent', info);

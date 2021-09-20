@@ -1,11 +1,12 @@
 <!-- TODO Modularize this -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Taxtds</title>
 
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -17,35 +18,202 @@
 
 
     <!-- User Defined Styles -->
-    <link rel="stylesheet" href="style-mailer/style.css">
+    <!-- <link rel="stylesheet" href="../../public/style-mailer/style.css"> -->
+    <style>
+        * {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            border: 0;
+            outline: 0;
+            text-decoration: none;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 500;
+        }
+
+        *::-moz-selection {
+            background-color: #f3de68;
+            color: black;
+        }
+
+        *::selection {
+            background-color: #f3de68;
+            color: black;
+        }
+
+        .mailer {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .mailer .signup-mailer-template {
+            max-width: 650px;
+            min-width: 300px;
+            background-color: #ebebeb;
+        }
+
+        .mailer .signup-mailer-template .signup-mailer-header {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            width: 100%;
+            padding: 10px;
+            background-color: #141f31;
+            color: white;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .mailer .signup-mailer-template .signup-mailer-header img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .mailer .signup-mailer-template .signup-mailer-info {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0 10px 0 10px;
+        }
+
+        .mailer .signup-mailer-template .signup-mailer-info table {
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        .mailer .signup-mailer-template .signup-mailer-footer {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            background-color: #141f31;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            color: white;
+            width: 100%;
+            padding: 15px;
+        }
+
+        .mailer .signup-mailer-template .signup-mailer-footer .social-icons-container {
+            padding: 10px 0 10px 0;
+        }
+
+        .mailer .signup-mailer-template .signup-mailer-footer .social-icons-container a {
+            text-decoration: none;
+        }
+
+        .mailer .signup-mailer-template .signup-mailer-footer .social-icons-container a:nth-child(1) {
+            color: #4267B2;
+        }
+
+        .mailer .signup-mailer-template .signup-mailer-footer .social-icons-container a:nth-child(2) {
+            color: #DD4B39;
+        }
+
+        .mailer .signup-mailer-template .signup-mailer-footer .social-icons-container a:nth-child(3) {
+            color: #1DA1F2;
+        }
+
+        .mailer .signup-mailer-template .signup-mailer-footer .social-icons-container a:nth-child(4) {
+            color: #2867B2;
+        }
+
+        .mailer .signup-mailer-template .signup-mailer-footer .social-icons-container a:nth-child(5) {
+            color: #FF0000;
+        }
+
+        .mailer .signup-mailer-template .signup-mailer-footer .social-icons-container a:nth-child(6) {
+            color: #25D366;
+        }
+
+        .mailer .signup-mailer-template .signup-mailer-footer .social-icons-container a i {
+            font-size: 2rem;
+            margin-right: 5px;
+        }
+    </style>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/png" href="images/fav.ico"/>
+    <link rel="shortcut icon" type="image/png" href="../../public/images/fav.ico" />
 </head>
+
 <body>
-    
+
     <!-- header -->
     <div class="mailer">
         <div class="signup-mailer-template">
             <div class="signup-mailer-header">
-                <img src="foot-logo.png" alt="">
+                <img src="../../public/images/foot-logo.png" alt="">
                 <p>World's largest public directory website</p>
                 <br>
-                <img src="back.jpg" alt="">
+                <img src="../../public/images/back.jpg" alt="">
             </div>
-    
+
             <div class="signup-mailer-info">
-                <p>This is to inform you that you have successfully signed up in the taxtds domain. Feel free to reach out to us in case of any need</p>
+                <p>This is to inform you that you have successfully signed up in the taxtds domain. Feel free to reach
+                    out to us in case of any need</p>
                 <br>
                 <p>other info related to sign in shown here</p>
                 <br>
                 <table>
-                    <tr><td>Email: </td>    <td>Email</td></tr>
-                    <tr><td>Name: </td>     <td>name</td></tr>
-                    <tr><td>Platform: </td> <td>chrome on windows</td></tr>
+                    <tr>
+                        <td>Email: </td>
+                        <td>Email</td>
+                    </tr>
+                    <tr>
+                        <td>Name: </td>
+                        <td>name</td>
+                    </tr>
+                    <tr>
+                        <td>Platform: </td>
+                        <td>chrome on windows</td>
+                    </tr>
                 </table>
             </div>
-            
+
             <div class="signup-mailer-footer">
                 <!-- social links -->
                 <div class="social-icons-container">
@@ -56,7 +224,7 @@
                     <a href=""><i class="fab fa-youtube-square"></i></a>
                     <a href=""><i class="fab fa-whatsapp-square"></i></a>
                 </div>
-    
+
                 <p>This is a system generated mail, please dont reply to this mail</p>
             </div>
         </div>
@@ -64,4 +232,5 @@
 
 
 </body>
+
 </html>

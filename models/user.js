@@ -14,11 +14,7 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         default: null
-    },
-    ads: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Advertisement'
-    }]
+    }
 });
 userSchema.plugin(require('passport-local-mongoose'));
 

@@ -12,10 +12,19 @@
 
         <div class="nav-links">
             <% if(user != null || user != undefined){ %>
-                <a id="user-profile" href="/user">Profile</a>
+                <a id="user-profile" href="/user">
+                    <i class="fas fa-user"></i>
+                    &nbsp;Profile
+                </a>
             <% } else{ %>
-                <a id="loginBtn">Login</a>
-                <a id="signupBtn">Signup</a>
+                <a id="loginBtn">
+                    <i class="fas fa-key"></i>
+                    &nbsp;Login
+                </a>
+                <a id="signupBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    &nbsp;Signup
+                </a>
             <% } %>
         </div>
     </form>

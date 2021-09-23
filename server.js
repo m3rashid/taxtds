@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require("passport");
 const passportLocalMongoose = require('passport-local-mongoose');
+const flash = require('connect-flash');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -23,7 +24,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(flash());
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 const db = mongoose.connection;
@@ -32,7 +33,6 @@ db.once('open', () => console.log('connected to mongoose'));
 
 app.use('/', require('./routes/home'));
 app.use('/', require('./routes/auth'));
-
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server on: ${port}`));

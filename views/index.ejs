@@ -12,13 +12,13 @@
             <%- include('partials/content/_listed_services.ejs') %> 
     
             <div class="info-card-section">
-                <% for(let i=0; i<15; i++){ %>
+                <% for(let i=0; i< services.length; i++){ %>
                     <div class="card" id="card<%= i %>">
-                        <h1 class="brand">Ankit Sehra and Assosiates</h1>
-                        <p class="name">Mr. Ankit Sehra, New Delhi</p>
-                        <p class="address"><span>Address:</span> Visit Us WZ-246 B1, Opp. Metro Pillar No.660, Chatrapati Shivaji Marg, Uttam Nagar, New Delhi, Delhi, 110059</p>
-                        <div class="call"><i class="fas fa-phone-volume"></i> 9891571973</div>
-                        <div class="message"><i class="far fa-envelope"></i> contact@expi</div>
+                        <h1 class="brand"><%= services[i].brandName %></h1>
+                        <p class="name"><%= services[i].owner %></p>
+                        <p class="address"><span>Address: </span><%= services[i].address %></p>
+                        <div class="call"><i class="fas fa-phone-volume"></i> <%= services[i].phone %></div>
+                        <div class="message"><i class="far fa-envelope"></i> <%= services[i].email %></div>
                         <a href="" class="button back-black"><i class="far fa-star"></i> Write Review</a>
                         <a href="" class="button back-black"><i class="fas fa-phone-alt"></i> Call Now</a>
                         <a href="" class="button back-red"><i class="fas fa-dollar-sign"></i> Get Quotes</a>

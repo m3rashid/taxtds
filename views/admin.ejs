@@ -1,0 +1,26 @@
+<%- include('partials/header/_topLinks.ejs') %>
+<main id="user-profile">
+    <div class="user-profile-header">
+        <div>
+            <h1>Hello Superuser, Hemant</h1>
+        </div>
+        <div>
+            <a id="settingsBtn" onclick="">
+                <i class="fas fa-cog"></i>
+                &nbsp;Settings
+            </a>
+            <a id="logoutBtn" onclick="logoutUser()">
+                <i class="fas fa-sign-out-alt"></i>
+                &nbsp;Logout
+            </a>
+            <script>
+                function logoutUser(){
+                    if(confirm('Are you sure you want to logout? ')) window.location.href = '/logout';
+                };
+            </script>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <%- include('partials/footer/actualFooter.ejs') %> 

@@ -269,14 +269,14 @@ main{
                     }
                 }
                 div.call{
-                    font-size: 1.2rem;
+                    font-size: 1.1rem;
                     margin-bottom: 5px;
                     float: left;
                     @media(max-width: 500px){ float: none }
                     i{ transform: rotate(-45deg) }
                 }
                 div.message{
-                    margin: 0 0 25px 250px;
+                    margin: 0 0 25px 150px;
                     @media(max-width: 500px){ margin: 0 0 10px 0 }
                 }
                 a.button{
@@ -433,6 +433,83 @@ footer{
 
 
 
+// Flash messeges start
+.flash{
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    width: 400px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    @media(max-width: 500px){
+        top: 0;
+        right: 0;
+        margin: 10px 2% 0 2%;
+        width: 96%;
+    }
+    .flash-card{
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        animation: swing-in-top-fwd 0.9s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+        i{
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+    }
+    .flash-success{
+        min-height: 60px;
+        background-color: rgb(120, 255, 120);
+    }
+    .flash-failure{
+        min-height: 60px;
+        background-color: rgb(250, 120, 120);
+    }
+}
+
+// entrance animation keyframes
+@keyframes swing-in-top-fwd {
+    0% {
+        transform: rotateX(-100deg);
+        transform-origin: top;
+        opacity: 0;
+    }
+    100% {
+        transform: rotateX(0deg);
+        transform-origin: top;
+        opacity: 1;
+    }
+}
+  
+
+// Exit  keyframes (not used)
+// animation: swing-out-top-bck 0.45s cubic-bezier(0.600, -0.280, 0.735, 0.045) both;
+@keyframes swing-out-top-bck {
+    0% {
+        transform: rotateX(0deg);
+        transform-origin: top;
+        opacity: 1;
+    }
+    100% {
+        transform: rotateX(-100deg);
+        transform-origin: top;
+        opacity: 0;
+    }
+}
+  
+
+
+
+
+// Flash messages end
+
+
 
 
 
@@ -538,22 +615,20 @@ main#user-profile{
         color: white;
         width: 100%;
         padding: 30px;
-        margin-bottom: 20px;
         @include center-row-wise();
         align-items: center;
         justify-content: space-between;
         @media(max-width: 700px){
-            padding: 30px 10px; 
+            padding: 20px 10px; 
         }
         div{
             &:nth-child(2){
-                span{
-                    margin-right: 20px;
-                }
                 a{
                     text-decoration: none;
                     color: white;
                     cursor: pointer;
+                    float: right;
+                    margin-right: 15px;
                     &:hover{
                         color: blueviolet;
                     }
@@ -561,19 +636,107 @@ main#user-profile{
             }
         }
     }
-    h1.user-profile-äd-here{
+    h2{
+        margin: 0;
         margin-bottom: 10px;
+        font-weight: bold;
+        text-align: center;
     }
-    .grid{
+    div.user-profile-main-page{
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-gap: 50px;
-        .user-profile-advert{
-
+        grid-template-columns: 1fr 3fr;
+        width: 100%;
+        @media(max-width: 768px){
+            grid-template-columns: 1fr;
+        }
+        
+        div.user-profile-form{
+            background-color: rgb(213, 226, 245);
+            padding: 20px;
+            // min-width: 400px;
+            @include center-column-wise();
+            justify-content: flex-start;
+            align-items: center;
+            @media(max-width: 768px){
+                width: 100vw;
+                padding: 10px;
+                margin-bottom: 50px;
+            }
+            form.user-profile-register-service{
+                @include center-column-wise();
+                align-items: center;
+                border-radius: 10px;
+                padding: 20px;
+                @media(max-width: 450px){
+                    padding: 15px;
+                }
+                background-color: #20344c;
+                div{
+                    @include center-row-wise();
+                    align-items: center;
+                    background-color: rgb(255, 51, 0);
+                    margin-bottom: 15px;
+                    padding-left: 8px;
+                    height: 35px;
+                    border-radius: 5px;
+                    i{
+                        background-color: rgb(255, 51, 0);
+                        font-size: 1.5rem;
+                        margin-right: 8px;
+                    }
+                    input{
+                        height: 35px;
+                        width: 285px;
+                        padding-left: 10px;
+                        font-size: 1.05rem;
+                        border-top-right-radius: 5px;
+                        border-bottom-right-radius: 5px;
+                    }
+                }
+                button{
+                    font-size: 1.2rem;
+                    padding: 5px;
+                    width: 200px;
+                    background-color: rgb(255, 51, 0);
+                    color: white;
+                    border-radius: 5px;
+                }
+            }
+        }
+        div.user-profile-cards{
+            @include center-column-wise();
+            justify-content: flex-start;
+            padding: 20px 50px 0 50px;
+            @media(max-width: 1000px){
+                padding: 20px 20px;
+            }
+            @media(max-width: 768px){
+                padding: 10px 10px;
+            }
+            div.user-profile-advert{
+                background-color: white;
+                margin-bottom: 30px;
+                padding: 20px;
+                border-radius: 5px;
+                font-size: 1rem;        
+                &:hover{
+                    background-color: rgb(253, 242, 212);
+                    box-shadow: 0px 0px 15px 0px rgb(167, 167, 167);
+                }
+                @media(max-width: 768px){
+                    margin-bottom: 20px;
+                    padding: 15px;
+                }
+            p{
+                font-size: 1.1rem;
+                span{
+                    font-weight: bold;
+                    margin-right: 10px;
+                }
+            }
+            }
         }
     }
-    
-
 }
 
 

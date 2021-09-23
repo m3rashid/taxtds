@@ -429,7 +429,7 @@ main div.main-details div.info-card-section div.card p.address span {
 }
 
 main div.main-details div.info-card-section div.card div.call {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-bottom: 5px;
   float: left;
 }
@@ -446,7 +446,7 @@ main div.main-details div.info-card-section div.card div.call i {
 }
 
 main div.main-details div.info-card-section div.card div.message {
-  margin: 0 0 25px 250px;
+  margin: 0 0 25px 150px;
 }
 
 @media (max-width: 500px) {
@@ -704,6 +704,132 @@ footer #footer-copyright {
   }
 }
 
+.flash {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 400px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  grid-gap: 10px;
+}
+
+@media (max-width: 500px) {
+  .flash {
+    top: 0;
+    right: 0;
+    margin: 10px 2% 0 2%;
+    width: 96%;
+  }
+}
+
+.flash .flash-card {
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-animation: swing-in-top-fwd 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+          animation: swing-in-top-fwd 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+.flash .flash-card i {
+  font-size: 2rem;
+  margin-right: 10px;
+}
+
+.flash .flash-success {
+  min-height: 60px;
+  background-color: #78ff78;
+}
+
+.flash .flash-failure {
+  min-height: 60px;
+  background-color: #fa7878;
+}
+
+@-webkit-keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+            transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 1;
+  }
+}
+
+@keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+            transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes swing-out-top-bck {
+  0% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: rotateX(-100deg);
+            transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 0;
+  }
+}
+
+@keyframes swing-out-top-bck {
+  0% {
+    -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: rotateX(-100deg);
+            transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+    opacity: 0;
+  }
+}
+
 .blur {
   -webkit-filter: blur(3px);
           filter: blur(3px);
@@ -852,7 +978,6 @@ main#user-profile .user-profile-header {
   color: white;
   width: 100%;
   padding: 30px;
-  margin-bottom: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -873,33 +998,199 @@ main#user-profile .user-profile-header {
 
 @media (max-width: 700px) {
   main#user-profile .user-profile-header {
-    padding: 30px 10px;
+    padding: 20px 10px;
   }
-}
-
-main#user-profile .user-profile-header div:nth-child(2) span {
-  margin-right: 20px;
 }
 
 main#user-profile .user-profile-header div:nth-child(2) a {
   text-decoration: none;
   color: white;
   cursor: pointer;
+  float: right;
+  margin-right: 15px;
 }
 
 main#user-profile .user-profile-header div:nth-child(2) a:hover {
   color: blueviolet;
 }
 
-main#user-profile h1.user-profile-äd-here {
+main#user-profile h2 {
+  margin: 0;
   margin-bottom: 10px;
+  font-weight: bold;
+  text-align: center;
 }
 
-main#user-profile .grid {
+main#user-profile div.user-profile-main-page {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 50px;
+  -ms-grid-columns: 1fr 3fr;
+      grid-template-columns: 1fr 3fr;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  main#user-profile div.user-profile-main-page {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-form {
+  background-color: #d5e2f5;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media (max-width: 768px) {
+  main#user-profile div.user-profile-main-page div.user-profile-form {
+    width: 100vw;
+    padding: 10px;
+    margin-bottom: 50px;
+  }
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-form form.user-profile-register-service {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #20344c;
+}
+
+@media (max-width: 450px) {
+  main#user-profile div.user-profile-main-page div.user-profile-form form.user-profile-register-service {
+    padding: 15px;
+  }
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-form form.user-profile-register-service div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #ff3300;
+  margin-bottom: 15px;
+  padding-left: 8px;
+  height: 35px;
+  border-radius: 5px;
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-form form.user-profile-register-service div i {
+  background-color: #ff3300;
+  font-size: 1.5rem;
+  margin-right: 8px;
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-form form.user-profile-register-service div input {
+  height: 35px;
+  width: 285px;
+  padding-left: 10px;
+  font-size: 1.05rem;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-form form.user-profile-register-service button {
+  font-size: 1.2rem;
+  padding: 5px;
+  width: 200px;
+  background-color: #ff3300;
+  color: white;
+  border-radius: 5px;
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-cards {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 20px 50px 0 50px;
+}
+
+@media (max-width: 1000px) {
+  main#user-profile div.user-profile-main-page div.user-profile-cards {
+    padding: 20px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  main#user-profile div.user-profile-main-page div.user-profile-cards {
+    padding: 10px 10px;
+  }
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-cards div.user-profile-advert {
+  background-color: white;
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-cards div.user-profile-advert:hover {
+  background-color: #fdf2d4;
+  -webkit-box-shadow: 0px 0px 15px 0px #a7a7a7;
+          box-shadow: 0px 0px 15px 0px #a7a7a7;
+}
+
+@media (max-width: 768px) {
+  main#user-profile div.user-profile-main-page div.user-profile-cards div.user-profile-advert {
+    margin-bottom: 20px;
+    padding: 15px;
+  }
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-cards div.user-profile-advert p {
+  font-size: 1.1rem;
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-cards div.user-profile-advert p span {
+  font-weight: bold;
+  margin-right: 10px;
 }
 /*# sourceMappingURL=style.css.map */

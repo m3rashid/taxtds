@@ -36,24 +36,27 @@
                 <div class="flash-card flash-success">
                     <i class="fas fa-check-circle"></i>
                     <%= successMessage %>
+                    <span><i class="flashClose fas fa-times-circle"></i></span>
                 </div>
             <% }) %>
         <% } %>
-        
+
         <% if(failure.length>0){ %>
             <% failure.forEach(failureMessage => { %>
                 <div class="flash-card flash-failure">
                     <i class="fas fa-exclamation-circle"></i>
                     <%= failureMessage %>
+                    <span><i class="flashClose fas fa-times-circle"></i></span>
                 </div>            
             <% }) %>
         <% } %>
 
         <script>
-            const flashDiv = document.querySelector('.flash-card');
-            setTimeout(() => {
-                flashDiv.style.display = 'none';
-            }, 4000);     
+            const flashMsg = document.querySelectorAll('.flash-card');
+            const flashClose = document.querySelectorAll('.flashClose');
+
+            for(let i=0; i<flashClose.length; i++){
+                flashClose[i].addEventListener('click', () => { flashMsg[i].style.display = 'none' })
+            }
         </script>
     </div>
-        

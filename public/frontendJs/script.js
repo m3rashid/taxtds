@@ -6,12 +6,14 @@ copyright.innerHTML = `copyrights &copy; ${date.getFullYear()}, &nbsp;&nbsp; All
 // Modals for login and signup in the index page 
 const modals = [
     document.getElementById('loginMain'),
-    document.getElementById('signupMain')
+    document.getElementById('signupMain'),
+    document.getElementById('adminLoginMain')
 ];
 
 const btns = [
     document.getElementById('loginBtn'),
-    document.getElementById('signupBtn')
+    document.getElementById('signupBtn'),
+    document.getElementById('userAdminBtn')
 ];
 
 const closebtns = document.querySelectorAll('span.close');
@@ -37,5 +39,4 @@ for(let i=0; i<btns.length; i++){
         modals[i].style.display = 'block';
         main.classList.add('blur');
     });
-
 }

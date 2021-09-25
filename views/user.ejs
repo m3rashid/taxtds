@@ -6,14 +6,8 @@
                 <p>Manage your services here</p>
             </div>
             <div>
-                <a id="settingsBtn" onclick="">
-                    <i class="fas fa-cog"></i>
-                    &nbsp;Settings
-                </a>
-                <a id="logoutBtn" onclick="logoutUser()">
-                    <i class="fas fa-sign-out-alt"></i>
-                    &nbsp;Logout
-                </a>
+                <a id="settingsBtn" onclick=""><i class="fas fa-cog"></i> Settings</a>
+                <a id="logoutBtn" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 <script>
                     function logoutUser(){
                         if(confirm('Are you sure you want to logout? ')) window.location.href = '/logout';
@@ -60,39 +54,22 @@
 
             <div class="user-profile-cards">
                 <h2>Your Already Listed Services</h2>
+                <% if(services.length ==0){ %>
+                    <h3 style="text-align: center">-----No registered services-----</h3>
+                <% } %>
 
-                <% services.forEach(ad => { %>
+                <% for(let i=0; i<services.length; i++){ %>
                     <div class="user-profile-advert">
-                        <p>
-                            <span>Brand: </span>
-                            <%= ad.brandName %>
-                        </p>
-                        <p>
-                            <span>Owner: </span>
-                            <%= ad.owner %>
-                        </p>
-                        <p>
-                            <span>Address: </span>
-                            <%= ad.address %>
-                        </p>
-                        <p>
-                            <span>State: </span>
-                            <%= ad.state %>
-                        </p>
-                        <p>
-                            <span>Service: </span>
-                            <%= ad.service %>
-                        </p>
-                        <p>
-                            <span>Phone: </span>
-                            <%= ad.phone %>
-                        </p>
-                        <p>
-                            <span>Email: </span>
-                            <%= ad.email %>
-                        </p>
+                        <p><span>Brand: </span><%= services[i].brandName %></p>
+                        <p><span>Owner: </span><%= services[i].owner %></p>
+                        <p><span>Address: </span><%= services[i].address %></p>
+                        <p><span>State: </span><%= services[i].state %></p>
+                        <p><span>Service: </span><%= services[i].service %></p>
+                        <p><span>Phone: </span><%= services[i].phone %></p>
+                        <p><span>Email: </span><%= services[i].email %></p>
+                        <a href="/admin/delete-service/<%= services[i].id %>" class="button back-red"><i class="fas fa-trash"></i> Remove Service</a>
                     </div>
-                <% }) %>
+                <% } %>
             </div>
         </div>
     </main>

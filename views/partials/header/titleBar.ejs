@@ -1,10 +1,9 @@
 <header>
     <form action="/search" method="GET">
-        <input type="text" placeholder="Enter State" name="state">
+        <input type="text" placeholder="Enter State" name="state" required>
         <div class="search-service">
             <i class="fas fa-search"></i>
-            <input type="text" name="service"
-                placeholder="Search your services like income tax consultant, gst consultants and more">
+            <input type="text" name="service" placeholder="Search your services like income tax consultant, gst consultants and more" required>
         </div>
         <button type="submit" class="search-icon">
             <i class="fas fa-search"></i>
@@ -12,19 +11,17 @@
 
         <div class="nav-links">
             <% if(user != null || user != undefined){ %>
-                <a id="user-profile" href="/user">
-                    <i class="fas fa-user"></i>
-                    &nbsp;Profile
-                </a>
+                <a id="user-profile" href="/user"><i class="fas fa-user"></i> Profile</a>
             <% } else{ %>
-                <a id="loginBtn">
-                    <i class="fas fa-key"></i>
-                    &nbsp;Login
-                </a>
-                <a id="signupBtn">
-                    <i class="fas fa-sign-in-alt"></i>
-                    &nbsp;Signup
-                </a>
+                <a id="loginBtn"><i class="fas fa-key"></i> Login</a>
+                <a id="signupBtn"><i class="fas fa-sign-in-alt"></i> Signup</a>
             <% } %>
+
+            <% if(admin){ %>
+                <a href="/admin" id="user-profile"><i class="fas fa-user"></i> Admin</a>    
+            <% } else{ %>
+                <a id="userAdminBtn"><i class="fas fa-user-cog"></i> Admin</a>
+            <% } %>
+            
         </div>
     </form>

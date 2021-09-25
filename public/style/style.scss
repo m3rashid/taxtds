@@ -281,9 +281,9 @@ main{
                 }
                 a.button{
                     height: 40px;
+                    width: 100px;
                     padding: 10px 15px;
                     border-radius: 3px;
-                    &:hover{ font-weight: bold }
                     @media(max-width: 768px){
                         margin-bottom: 5px;
                         &:last-child{ margin-bottom: 0 }
@@ -295,8 +295,8 @@ main{
                     border: 2px solid #d3d3d3;
                     &:hover{
                         background-color: #343c42;
+                        border-color: #343c42;
                         color: white;
-                        border: 0;
                     }
                 }
                 a.back-red{
@@ -450,7 +450,7 @@ footer{
     }
     .flash-card{
         border-radius: 10px;
-        padding: 10px;
+        padding: 20px 10px 15px 10px;
         font-size: 1.1rem;
         font-weight: bold;
         display: flex;
@@ -462,14 +462,29 @@ footer{
             font-size: 2rem;
             margin-right: 10px;
         }
+        span{
+            position: absolute;
+            right: -5px;
+            top: 3px;
+            cursor: pointer;
+            i{
+                font-size: 1.2rem;
+            }
+        }
     }
     .flash-success{
         min-height: 60px;
         background-color: rgb(120, 255, 120);
+        span:hover{
+            color: rgb(250, 120, 120);
+        }
     }
     .flash-failure{
         min-height: 60px;
         background-color: rgb(250, 120, 120);
+        span:hover{
+            color: rgb(120, 255, 120);
+        }
     }
 }
 
@@ -487,7 +502,6 @@ footer{
     }
 }
   
-
 // Exit  keyframes (not used)
 // animation: swing-out-top-bck 0.45s cubic-bezier(0.600, -0.280, 0.735, 0.045) both;
 @keyframes swing-out-top-bck {
@@ -502,10 +516,6 @@ footer{
         opacity: 0;
     }
 }
-  
-
-
-
 
 // Flash messages end
 
@@ -518,7 +528,7 @@ footer{
     filter: blur(3px);
     opacity: 0.6;
 }
-div#loginMain, div#signupMain, div#logoutMain{
+div#loginMain, div#signupMain, div#logoutMain, div#adminLoginMain{
     background-color: rgb(213, 226, 245);
     display: none;
     position: fixed;
@@ -727,13 +737,144 @@ main#user-profile{
                     margin-bottom: 20px;
                     padding: 15px;
                 }
-            p{
-                font-size: 1.1rem;
-                span{
-                    font-weight: bold;
-                    margin-right: 10px;
+                p{
+                    font-size: 1.1rem;
+                    span{
+                        font-weight: bold;
+                        margin-right: 10px;
+                    }
                 }
             }
+        }
+    }
+}
+
+// user page end
+
+
+// Admin Page start
+div#admin-page-grid{
+    min-height: 50vh;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-gap: 30px;
+    margin: 15px 10px;
+    @media(max-width: 600px){
+        grid-template-columns: 1fr;
+    }
+    div.admin-all-users{
+        margin-bottom: 40px;
+        @media(max-width: 600px){
+            margin-bottom: 20px;
+        }
+        h2{
+            margin: 10px;
+        }
+        div.card{
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            position: relative;
+            &:hover{
+                background-color: rgb(253, 242, 212);
+                box-shadow: 0px 0px 15px 0px rgb(167, 167, 167);
+            }
+            @media(max-width: 600px){
+                padding: 15px;
+            }
+            p.name{
+                font-size: 1.1rem;
+                // float: left;
+            }
+            a.button{
+                height: 35px;
+                padding: 8px 10px;
+                background-color: rgb(244, 67, 54);
+                color: white;
+                border-radius: 5px;
+                position: absolute;
+                right: 15px;
+                top: 15px;
+                @media(max-width: 600px){
+                    right: 8px;
+                    top: 8px;
+                }
+            }
+        }
+    }
+    div.admin-all-services{
+        // margin: 15px 20px 40px 20px;
+        h2{
+            margin: 10px;
+        }
+        div.card{
+            padding: 20px;
+            padding-bottom: 30px;
+            background-color: white;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            width: 100%;
+            &:hover{
+                background-color: rgb(253, 242, 212);
+                box-shadow: 0px 0px 15px 0px rgb(167, 167, 167);
+            }
+            @media(max-width: 600px){
+                padding: 15px;
+                padding-bottom: 25px;
+            }
+
+            p.brand{
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+                font-weight: bold;
+            }
+            p.name{
+                font-size: 1.1rem;
+                margin-bottom: 5px;
+            }
+            p.address{
+                margin-bottom: 5px;
+                span{
+                    font-weight: bold;
+                }
+            }
+            div.call{
+                i{
+                    transform: rotate(-45deg);
+                    font-weight: bold; 
+                }
+            }
+            div.message{
+                margin: -20px 0 25px 150px;
+                @media(max-width: 500px){
+                    margin: 0 0 20px 0;
+                }
+            }
+            a.button{
+                height: 40px;
+                width: 100px;
+                padding: 10px 15px;
+                border-radius: 3px;
+                @media(max-width: 768px){
+                    margin-bottom: 5px;
+                    &:last-child{ margin-bottom: 0 }
+                }
+            }
+            a.back-black{
+                background-color: white;
+                color: black;
+                border: 2px solid #d3d3d3;
+                &:hover{
+                    background-color: #343c42;
+                    border-color: #343c42;
+                    color: white;
+                }
+            }
+            a.back-red{
+                color: white;
+                background-color: rgb(244, 67, 54);
+                border: 1px solid rgb(244, 67, 54);
             }
         }
     }
@@ -741,6 +882,9 @@ main#user-profile{
 
 
 
-// user page end
 
 
+
+
+
+// Admin page end

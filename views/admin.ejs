@@ -1,23 +1,41 @@
 <%- include('partials/header/_topLinks.ejs') %>
+
 <main id="user-profile">
     <div class="user-profile-header">
+        <div><h1>Hello Admin</h1></div>
         <div>
-            <h1>Hello Superuser, Hemant</h1>
-        </div>
-        <div>
-            <a id="settingsBtn" onclick="">
-                <i class="fas fa-cog"></i>
-                &nbsp;Settings
-            </a>
-            <a id="logoutBtn" onclick="logoutUser()">
-                <i class="fas fa-sign-out-alt"></i>
-                &nbsp;Logout
-            </a>
+            <a id="settingsBtn" onclick=""><i class="fas fa-cog"></i>Settings</a>
+            <a id="logoutBtn" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</a>
             <script>
-                function logoutUser(){
-                    if(confirm('Are you sure you want to logout? ')) window.location.href = '/logout';
-                };
+                function logoutUser(){ if(confirm('Are you sure you want to logout? ')) window.location.href = '/adminLogout' };
             </script>
+        </div>
+    </div>
+
+    <div id="admin-page-grid">
+        <div class="admin-all-users">
+            <h2>All users in the Tax TDS domain</h2>
+            <% for(let i=0; i<allUsers.length; i++){ %>
+                <div class="card" id="card<%= i %>">
+                    <p class="name"><i class="fas fa-address-card"></i> <%= allUsers[i].username %></p>
+                    <a href="/admin/delete-user/<%= allUsers[i].id %>" class="button back-red"><i class="fas fa-trash"></i> Remove</a>
+                </div>
+            <% } %> 
+        </div>
+
+        <div class="admin-all-services">
+            <h2>All registered services in the Tax TDS domain</h2>
+            <% for(let i=0; i<services.length; i++){ %>
+                <div class="card" id="card<%= i %>">
+                    <p class="brand"><%= services[i].brandName %></p>
+                    <p class="name"><%= services[i].owner %></p>
+                    <p class="address"><span>Address: </span><%= services[i].address %></p>
+                    <div class="call"><i class="fas fa-phone-volume"></i> <%= services[i].phone %></div>
+                    <div class="message"><i class="far fa-envelope"></i> <%= services[i].email %></div>
+                    <a href="/admin/advertise-service/<%= services[i].id %>" class="button back-black"><i class="fas fa-ad"></i> Advertise</a>
+                    <a href="/admin/delete-service/<%= services[i].id %>" class="button back-red"><i class="fas fa-trash"></i> Remove</a>
+                </div>
+            <% } %> 
         </div>
     </div>
 </main>

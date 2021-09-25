@@ -4,6 +4,8 @@
     
     <%- include('partials/modals/login.ejs') %>
     <%- include('partials/modals/signup.ejs') %>
+    <%- include('partials/modals/adminLogin.ejs') %>
+    
     <main>
         <div class="image-top-main">
             <img src="images/back.jpg" alt="">
@@ -19,9 +21,9 @@
                         <p class="address"><span>Address: </span><%= services[i].address %></p>
                         <div class="call"><i class="fas fa-phone-volume"></i> <%= services[i].phone %></div>
                         <div class="message"><i class="far fa-envelope"></i> <%= services[i].email %></div>
-                        <a href="" class="button back-black"><i class="far fa-star"></i> Write Review</a>
+                        <a href="/service/write-review/<%= services[i].id %>" class="button back-black"><i class="far fa-star"></i> Write Review</a>
                         <a href="" class="button back-black"><i class="fas fa-phone-alt"></i> Call Now</a>
-                        <a href="" class="button back-red"><i class="fas fa-dollar-sign"></i> Get Quotes</a>
+                        <a href="/service/get-quotes/<%= services[i].id %>" class="button back-red"><i class="fas fa-dollar-sign"></i> Get Quotes</a>
                     </div>
                 <% } %> 
             </div>

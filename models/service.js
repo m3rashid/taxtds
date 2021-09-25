@@ -32,7 +32,8 @@ const serviceSchema = new mongoose.Schema({
     addedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    reviews: [String]
 });
 
 

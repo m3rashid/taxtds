@@ -12,14 +12,6 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-router.get('/admin', (req, res) => {
-    res.render('admin.ejs', {
-        titleTop: 'Tax TDS | Admin',
-        success: req.flash('success'),
-        failure: req.flash('failure')
-    })
-})
-
 router.get('/user', (req, res) => {
     if(req.isAuthenticated()){
         let userServices = [];
@@ -44,7 +36,6 @@ router.get('/user', (req, res) => {
         res.redirect('/');
     }
 });
-
 
 router.post('/user/add-service', (req, res) => {
     if(!req.isAuthenticated()){
@@ -127,12 +118,10 @@ router.post('/signup', (req, res) => {
     })    
 });
 
-
 router.get("/logout", (req, res) => {
     req.logout();
     req.flash('success', 'Successfully logged out')
     return res.redirect('/');
 });
-
 
 module.exports = router;

@@ -8,14 +8,16 @@ const session = require('express-session');
 
 const User = require('../models/user');
 const Service = require('../models/service');
+const Review = require('../models/reviews')
 const signupMailer = require('../mailer/signup');
 
 
 // Tesing mailer start
-router.get('/m', (req, res) => {
+router.get('/mail', (req, res) => {
     res.render('mailer/signup.ejs');
 })
-// Testing end"
+// Testing mailer end"
+
 
 
 let sessions;
@@ -125,13 +127,53 @@ router.get('/admin/delete-service/:serviceId', (req, res) => {
     })
 })
 
-router.get('/service/write-review/:serviceId', (req, res) => {
-    // req.params.serviceId
-})
-
 router.get('/admin/advertise-service/:serviceId', (req, res) => {
     res.send('<h1>Under Construction</h1>')
 })
+
+const dummyDataService = {
+    brandName: 'This is the brandname',
+    tagline: 'Awesome tagline of the awesome brand',
+    owner: 'Babu rao',
+    establishment: '1998',
+    addedBy: 'Babu Rao',
+    phone: '9988776655',
+    email: 'mastaadmibaburaao@hotmail.com',
+    profession: 'Ameer aadmi',
+    address: 'Mumbai me chhota sa bhade par kholi hai, navi mumbai, Bihar',
+    state: 'Bihar',
+    services: ['tax filing', 'income tax', 'bhoot bhagao', 'purane aashiq se saamna', 'aur bhi hai', 'aao kabhi milne', 'chai pilaunga']
+}
+const dummyDataReviews = [
+    { name: 'MD Rashid Hussain', comment: `This is a very positive review of this service's and this is good.`, rating: 1 },
+    { name: 'MD Rashid Hussain', comment: `This is a very positive review of this service's and this is good.`, rating: 2 },
+    { name: 'MD Rashid Hussain', comment: `This is a very positive review of this service's and this is good.`, rating: 3 },
+    { name: 'MD Rashid Hussain', comment: `This is a very positive review of this service's and this is good.`, rating: 4 },
+    { name: 'MD Rashid Hussain', comment: `This is a very positive review of this service's and this is good.`, rating: 5 },
+]
+
+router.get('/details', (req, res) => {
+    res.render('details.ejs', {
+        titleTop: 'User Details',
+        // user: req.user,
+        success: req.flash('success'),
+        failure: req.flash('failure'),
+        userListedservices: dummyDataService,
+        userReviews: dummyDataReviews
+    })
+})
+
+router.post('/service/write-review/:serviceId', (req, res) => {
+    const serviceId = req.params.serviceId;
+    const review = new Review({
+        name: req.body.name,
+        rating: req.body.rating,
+        comment: req.body.comment
+    });
+});
+
+
+
 
 
 
@@ -171,15 +213,6 @@ router.get('/search', async (req, res) => {
     const service = req.query.service;
     // Nothing is done here as of now
     res.render('index.ejs', {
-        titleTop: 'Taxtds',
-        user: req.user,
-        success: req.flash('success'),
-        failure: req.flash('failure')
-    });
-});
-
-router.get('/details', (req, res) => {
-    res.render('details.ejs', {
         titleTop: 'Taxtds',
         user: req.user,
         success: req.flash('success'),

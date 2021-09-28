@@ -19,6 +19,24 @@ const btns = [
 const closebtns = document.querySelectorAll('span.close');
 const main = document.querySelector('main');
 
+// btns[0].addEventListener('click', () => {
+//     if(modals[0].style.display == 'block'){
+//         modals[0].style.display == 'none';
+//         main.classList.remove('blur');
+//     }
+//     else{
+//         modals[0].style.display == 'block';
+//         main.classList.add('blur');
+//     }
+// })
+
+function showModals(n){
+    if(modals[n].style.display == 'block'){
+        modals[n].style.display == 'none';
+        main.classList.remove('blur');
+    }
+}
+
 for(let i=0; i<btns.length; i++){
     closebtns[i].addEventListener('click', () => {
         modals[i].style.display = 'none';
@@ -28,15 +46,15 @@ for(let i=0; i<btns.length; i++){
 
 for(let i=0; i<btns.length; i++){
     btns[i].addEventListener('click', () => {
-        let j=0;
-        while(j<btns.length){
+        for(let j=0; j<btns.length; j++){
             if(modals[j].style.display == 'block'){
                 modals[j].style.display = 'none';
                 main.classList.remove('blur');
             }
-            j++;
         }
         modals[i].style.display = 'block';
         main.classList.add('blur');
     });
 }
+
+

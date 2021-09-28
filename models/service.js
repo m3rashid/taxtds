@@ -5,7 +5,27 @@ const serviceSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    tagline: String,
     owner: {
+        type: String,
+        required: true
+    },
+    establishment: {
+        type: Date,
+    },
+    addedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    phone: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    profession: {
         type: String,
         required: true
     },
@@ -17,23 +37,13 @@ const serviceSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    service: {
-        type: String,
-        required: true
-    },
-    phone: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    addedBy: {
+    services: [{
+        type: String
+    }],
+    reviews: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    reviews: [String]
+        ref: 'Review'
+    }]
 });
 
 

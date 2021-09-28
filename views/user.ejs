@@ -1,8 +1,12 @@
+<% const allListedServices = [ "Registration Services", "Company compliance", "Tax filling", "Audit and Insurance", "Taxation Advisory and Personal Advisory", "FCRA FEMA NGOs", "Valuations", "Accounting Services", "Investment Planning", "GST Return", "GST Registration", "GST Registration for foreigners", "Cancel GST Registration", "Temporary Registration", "Income Tax Registration", "company Registration", "Private Limited company", "Public Limited company", "Proprietorship Registration", "Partnership Registration", "LLP Registration", "Society Registration", "Trust Registration", "PF Registration", "ESI Registration", "MSME Registration", "FSSAI Registration", "Digital Registration", "Patent Registration", "Import Export Code", "Copy Right Registration", "Trademark Registration", "Trademark Rectification", "Trade mark Objection", "Trademark Renewal", "Logo Registration", "Provisional Patent Registration", "Partnership deed", "Company name change", "Registration office Change", "Add Directors", "Remove directores", "Increase Authorized Capital", "Shares Transfer", "MOA Amendment", "Add Partner", "Winding Up company", "Winding Up LLP", "Filing of Income tax", "Wealth tax returns", "TDS Return", "ESI Return", "Statutory Audits", "Tax Audits", "Internal and Management Audits", "Internal Control Review", "Due diligence", "Business and Asset Valuation", "System Audit", "Risk Assessment and Management", "Corporate and personal tax compliance including income-tax assessments", "Appeals before the Commissioner (Appeals)", "International and Domestic Tax Planning", "Filing of Income tax", "Wealth-tax returns of residents and non-residents individuals", "Tax and tds services", "domestic and foreign companies and other entities", "Compliance with law relating to Indirect taxes", "Personal financial planning", "Insurance and pension planning", "Advice on various foreign exchange matters under the Act", "Trust/Society Formation", "Registration u/s 12A and 80G of Income Tax Act", "Registration under FCRA", "Business Valuation", "Partnership Valuation", "Fair Valuation for IFRS Valuation in Shareholder Disputes", "Intangible Asset Valuation", "Maintenance of statutory records registers and minutes books", "Book Keeping and general accounting services", "Preparation of Financial Statements", "Payroll Processing", "Cash Forecasting Design, implementation and review of accounting manuals", "Book Keeping and general accounting services", "Preparation of Financial Statements", "Payroll Processing", "Cash Forecasting Design", "implementation and review of accounting manuals", "Life Insurance Policy (LIC)", "Public Provident Fund", "Mutual fund", "Equity Share", "Real estate investment", "Gold ETF", "Post Office investment", "Company Fixed Deposits", "Bank fixed deposits", "Recurring Deposits", "Double Accounting System", "Economics - Micro", "Economics - Macro", "Business Studies", "Fundamentals of Accounting", "Mercantile Law", "General Economics", "Quantitative Aptitude", "Accounting", "Cost Accounting and Financial Management", "Advanced Accounting", "Taxation", "Auditing and Assurance", "Business Laws, Ethics and Communication", "Information Technology and Strategic Management", "Corporate and other Laws", "Advanced Auditing and Professional Ethics", "Financial Reporting", "Strategic Financial Management", "Strategic Cost Management and Performance Evaluation", "Corporate and Economic Laws", "Direct Tax Laws and International Taxation", "Indirect Tax Laws", "Risk Management", "International Taxation", "Economic Laws", "Financial Services and Capital Markets", "Global Financial Reporting Standards", "Multidisciplinary Case Study" ]; %>
+
+
+
 <%- include('partials/header/_topLinks.ejs') %>
     <main id="user-profile">
         <div class="user-profile-header">
             <div>
-                <h1 >Hello <%= username %></h1>
+                <h1 >Hello <%= name %></h1>
                 <p>Manage your services here</p>
             </div>
             <div>
@@ -20,25 +24,23 @@
             <div class="user-profile-form">
                 <h2>Register a new service</h2>
                 <form id="add-service" action="/user/add-service" method="POST" class="user-profile-register-service">
+                    <p style="color: white; text-align: center;">Data entered in the form cannot be modified at a later stage, please fill this form carefully</p>
+                    <br>
+                    <div>
+                        <i class="fas fa-building"></i>
+                        <input type="text" name="brandName" placeholder="Name of your organisation" required>
+                    </div>
                     <div>
                         <i class="fas fa-star-half-alt"></i>
-                        <input type="text" name="brandName" placeholder="Name of your brand" required>
+                        <input type="text" name="tagline" placeholder="Organisation tagline">
                     </div>
                     <div>
                         <i class="fas fa-user-tie"></i>
                         <input type="text" name="owner" placeholder="Name of the owner" required>
                     </div>
                     <div>
-                        <i class="fas fa-street-view"></i>
-                        <input type="text" name="address" placeholder="Full address of the service">
-                    </div>
-                    <div>
-                        <i class="fab fa-font-awesome-flag"></i>
-                        <input type="text" name="state" placeholder="Adress (state)" required>
-                    </div>
-                    <div>
-                        <i class="fas fa-briefcase"></i>
-                        <input type="text" name="service" placeholder="Name of the service" required>
+                        <i class="fas fa-certificate"></i>
+                        <input type="text" name="establishment" placeholder="year of establishment" required>
                     </div>
                     <div>
                         <i class="fas fa-phone-alt"></i>
@@ -48,6 +50,31 @@
                         <i class="fas fa-envelope-open-text"></i>
                         <input type="email" name="email" placeholder="Email (service/owner)">
                     </div>
+                    <div>
+                        <i class="fas fa-briefcase"></i>
+                        <input type="text" name="profession" placeholder="Your Profession" required>
+                    </div>
+                    <div>
+                        <i class="fas fa-street-view"></i>
+                        <input type="text" name="address" placeholder="Full address of the service">
+                    </div>
+                    <div>
+                        <i class="fab fa-font-awesome-flag"></i>
+                        <input type="text" name="state" placeholder="Enter your State" required>
+                    </div>
+                    <div onclick="document.getElementById('allListedServices').style.display = 'block';" style="cursor: pointer;">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <span style="color: white; font-weight: bold">Choose Your Services &nbsp;</span>
+                        <!-- <input type="text" name="services" placeholder="Name of the service" required> -->
+                    </div>
+                    <div id="allListedServices">
+                        <% let userListedServices = [] %>
+                        <% for(let i=0; i<allListedServices.length; i++){ %>
+                            <input type="checkbox" name="userListedServices[<%= i %>]" value="<%= allListedServices[i] %>" <%= allListedServices[i].enabled ? "checked" : null %> >
+                            <label for="service<%= i %>"> <%= allListedServices[i] %></label>
+                            <br>
+                        <% } %>
+                    </div>                        
                     <button type="submit">Add service</button>
                 </form>
             </div>
@@ -67,7 +94,12 @@
                         <p><span>Service: </span><%= services[i].service %></p>
                         <p><span>Phone: </span><%= services[i].phone %></p>
                         <p><span>Email: </span><%= services[i].email %></p>
-                        <a href="/admin/delete-service/<%= services[i].id %>" class="button back-red"><i class="fas fa-trash"></i> Remove Service</a>
+                        <a onclick="checkServiceDelete()" class="button back-red"><i class="fas fa-trash"></i> Remove Service</a>
+                        <script>
+                            function checkServiceDelete(){
+                                if(confirm("Are you sure, you wnat to delete this service? ")) window.location.href = "/admin/delete-service/<%= services[i].id %>";
+                            };
+                        </script>
                     </div>
                 <% } %>
             </div>

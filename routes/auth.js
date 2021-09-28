@@ -24,7 +24,7 @@ router.get('/user', (req, res) => {
             req.flash('success', 'Successfully logged in');
             res.render('user.ejs', {
                 titleTop: 'Profile',
-                username: req.user.username,
+                name: req.user.name,
                 services: userServices,
                 success: req.flash('success'),
                 failure: req.flash('failure')
@@ -43,15 +43,20 @@ router.post('/user/add-service', (req, res) => {
         res.redirect('/');
     }
     else{
+        console.log(req.body);
+
         const service = new Service ({
             brandName: req.body.brandName,
+            tagline: req.body.tagline,
             owner: req.body.owner,
-            address: req.body.address,
-            state: req.body.state,
-            service: req.body.service,
+            establishment: req.body.establishment,
+            addedBy: req.user.id,
             phone: req.body.phone,
             email: req.body.email,
-            addedBy: req.user.id
+            profession: req.body.profession,
+            address: req.body.address,
+            state: req.body.state,
+            services: req.body.userListedServices
         });
         service.save((err, doc) => {
             if(err) req.flash('failure', 'There was an error in registering your service, try again');
@@ -97,7 +102,7 @@ router.post('/signup', (req, res) => {
         }
         else{
             if(req.body.password == req.body.confirm_password){
-                User.register({username: req.body.username}, req.body.password, (err, user) => {
+                User.register({username: req.body.username, name: req.body.name}, req.body.password, (err, user) => {
                     if(err){
                         console.log(err);
                         res.redirect('back');

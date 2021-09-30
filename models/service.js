@@ -10,8 +10,13 @@ const serviceSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    experience: {
+        type: String,
+        required: true
+    },
     establishment: {
-        type: Date,
+        type: String,
+        required: true
     },
     addedBy: {
         type: mongoose.Schema.Types.ObjectId,
@@ -41,8 +46,20 @@ const serviceSchema = new mongoose.Schema({
         type: String
     }],
     reviews: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Review'
+        name: {
+            type: String,
+            required: true
+        },
+        rating: {
+            type: Number,
+            required: true,
+            min: 0,
+            max: 5
+        },
+        comment: {
+            type: String,
+            required: true
+        }
     }]
 });
 

@@ -409,9 +409,15 @@ main div.main-details div.info-card-section div.card:hover {
           box-shadow: 0px 0px 15px 0px #a7a7a7;
 }
 
-main div.main-details div.info-card-section div.card h1 {
+main div.main-details div.info-card-section div.card h1.brand a {
+  text-decoration: none;
   margin-bottom: 10px;
   font-weight: bold;
+  color: black;
+}
+
+main div.main-details div.info-card-section div.card h1.brand a:hover {
+  color: #f44336;
 }
 
 main div.main-details div.info-card-section div.card p.name {
@@ -464,6 +470,7 @@ main div.main-details div.info-card-section div.card a.button {
 
 @media (max-width: 768px) {
   main div.main-details div.info-card-section div.card a.button {
+    width: 100%;
     margin-bottom: 5px;
   }
   main div.main-details div.info-card-section div.card a.button:last-child {
@@ -809,40 +816,6 @@ footer #footer-copyright {
     -webkit-transform-origin: top;
             transform-origin: top;
     opacity: 1;
-  }
-}
-
-@-webkit-keyframes swing-out-top-bck {
-  0% {
-    -webkit-transform: rotateX(0deg);
-            transform: rotateX(0deg);
-    -webkit-transform-origin: top;
-            transform-origin: top;
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: rotateX(-100deg);
-            transform: rotateX(-100deg);
-    -webkit-transform-origin: top;
-            transform-origin: top;
-    opacity: 0;
-  }
-}
-
-@keyframes swing-out-top-bck {
-  0% {
-    -webkit-transform: rotateX(0deg);
-            transform: rotateX(0deg);
-    -webkit-transform-origin: top;
-            transform-origin: top;
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: rotateX(-100deg);
-            transform: rotateX(-100deg);
-    -webkit-transform-origin: top;
-            transform-origin: top;
-    opacity: 0;
   }
 }
 
@@ -1286,25 +1259,14 @@ main#user-profile div.details-page-reviews {
   min-height: 25vh;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 7fr 4fr;
-      grid-template-columns: 7fr 4fr;
-  grid-gap: 10px;
+  -ms-grid-columns: 3fr 2fr;
+      grid-template-columns: 3fr 2fr;
 }
 
 @media (max-width: 600px) {
   main#user-profile div.details-page-reviews {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
-  }
-}
-
-main#user-profile div.details-page-reviews div.reviews {
-  padding: 15px;
-}
-
-@media (max-width: 600px) {
-  main#user-profile div.details-page-reviews div.reviews {
-    padding: 10px;
   }
 }
 
@@ -1332,6 +1294,9 @@ main#user-profile div.details-page-reviews div.reviews div div.inner {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   background-color: white;
   margin-bottom: 10px;
   max-width: 800px;
@@ -1382,7 +1347,7 @@ main#user-profile div.details-page-reviews div.write-review {
 
 @media (max-width: 768px) {
   main#user-profile div.details-page-reviews div.write-review {
-    width: 100vw;
+    margin: 0;
     padding: 10px;
     margin-bottom: 50px;
   }

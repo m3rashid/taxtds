@@ -16,13 +16,13 @@
             <div class="info-card-section">
                 <% for(let i=0; i< services.length; i++){ %>
                     <div class="card" id="card<%= i %>">
-                        <h1 class="brand"><%= services[i].brandName %></h1>
+                        <h1 class="brand"><a href="/service/details/<%= services[i].id %>"><%= services[i].brandName %></a></h1>
                         <p class="name"><%= services[i].owner %></p>
                         <p class="address"><span>Address: </span><%= services[i].address %></p>
                         <div class="call"><i class="fas fa-phone-volume"></i> <%= services[i].phone %></div>
                         <div class="message"><i class="far fa-envelope"></i> <%= services[i].email %></div>
-                        <a href="/service/write-review/<%= services[i].id %>" class="button back-black"><i class="far fa-star"></i> Write Review</a>
-                        <a href="" class="button back-black"><i class="fas fa-phone-alt"></i> Call Now</a>
+                        <a href="/service/details/<%= services[i].id %>/#user-write-review" class="button back-black"><i class="far fa-star"></i> Write Review</a>
+                        <a href="tel:<%= services[i].phone %>" class="button back-black"><i class="fas fa-phone-alt"></i> Call Now</a>
                         <a href="/service/get-quotes/<%= services[i].id %>" class="button back-red"><i class="fas fa-dollar-sign"></i> Get Quotes</a>
                     </div>
                 <% } %> 

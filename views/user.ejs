@@ -39,8 +39,12 @@
                         <input type="text" name="owner" placeholder="Name of the owner" required>
                     </div>
                     <div>
+                        <i class="fas fa-hourglass-half"></i>
+                        <input type="text" name="experience" placeholder="Experience in the field" required>
+                    </div>
+                    <div>
                         <i class="fas fa-certificate"></i>
-                        <input type="text" name="establishment" placeholder="year of establishment" required>
+                        <input type="text" name="establishment" placeholder="Year of establishment" required>
                     </div>
                     <div>
                         <i class="fas fa-phone-alt"></i>
@@ -48,7 +52,7 @@
                     </div>
                     <div>
                         <i class="fas fa-envelope-open-text"></i>
-                        <input type="email" name="email" placeholder="Email (service/owner)">
+                        <input type="email" name="email" placeholder="Email (service/owner)" required>
                     </div>
                     <div>
                         <i class="fas fa-briefcase"></i>
@@ -56,7 +60,7 @@
                     </div>
                     <div>
                         <i class="fas fa-street-view"></i>
-                        <input type="text" name="address" placeholder="Full address of the service">
+                        <input type="text" name="address" placeholder="Full address of the service" required>
                     </div>
                     <div>
                         <i class="fab fa-font-awesome-flag"></i>
@@ -88,13 +92,25 @@
                 <% for(let i=0; i<services.length; i++){ %>
                     <div class="user-profile-advert">
                         <p><span>Brand: </span><%= services[i].brandName %></p>
+                        <% if(services[i].tagline){ %>
+                            <p><span>Tagline: </span><%= services[i].tagline %></p>    
+                        <% } %>
                         <p><span>Owner: </span><%= services[i].owner %></p>
-                        <p><span>Address: </span><%= services[i].address %></p>
-                        <p><span>State: </span><%= services[i].state %></p>
-                        <p><span>Service: </span><%= services[i].service %></p>
+                        <p><span>Experience: </span><%= services[i].experience %></p>
+                        <p><span>Established: </span><%= services[i].establishment %></p>
                         <p><span>Phone: </span><%= services[i].phone %></p>
                         <p><span>Email: </span><%= services[i].email %></p>
-                        <a onclick="checkServiceDelete()" class="button back-red"><i class="fas fa-trash"></i> Remove Service</a>
+                        <p><span>Profession: </span><%= services[i].profession %></p>
+                        <p><span>Address: </span><%= services[i].address %></p>
+                        <p><span>State: </span><%= services[i].state %></p>
+                        <br>
+                        <p class="user-given-services">
+                            <span>Services you offer: </span>
+                            <% services[i].services.forEach(service => { %>
+                                <div><%= service %></div>
+                            <% }) %>
+                        </p>
+                        <a onclick="checkServiceDelete()" class="button back-red"><i class="fas fa-trash"></i> Remove Listing</a>
                         <script>
                             function checkServiceDelete(){
                                 if(confirm("Are you sure, you wnat to delete this service? ")) window.location.href = "/admin/delete-service/<%= services[i].id %>";

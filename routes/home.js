@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const _ = require('lodash');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const mongoose = require('mongoose');
@@ -8,7 +9,7 @@ const session = require('express-session');
 
 const User = require('../models/user');
 const Service = require('../models/service');
-const Review = require('../models/reviews')
+// const Review = require('../models/reviews')
 const signupMailer = require('../mailer/signup');
 
 
@@ -36,17 +37,16 @@ router.post('/adminLogin', (req, res) => {
 
 let allUsers = []; 
 let services = [];
-
 router.get('/admin', (req, res) => {
     if(!sessions){
         req.flash('failure', 'session not set as admin');
         res.redirect('/');
     }
     else if(sessions.userid){
-        User.find({admin : 0}, (err, docs) => {
+        User.find({}, (err, docs) => {
             if(err) console.log(err);
             else{
-                if(docs && docs.length>0) allUsers = docs;
+                if(docs) allUsers = docs;
                 else{
                     allusers = [];
                     req.flash('failure', 'No registered users found');
@@ -56,7 +56,7 @@ router.get('/admin', (req, res) => {
         Service.find({}, (err, docs) => {
             if(err) console.log(err);
             else{
-                if(docs && docs.length>0) services = docs;
+                if(docs) services = docs;
                 else{
                     services = [];
                     req.flash('failure', 'No registered services found');
@@ -94,22 +94,19 @@ router.get('/adminLogout', (req, res) => {
 
 
 router.get('/admin/delete-user/:userId', (req, res) => {
-    console.log(req.params.userId)
     Service.deleteMany({addedBy: req.params.userId}, (err, doc) => {
-        if(err) req.flash('failure', 'A problem occured. Cannot delete services of this user');
-        else{
-            req.flash('success', 'Deleted all services of this user');
-            console.log(doc);
+        if(err){
+            console.log(err);
+            req.flash('failure', 'A problem occured. Cannot delete services of this user');
         }
+        else req.flash('success', 'Deleted all services of this user');
     });
     User.deleteOne({id: req.params.userId}, (err, doc) => {
         if (err){
+            console.log(err);
             req.flash('failure', 'A problem occured. Cannot delete user, try again');
         }
-        else{
-            req.flash('success', 'Successfully deleted user');
-            console.log(doc);
-        }
+        else req.flash('success', 'Successfully deleted user');
         res.redirect('/admin');
     })
 })
@@ -117,12 +114,10 @@ router.get('/admin/delete-user/:userId', (req, res) => {
 router.get('/admin/delete-service/:serviceId', (req, res) => {
     Service.deleteOne({id: req.params.serviceId}, (err, doc) => {
         if (err){
+            console.log(err);
             req.flash('failure', 'A problem occured. Cannot delete service, try again');
         }
-        else{
-            req.flash('success', 'Successfully deleted the service');
-            console.log(doc);
-        }
+        else req.flash('success', 'Successfully deleted the service');
         res.redirect('back');
     })
 })
@@ -131,46 +126,46 @@ router.get('/admin/advertise-service/:serviceId', (req, res) => {
     res.send('<h1>Under Construction</h1>')
 })
 
-const dummyDataService = {
-    brandName: 'This is the brandname',
-    tagline: 'Awesome tagline of the awesome brand',
-    owner: 'Babu rao',
-    establishment: '1998',
-    addedBy: 'Babu Rao',
-    phone: '9988776655',
-    email: 'mastaadmibaburaao@hotmail.com',
-    profession: 'Ameer aadmi',
-    address: 'Mumbai me chhota sa bhade par kholi hai, navi mumbai, Bihar',
-    state: 'Bihar',
-    services: ['tax filing', 'income tax', 'bhoot bhagao', 'purane aashiq se saamna', 'aur bhi hai', 'aao kabhi milne', 'chai pilaunga']
-}
-const dummyDataReviews = [
-    { name: 'MD Rashid Hussain', comment: `This is a very positive review of this service's and this is good.`, rating: 1 },
-    { name: 'MD Rashid Hussain', comment: `This is a very positive review of this service's and this is good.`, rating: 2 },
-    { name: 'MD Rashid Hussain', comment: `This is a very positive review of this service's and this is good.`, rating: 3 },
-    { name: 'MD Rashid Hussain', comment: `This is a very positive review of this service's and this is good.`, rating: 4 },
-    { name: 'MD Rashid Hussain', comment: `This is a very positive review of this service's and this is good.`, rating: 5 },
-]
-
-router.get('/details', (req, res) => {
-    res.render('details.ejs', {
-        titleTop: 'User Details',
-        // user: req.user,
-        success: req.flash('success'),
-        failure: req.flash('failure'),
-        userListedservices: dummyDataService,
-        userReviews: dummyDataReviews
-    })
-})
-
 router.post('/service/write-review/:serviceId', (req, res) => {
-    const serviceId = req.params.serviceId;
-    const review = new Review({
+    const review = {
         name: req.body.name,
         rating: req.body.rating,
         comment: req.body.comment
+    };
+    Service.findOneAndUpdate({id: req.params.serviceId}, {'$push': {reviews: review}}, (err, docs) => {
+        if(err){
+            console.log(err);
+            req.flash('failure', 'Error in posting review');
+        }
+        else{
+            console.log(docs);
+            req.flash('success', 'Successfully posted the review');
+        }
+    });
+    res.redirect('back');
+});
+
+router.get('/service/details/:serviceId', (req, res) => {
+    Service.findById(req.params.serviceId, (err, docs) => {
+        if(err) console.log(err);
+        else{
+            if(docs){
+                res.render('details.ejs', {
+                    titleTop: 'User Details',
+                    success: req.flash('success'),
+                    failure: req.flash('failure'),
+                    services: docs,
+                });
+            }
+            else{
+                req.flash('failure', 'Service not found');
+                res.redirect('back');
+            }
+        }
     });
 });
+
+
 
 
 
@@ -208,6 +203,7 @@ router.get('/', (req, res) => {
     });
 });
 
+// Searching (title bar state/service search)
 router.get('/search', async (req, res) => {
     const state = req.query.state;
     const service = req.query.service;
@@ -219,5 +215,13 @@ router.get('/search', async (req, res) => {
         failure: req.flash('failure')
     });
 });
+
+// Searching (left panel category search)
+router.get('/services/category/:list', (req, res) => {
+    const list = req.params.list;
+    console.log(_.lowerCase(list));
+    // Nothing as of now
+    res.redirect('/');
+})
 
 module.exports = router;

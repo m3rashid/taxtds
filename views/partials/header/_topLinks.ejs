@@ -16,10 +16,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- User Defined Styles -->
-    <link rel="stylesheet" href="style/style.css"> 
+    <link rel="stylesheet" href="/style/style.css"> 
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/png" href="images/fav.ico"/>
+    <link rel="shortcut icon" type="image/png" href="/images/fav.ico"/>
 
     <!-- SEO Meta Descriptions -->
     <meta name=”description” content="Taxtds is the World's number number one local business directory website">
@@ -56,7 +56,7 @@
             const flashClose = document.querySelectorAll('.flashClose');
 
             for(let i=0; i<flashClose.length; i++){
-                flashClose[i].addEventListener('click', () => { flashMsg[i].style.display = 'none' })
+                flashClose[i].addEventListener('click', () => flashMsg[i].style.display = 'none' )
             }
         </script>
     </div>

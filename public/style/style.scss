@@ -253,9 +253,14 @@ main{
                     background-color: rgb(253, 242, 212);
                     box-shadow: 0px 0px 15px 0px rgb(167, 167, 167);
                 }
-                h1{
+                h1.brand a{
+                    text-decoration: none;
                     margin-bottom: 10px;
                     font-weight: bold;
+                    color: black;
+                    &:hover{
+                        color: rgb(244, 67, 54);
+                    }
                 }
                 p.name{
                     font-size: 1.2rem;
@@ -285,6 +290,7 @@ main{
                     padding: 10px 15px;
                     border-radius: 3px;
                     @media(max-width: 768px){
+                        width: 100%;
                         margin-bottom: 5px;
                         &:last-child{ margin-bottom: 0 }
                     }
@@ -500,23 +506,7 @@ footer{
         transform-origin: top;
         opacity: 1;
     }
-}
-  
-// Exit  keyframes (not used)
-// animation: swing-out-top-bck 0.45s cubic-bezier(0.600, -0.280, 0.735, 0.045) both;
-@keyframes swing-out-top-bck {
-    0% {
-        transform: rotateX(0deg);
-        transform-origin: top;
-        opacity: 1;
-    }
-    100% {
-        transform: rotateX(-100deg);
-        transform-origin: top;
-        opacity: 0;
-    }
-}
-
+}  
 // Flash messages end
 
 
@@ -663,7 +653,6 @@ main#user-profile{
         div.user-profile-form{
             background-color: rgb(213, 226, 245);
             padding: 20px;
-            // min-width: 400px;
             @include center-column-wise();
             justify-content: flex-start;
             align-items: center;
@@ -819,18 +808,12 @@ main#user-profile{
     div.details-page-reviews{
         min-height: 25vh;
         display: grid;
-        grid-template-columns: 7fr 4fr;
-        grid-gap: 10px;
-        // margin: 15px;
+        grid-template-columns: 3fr 2fr;
         @media(max-width: 600px){
             grid-template-columns: 1fr;
         }
 
         div.reviews{
-            padding: 15px;
-            @media(max-width: 600px){
-                padding: 10px;
-            }
             div{
                 padding: 15px;
                 @media(max-width: 600px){
@@ -839,6 +822,7 @@ main#user-profile{
                 div.inner{
                     @include center-row-wise();
                     align-items: flex-start;
+                    justify-content: flex-start;
                     background-color: white;
                     margin-bottom: 10px;
                     max-width: 800px;
@@ -880,7 +864,7 @@ main#user-profile{
             border-radius: 5px;
             padding: 20px;
             @media(max-width: 768px){
-                width: 100vw;
+                margin: 0;
                 padding: 10px;
                 margin-bottom: 50px;
             }
@@ -890,7 +874,6 @@ main#user-profile{
                 align-items: center;
                 border-radius: 10px;
                 padding: 20px;
-                // background-color: rgb(213, 226, 245);
                 @media(max-width: 450px){
                     padding: 15px;
                 }
@@ -982,7 +965,6 @@ div#admin-page-grid{
             }
             p.name{
                 font-size: 1.1rem;
-                // float: left;
             }
             a.button{
                 height: 35px;
@@ -1001,7 +983,6 @@ div#admin-page-grid{
         }
     }
     div.admin-all-services{
-        // margin: 15px 20px 40px 20px;
         h2{
             margin: 10px;
         }

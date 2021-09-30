@@ -45,10 +45,11 @@ router.post('/user/add-service', (req, res) => {
     else{
         console.log(req.body);
 
-        const service = new Service ({
+        const service = new Service({
             brandName: req.body.brandName,
             tagline: req.body.tagline,
             owner: req.body.owner,
+            experience: req.body.experience,
             establishment: req.body.establishment,
             addedBy: req.user.id,
             phone: req.body.phone,
@@ -61,6 +62,7 @@ router.post('/user/add-service', (req, res) => {
         service.save((err, doc) => {
             if(err) req.flash('failure', 'There was an error in registering your service, try again');
             else {
+                console.log(doc);
                 req.flash('success', 'Your service has been successfully registered in tax TDS');
             }
             res.redirect('/user');
@@ -80,12 +82,18 @@ router.post('/login', (req, res) => {
             req.flash('failure', 'No user found, check your username/password and try again')
             return res.redirect('/');
         }
+        else if(!user){
+            req.flash('failure', 'No user');
+            return res.redirect('/');
+        }
         else{
-            passport.authenticate('local')(req, res, () => {
+            let flash = req.flash('failure', 'Incorrect username or password');
+            passport.authenticate('local', { failureRedirect: '/', flash })(req, res, () => {
                 // signupMailer();
                 return res.redirect('/user');
             });
         }
+
     });
 });
 

@@ -1,12 +1,13 @@
 <%- include('partials/header/_topLinks.ejs') %>
 <main id="user-profile">
     <div class="user-profile-header">
+        </script>
         <div>
-            <h1><%= userListedservices.brandName %></h1>
-            <p><%= userListedservices.tagline %></p>
+            <h1><%= services.brandName %></h1>
+            <p><%= services.tagline %></p>
         </div>
         <div>
-            <a href="/go-back" style="text-align: center;"><i class="fas fa-home"></i> Home</a>
+            <a href="/" style="text-align: center;"><i class="fas fa-home"></i> Home</a>
         </div>
     </div>
 
@@ -14,24 +15,27 @@
         <div class="details-col-left">
             <div class="service">
                 <h2>General Service Details</h2>
-                <p><span>Established: </span><%= userListedservices.establishment %></p>
-                <p><span>Phone Number: </span><%= userListedservices.phone %></p>
-                <p><span>Email Address: </span><%= userListedservices.email %></p>
-                <p><span>Address: </span><%= userListedservices.address %></p>
-                <p><span>Address (state): </span><%= userListedservices.state %></p>
+                <p><span>Established: </span><%= services.establishment %></p>
+                <p><span>Phone Number: </span><%= services.phone %></p>
+                <p><span>Email Address: </span><%= services.email %></p>
+                <p><span>Address: </span><%= services.address %></p>
+                <p><span>Address (state): </span><%= services.state %></p>
             </div>
 
             <div class="addedBy">
                 <h2>Service Owner Details</h2>
-                <p><span>Owner: </span><%= userListedservices.owner %></p>
-                <p><span>Profession: </span><%= userListedservices.profession %></p>
+                <p><span>Owner: </span><%= services.owner %></p>
+                <p><span>Profession: </span><%= services.profession %></p>
+                <p><span>Experience: </span><%= services.experience %></p>
             </div>
         </div>
         <div class="details-col-right">
             <h2>All services offered</h2>
-            <% userListedservices.services.forEach(service => { %>
-                <div><%= service %></div>
-            <% }) %>
+            <% if(locals.services && services!=undefined){ %>
+                <% services.services.forEach(service => { %>
+                    <div><%= service %></div>
+                <% }) %>    
+            <% } %>
         </div>
     </div>
 
@@ -39,25 +43,33 @@
         <div class="reviews">
             <h2>Reviews from customers</h2>
             <div>
-                <% userReviews.forEach(review => { %>
-                    <div class="inner">
-                        <i class="fas fa-user"></i>
-                        <div>
-                            <p class="reviewer-name"><%= review.name %></p>
-                            <p class="rate"><span>Rating: &nbsp;</span>
-                                <% for(let i=0; i<review.rating; i++){ %>
-                                    <i class="fas fa-star"></i>
-                                <% } %> </p>
-                            <p><%= review.comment %></p>
+                <% if(services.reviews.length==0){ %>
+                    <div class="inner">-----No reviews yet-----</div>    
+                <% } else { %>
+                    <% services.reviews.forEach(review => { %>
+                        <div class="inner">
+                            <i class="fas fa-user"></i>
+                            <div>
+                                <p class="reviewer-name"><%= review.name %></p>
+                                <p class="rate"><span>Rating: &nbsp;</span>
+                                    <% if(review.rating == 0){ %>
+                                        <i style="color: red;" class="fas fa-times"></i>
+                                    <% } else { %>
+                                        <% for(let i=0; i<review.rating; i++){ %>
+                                            <i class="fas fa-star"></i>
+                                        <% } %> </p>
+                                    <% } %>
+                                <p><%= review.comment %></p>
+                            </div>
                         </div>
-                    </div>
-                <% }) %>
+                    <% }) %>
+                <% } %>
             </div>
         </div>
 
         <div class="write-review">
             <h2>Write a review</h2>
-            <form action="/" method="POST">
+            <form action="/service/write-review/<%= services.id %>" method="POST" id="user-write-review">
                 <div>
                     <i class="fas fa-user"></i>
                     <input type="text" name="name" placeholder="Enter your name" required>
@@ -73,7 +85,7 @@
                 </div>
                 <div>
                     <i class="fas fa-comment"></i>
-                    <input type="text" name="comment" placeholder="reviews message" required>
+                    <input type="text" name="comment" placeholder="Your review" required>
                 </div>
                 <button type="submit">Post Review</button>
             </form>

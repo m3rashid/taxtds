@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const _ = require('lodash')
 
 const session = require('express-session');
 const passport = require("passport");
@@ -9,6 +10,7 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const flash = require('connect-flash');
 
 const app = express();
+app.locals._ = _;
 app.set('view engine', 'ejs');
 app.set('views');
 
@@ -39,6 +41,11 @@ mongoose.connect(`mongodb://localhost:27017/taxtds`, { useNewUrlParser: true, us
 
 app.use('/', require('./routes/home'));
 app.use('/', require('./routes/auth'));
+
+// Handline error (non-defined) routes
+app.get('*', (req, res) => {
+    res.sendFile(`${__dirname}/views/error.html`);
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server on: ${port}`));

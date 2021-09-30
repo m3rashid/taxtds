@@ -28,10 +28,10 @@ app.use(passport.session());
 app.use(flash());
 
 // Connection to atlas
-// mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@taxtds.nhimu.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@taxtds.nhimu.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Connection to local DB
-mongoose.connect(`mongodb://localhost:27017/taxtds`, { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect(`mongodb://localhost:27017/taxtds`, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 // const db = mongoose.connection;

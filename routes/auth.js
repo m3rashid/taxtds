@@ -118,6 +118,8 @@ router.post('/signup', (req, res) => {
                     else{
                         passport.authenticate('local')(req, res, () => {
                             req.flash('success', 'Successfully created your account on tax TDS');
+                            signupMailer(user);
+                            console.log(user.username);
                             res.redirect('/user');
                         });
                     }

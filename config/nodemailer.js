@@ -16,9 +16,9 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-let renderTemplate = (/* data,*/ filename) => {
+let renderTemplate = (data, filename) => {
     let mailHTML;
-    ejs.renderFile(path.join(__dirname, `../views/mailer/${filename}`), /* data, */ (err, template) => {
+    ejs.renderFile(path.join(__dirname, `../views/mailer/${filename}`), {data: data}, (err, template) => {
         if(err) {
             console.log('Error in rendering template', err);
             return;

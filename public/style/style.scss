@@ -178,7 +178,10 @@ main{
     align-items: center;
     div.image-top-main{
         max-width: 80%;
-        @media(max-width: 900px){ width: 92% }
+        @media(max-width: 768px){
+            max-width: 100%;
+            width: 100vw
+        }
         img{
             width: 100%;
             height: 100%;
@@ -289,10 +292,18 @@ main{
                     width: 100px;
                     padding: 10px 15px;
                     border-radius: 3px;
+                    margin-right: 8px;
+                    &:last-child{
+                        margin-left: -5px;
+                    }
                     @media(max-width: 768px){
                         width: 100%;
                         margin-bottom: 5px;
-                        &:last-child{ margin-bottom: 0 }
+                        margin-right: 0;
+                        &:last-child{ 
+                            margin-bottom: 0;
+                            margin-left: 0;
+                        }
                     }
                 }
                 a.back-black{
@@ -305,11 +316,6 @@ main{
                         color: white;
                     }
                 }
-                a.back-red{
-                    color: white;
-                    background-color: rgb(244, 67, 54);
-                    border: 1px solid rgb(244, 67, 54);
-                }
             }
         }
     }
@@ -321,25 +327,26 @@ footer{
     div.carousel-links{
         background-color: white;
         height: 150px;
-        width: 100%;
+        width: 100vw;
+        position: relative;
         overflow: hidden;
-        white-space: nowrap;
-        .images{
-            width: 100%;
+        ul.images{
+            display: flex;
+            width: calc(244px * 8);
             height: 100%;
-            animation: carousel 15s linear infinite;
+            animation: carousel 20s linear infinite;
             &:hover{
                 animation-play-state: paused;
             }
-            img{
-                display: inline;
-                float: left;
+            li{
+                height: 144px;
+                width: 244px;
             }
         }
         @keyframes carousel {
-            100%{ transform: translateX(-1050px); }
+            0%{ transform: translateX(0) }
+            100%{ transform: translateX(calc(-244px * 8)) }
         }
-    
     }
 
     div.actual-footer-one{

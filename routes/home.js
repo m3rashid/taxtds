@@ -9,7 +9,6 @@ const session = require('express-session');
 
 const User = require('../models/user');
 const Service = require('../models/service');
-// const Review = require('../models/reviews')
 const signupMailer = require('../mailer/signup');
 
 
@@ -132,13 +131,12 @@ router.post('/service/write-review/:serviceId', (req, res) => {
         rating: req.body.rating,
         comment: req.body.comment
     };
-    Service.findOneAndUpdate({id: req.params.serviceId}, {'$push': {reviews: review}}, (err, docs) => {
+    Service.findByIdAndUpdate(req.params.serviceId, {'$push': {reviews: review}}, (err, docs) => {
         if(err){
             console.log(err);
             req.flash('failure', 'Error in posting review');
         }
         else{
-            console.log(docs);
             req.flash('success', 'Successfully posted the review');
         }
     });

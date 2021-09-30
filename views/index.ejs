@@ -21,9 +21,23 @@
                         <p class="address"><span>Address: </span><%= services[i].address %></p>
                         <div class="call"><i class="fas fa-phone-volume"></i> <%= services[i].phone %></div>
                         <div class="message"><i class="far fa-envelope"></i> <%= services[i].email %></div>
+                        <a class="button back-black">
+                            <% let rate = 0; %>
+                            <% let j=0; %>
+                            <% for(j=0; j<services[i].reviews.length; j++){ %>
+                                <% rate += services[i].reviews[j].rating; %>
+                            <% } %>
+                            <% rate = rate/j; %>
+                            <% if(rate !== rate){ %>
+                                No ratings yet
+                            <% } else{ %>
+                                <span >Rating: </span>
+                                <%= rate.toFixed(1) %>
+                                <i class="fas fa-star" style="color: gold;"></i>
+                            <% } %>
+                        </a>
                         <a href="/service/details/<%= services[i].id %>/#user-write-review" class="button back-black"><i class="far fa-star"></i> Write Review</a>
                         <a href="tel:<%= services[i].phone %>" class="button back-black"><i class="fas fa-phone-alt"></i> Call Now</a>
-                        <a href="/service/get-quotes/<%= services[i].id %>" class="button back-red"><i class="fas fa-dollar-sign"></i> Get Quotes</a>
                     </div>
                 <% } %> 
             </div>

@@ -267,9 +267,10 @@ main div.image-top-main {
   max-width: 80%;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   main div.image-top-main {
-    width: 92%;
+    max-width: 100%;
+    width: 100vw;
   }
 }
 
@@ -466,15 +467,22 @@ main div.main-details div.info-card-section div.card a.button {
   width: 100px;
   padding: 10px 15px;
   border-radius: 3px;
+  margin-right: 8px;
+}
+
+main div.main-details div.info-card-section div.card a.button:last-child {
+  margin-left: -5px;
 }
 
 @media (max-width: 768px) {
   main div.main-details div.info-card-section div.card a.button {
     width: 100%;
     margin-bottom: 5px;
+    margin-right: 0;
   }
   main div.main-details div.info-card-section div.card a.button:last-child {
     margin-bottom: 0;
+    margin-left: 0;
   }
 }
 
@@ -490,12 +498,6 @@ main div.main-details div.info-card-section div.card a.back-black:hover {
   color: white;
 }
 
-main div.main-details div.info-card-section div.card a.back-red {
-  color: white;
-  background-color: #f44336;
-  border: 1px solid #f44336;
-}
-
 footer {
   background-color: #141f31;
   color: white;
@@ -504,39 +506,50 @@ footer {
 footer div.carousel-links {
   background-color: white;
   height: 150px;
-  width: 100%;
+  width: 100vw;
+  position: relative;
   overflow: hidden;
-  white-space: nowrap;
 }
 
-footer div.carousel-links .images {
-  width: 100%;
+footer div.carousel-links ul.images {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: calc(244px * 8);
   height: 100%;
-  -webkit-animation: carousel 15s linear infinite;
-          animation: carousel 15s linear infinite;
+  -webkit-animation: carousel 20s linear infinite;
+          animation: carousel 20s linear infinite;
 }
 
-footer div.carousel-links .images:hover {
+footer div.carousel-links ul.images:hover {
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
 }
 
-footer div.carousel-links .images img {
-  display: inline;
-  float: left;
+footer div.carousel-links ul.images li {
+  height: 144px;
+  width: 244px;
 }
 
 @-webkit-keyframes carousel {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
   100% {
-    -webkit-transform: translateX(-1050px);
-            transform: translateX(-1050px);
+    -webkit-transform: translateX(calc(-244px * 8));
+            transform: translateX(calc(-244px * 8));
   }
 }
 
 @keyframes carousel {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
   100% {
-    -webkit-transform: translateX(-1050px);
-            transform: translateX(-1050px);
+    -webkit-transform: translateX(calc(-244px * 8));
+            transform: translateX(calc(-244px * 8));
   }
 }
 

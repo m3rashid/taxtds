@@ -26,19 +26,6 @@
         }
         table.main tr td{ text-align: center; }
         table.main tr td img.tax{ width: 100%; }
-        table.inner{
-            background-color: white;
-            color: black;
-            padding: 15px;
-            padding-bottom: 40px;
-        }
-        table.inner tr{
-          height: 25px;
-        }
-        table.inner tr td:first-child{
-            padding-right: 30px;
-            font-weight: bold;
-        }
         table.social-icons-container{
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
@@ -51,21 +38,10 @@
     <table class="main" align="center">
         <%- include('mailerPartials/bannerLogo.ejs') %> 
         <tr class="content">
-            <td>This is to inform you that you have successfully signed up in Tax TDS. Start listing and advertising your organisation/services</td>
+            <td>This is to inform you that your account and all the services associated with that account have been deleted by the Tax TDS admin</td>
         </tr>
+        <tr><td>-------------------------------</td></tr>
         <tr><td><br></td></tr>
-        <tr>
-            <td>Your Signed up using the following credentials below</td>
-        </tr>
-    </table>
-
-    <table class="inner" align="center">
-        <tr>
-            <td>Name : </td><td> <%= data.name %></td>
-        </tr>
-        <tr>
-            <td>Email : </td><td> <%= data.username %></td>
-        </tr>
     </table>
     <%- include('mailerPartials/social.ejs') %> 
 </body>

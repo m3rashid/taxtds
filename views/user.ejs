@@ -22,9 +22,9 @@
 
         <div class="user-profile-main-page">
             <div class="user-profile-form">
-                <h2>Register a new service</h2>
-                <form id="add-service" action="/user/add-service" method="POST" class="user-profile-register-service">
-                    <p style="color: white; text-align: center;">Data entered in the form cannot be modified at a later stage, please fill this form carefully</p>
+                <h2>Register your services</h2>
+                <form enctype="multipart/form-data" id="add-service" action="/user/add-service" method="POST" class="user-profile-register-service">
+                    <p style="color: white; text-align: center;">Data entered will be shown on the main page as a listing, please fill this form carefully</p>
                     <br>
                     <div>
                         <i class="fas fa-building"></i>
@@ -34,6 +34,30 @@
                         <i class="fas fa-star-half-alt"></i>
                         <input type="text" name="tagline" placeholder="Organisation tagline">
                     </div>
+                    <script>
+                        function updateFileName(e){ e.setAttribute('data-before', e.files[0].name); }
+                    </script>
+                    <div>
+                        <i class="fas fa-image"></i>
+                        <input type="file" name="avatar" data-before="Select profile picture" onchange="javascript:updateFileName(this)" required>
+                    </div>
+
+                    <script>
+                        function showGalleryImages(e){
+                            const gallery = document.getElementById('displayGallery');
+                            for(let i=0; i<e.files.length; i++){
+                                let li = document.createElement('li');
+                                li.appendChild(document.createTextNode(e.files[i].name))
+                                gallery.appendChild(li);
+                            }
+                            gallery.style.display = 'block';
+                        }
+                    </script>
+                    <div>
+                        <i class="fas fa-images"></i>
+                        <input id="uploadGalleryImages" accept='image/*' name="gallery" onchange="showGalleryImages(this)" type="file" data-before="Select service gallery images" multiple>
+                    </div>
+                    <div id="displayGallery"><p style="font-weight: bolder;">Gallery images to be uploaded :</p></div>
                     <div>
                         <i class="fas fa-user-tie"></i>
                         <input type="text" name="owner" placeholder="Name of the owner" required>
@@ -64,18 +88,26 @@
                     </div>
                     <div>
                         <i class="fab fa-font-awesome-flag"></i>
-                        <input type="text" name="state" placeholder="Enter your State" required>
+                        <input type="text" name="state" placeholder="Enter your State (only)" required>
                     </div>
-                    <div onclick="document.getElementById('allListedServices').style.display = 'block';" style="cursor: pointer;">
+                    <script>
+                        function toggleList(){
+                            const s = document.getElementById('allListedServices')
+                            if(s.style.display == 'none') s.style.display = 'block';
+                            else s.style.display = 'none';
+                        }
+                    </script>
+                    <div id="togglerButton" onclick="toggleList()" style="cursor: pointer;">
                         <i class="fas fa-file-invoice-dollar"></i>
                         <span style="color: white; font-weight: bold">Choose Your Services &nbsp;</span>
-                        <!-- <input type="text" name="services" placeholder="Name of the service" required> -->
                     </div>
                     <div id="allListedServices">
                         <% let userListedServices = [] %>
                         <% for(let i=0; i<allListedServices.length; i++){ %>
-                            <input type="checkbox" name="userListedServices[<%= i %>]" value="<%= allListedServices[i] %>" <%= allListedServices[i].enabled ? "checked" : null %> >
-                            <label for="service<%= i %>"> <%= allListedServices[i] %></label>
+                            <label>
+                                <input type="checkbox" name="userListedServices[<%= i %>]" value="<%= allListedServices[i] %>" <%= allListedServices[i].enabled ? "checked" : null %> >
+                                <span><%= allListedServices[i] %></span>
+                            </label>                            
                             <br>
                         <% } %>
                     </div>                        
@@ -110,6 +142,22 @@
                                 <div><%= service %></div>
                             <% }) %>
                         </p>
+                        <div class="avatar">
+                            <p>Your service avatar (profile picture)</p>
+                            <img src="data:<%= services[i].avatar.contentType %>;base64,<%= services[i].avatar.img %>" alt="service avatar">
+                        </div>
+
+                        <% if(services[i].gallery.length>0){ %>
+                            <p class="service-gallery-images">Your service gallery images</p>
+                            <div class="gallery">
+                                <% for(let j=0; j<3; j++){ %>
+                                    <img src="data:<%= services[i].gallery[j].contentType %>;base64,<%= services[i].gallery[j].img %>" alt="gallery image">
+                                <% } %>    
+                            </div>
+                        <% } %>
+
+                        <br>
+                        <a href="" class="button back-red" style="background-color: #343c42;"><i class="fas fa-edit"></i> Edit Listing</a>
                         <a onclick="checkServiceDelete()" class="button back-red"><i class="fas fa-trash"></i> Remove Listing</a>
                         <script>
                             function checkServiceDelete(){

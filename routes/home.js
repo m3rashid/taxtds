@@ -1,23 +1,22 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const _ = require('lodash');
 const bodyParser = require('body-parser');
-const passport = require('passport');
 const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
 const session = require('express-session');
 
 const User = require('../models/user');
 const Service = require('../models/service');
-const signupMailer = require('../mailer/signup');
+const email = require('../config/nodemailer');
 
-
-// Tesing mailer start
+// Tesing mailer
 router.get('/mail', (req, res) => {
-    res.render('mailer/signup.ejs');
+    res.render('mailer/deleteServiceByUser.ejs', {data: req.user, link: 'www.google.com'});
 })
-// Testing mailer end"
 
+// TODO make this work
+router.get('/admin/advertise-service/:serviceId', (req, res) => {
+    res.send('<h1>Under Construction</h1>')
+})
 
 
 let sessions;
@@ -66,8 +65,6 @@ router.get('/admin', (req, res) => {
         req.flash('success', 'successfully logged in as admin');
         res.render('admin.ejs', {
             titleTop: 'Tax TDS | Admin',
-            success: req.flash('success'),
-            failure: req.flash('failure'),
             allUsers: allUsers,
             services: services
         });
@@ -93,6 +90,21 @@ router.get('/adminLogout', (req, res) => {
 
 
 router.get('/admin/delete-user/:userId', (req, res) => {
+    //* First send mail to the user that it is about to be deleted
+    User.findById(req.params.userId, (err, user) => {
+        if(err){
+            console.log(err);
+            req.flash('failure', 'An error occured');
+        }
+        else if(!user){
+            req.flash('failure', 'No users found');
+        }
+        else{
+            // TODO Make a mailer template for deleting the user
+        }
+    })
+
+    //! Do the delete operation
     Service.deleteMany({addedBy: req.params.userId}, (err, doc) => {
         if(err){
             console.log(err);
@@ -111,6 +123,21 @@ router.get('/admin/delete-user/:userId', (req, res) => {
 })
 
 router.get('/admin/delete-service/:serviceId', (req, res) => {
+    //* send mail to the user that its service is deleted
+    Service.findById(req.params.serviceId, (err, service) => {
+        if(err) console.log(err);
+        else{
+            User.findById(service.addedBy, (err,user) => {
+                if(err) console.log(err);
+                else{
+                    // TODO make a service-delete mailer template to be sent to the user
+                    req.flash('success', 'Service delete mail sent to the user');
+                }
+            })
+        }
+    })
+
+    //! do the delete operation
     Service.deleteOne({id: req.params.serviceId}, (err, doc) => {
         if (err){
             console.log(err);
@@ -119,10 +146,6 @@ router.get('/admin/delete-service/:serviceId', (req, res) => {
         else req.flash('success', 'Successfully deleted the service');
         res.redirect('back');
     })
-})
-
-router.get('/admin/advertise-service/:serviceId', (req, res) => {
-    res.send('<h1>Under Construction</h1>')
 })
 
 router.post('/service/write-review/:serviceId', (req, res) => {
@@ -136,9 +159,7 @@ router.post('/service/write-review/:serviceId', (req, res) => {
             console.log(err);
             req.flash('failure', 'Error in posting review');
         }
-        else{
-            req.flash('success', 'Successfully posted the review');
-        }
+        else req.flash('success', 'Successfully posted the review');
     });
     res.redirect('back');
 });
@@ -150,8 +171,6 @@ router.get('/service/details/:serviceId', (req, res) => {
             if(docs){
                 res.render('details.ejs', {
                     titleTop: 'User Details',
-                    success: req.flash('success'),
-                    failure: req.flash('failure'),
                     services: docs,
                 });
             }
@@ -162,16 +181,6 @@ router.get('/service/details/:serviceId', (req, res) => {
         }
     });
 });
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -194,9 +203,9 @@ router.get('/', (req, res) => {
             titleTop: 'Home | Tax TDS',
             user: req.user,
             services: userServices,
-            failure: req.flash('failure'),
-            success: req.flash('success'),
             admin: getAdmin()
+            // failure: req.flash('failure'),
+            // success: req.flash('success'),
         });
     });
 });
@@ -208,9 +217,9 @@ router.get('/search', async (req, res) => {
     // Nothing is done here as of now
     res.render('index.ejs', {
         titleTop: 'Taxtds',
-        user: req.user,
-        success: req.flash('success'),
-        failure: req.flash('failure')
+        user: req.user
+        // success: req.flash('success'),
+        // failure: req.flash('failure')
     });
 });
 

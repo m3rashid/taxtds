@@ -11,8 +11,31 @@
         </div>
     </div>
 
+    <div class="slideshow-outer">
+        <% if(services.gallery.length>0){ %>
+            <div class="slideshow-container">
+                <% for(let i=0; i<3; i++){ %>
+                    <div class="mySlides">
+                        <img src="data:<%= services.gallery[i].contentType %>;base64,<%= services.gallery[i].img %>" alt="">
+                    </div>
+                <% } %>
+                <% for(let i=0; i<3; i++){ %>
+                    <div class="mySlides">
+                        <img src="data:<%= services.gallery[i].contentType %>;base64,<%= services.gallery[i].img %>" alt="">
+                    </div>
+                <% } %>    
+            </div>
+        <% } %>
+    </div>
+
     <div class="details-page-main">
         <div class="details-col-left">
+            <div class="avatar">
+                <% if(services.avatar.img){ %>
+                    <img src="data:<%= services.avatar.contentType %>;base64,<%= services.avatar.img %>">
+                <% } %>
+            </div>
+
             <div class="service">
                 <h2>General Service Details</h2>
                 <p><span>Established: </span><%= services.establishment %></p>
@@ -33,7 +56,9 @@
             <h2>All services offered</h2>
             <% if(locals.services && services!=undefined){ %>
                 <% services.services.forEach(service => { %>
-                    <div><%= service %></div>
+                    <% if(service != null){ %>
+                        <div><%= service %></div>
+                    <% } %>
                 <% }) %>    
             <% } %>
         </div>
@@ -46,23 +71,23 @@
                 <% if(services.reviews.length==0){ %>
                     <div class="inner">-----No reviews yet-----</div>    
                 <% } else { %>
-                    <% services.reviews.forEach(review => { %>
-                        <div class="inner">
-                            <i class="fas fa-user"></i>
-                            <div>
-                                <p class="reviewer-name"><%= review.name %></p>
-                                <p class="rate"><span>Rating: &nbsp;</span>
-                                    <% if(review.rating == 0){ %>
-                                        <i style="color: red;" class="fas fa-times"></i>
-                                    <% } else { %>
-                                        <% for(let i=0; i<review.rating; i++){ %>
-                                            <i class="fas fa-star"></i>
-                                        <% } %> </p>
-                                    <% } %>
-                                <p><%= review.comment %></p>
-                            </div>
+                <% services.reviews.forEach(review => { %>
+                    <div class="inner">
+                        <i class="fas fa-user"></i>
+                        <div>
+                            <p class="reviewer-name"><%= review.name %></p>
+                            <p class="rate"><span>Rating: &nbsp;</span>
+                            <% if(review.rating == 0){ %>
+                                <i style="color: red;" class="fas fa-times"></i>
+                            <% } else { %>
+                                <% for(let i=0; i<review.rating; i++){ %>
+                                    <i class="fas fa-star"></i>
+                                <% } %> </p>
+                            <% } %>
+                            <p><%= review.comment %></p>
                         </div>
-                    <% }) %>
+                    </div>
+                <% }) %>
                 <% } %>
             </div>
         </div>

@@ -1,19 +1,21 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const passportLocalMongoose = require('passport-local-mongoose');
+
+// const passportLocalMongoose = require('passport-local-mongoose');
 const mongoose = require('mongoose');
 const User = require('../models/user')
 const Service = require('../models/service')
-const signupMailer = require('../mailer/signup');
+const email = require('../config/nodemailer');
+const upload = require('../config/multer')
+const fs = require('fs');
 
-passport.use(User.createStrategy());
+passport.use((User.createStrategy()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 router.get('/user', (req, res) => {
-    if(req.isAuthenticated()){
+    if(req.user && req.isAuthenticated()){
         let userServices = [];
         Service.find({addedBy: mongoose.Types.ObjectId(req.user.id)}, (err, docs) => {
             if(err) console.log(err);
@@ -22,32 +24,60 @@ router.get('/user', (req, res) => {
                 else req.flash('failure', 'You have not registered any services');
             }
             req.flash('success', 'Successfully logged in');
-            res.render('user.ejs', {
+            return res.render('user.ejs', {
                 titleTop: 'Profile',
                 name: req.user.name,
-                services: userServices,
-                success: req.flash('success'),
-                failure: req.flash('failure')
+                services: userServices
             });
         });
     }
     else{
         req.flash('failure', 'You are not authenticated, signup (create account) or login first');
-        res.redirect('/');
+        return res.redirect('/');
     }
 });
 
-router.post('/user/add-service', (req, res) => {
+router.post('/user/add-service', upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'gallery', maxCount: 3 }]), (req, res) => {
     if(!req.isAuthenticated()){
-        req.flash('flash', 'You are not authenticated to add service, signup (create account) or login first!')
-        res.redirect('/');
+        req.flash('flash', 'You are not authenticated to add service, signup (create account) or login first!');
+        return res.redirect('/');
     }
     else{
-        console.log(req.body);
+        const userListedServices = req.body.userListedServices
+        let servicesSanitized = [];
+        for(let i=0; i<userListedServices.length; i++){
+            if(userListedServices[i] != null){
+                servicesSanitized.push(userListedServices[i]);
+            }
+        }
 
+        const gallery = req.files['gallery'];
+        const avatar = req.files['avatar'][0];
+        
+        let imgArray = gallery.map((file) => {
+            let img = fs.readFileSync(file.path);
+            return encode_image = img.toString('base64');
+        });
+        let avt = fs.readFileSync(avatar.path).toString('base64');
+
+        const images = imgArray.map((src, index) => {
+            return img = {
+                filename: gallery[index].originalname,
+                contentType: gallery[index].mimetype,
+                img: src
+            }
+        });
+        const avtImg = {
+            filename: avatar.originalname,
+            contentType: avatar.mimetype,
+            img: avt
+        }
+        
         const service = new Service({
             brandName: req.body.brandName,
             tagline: req.body.tagline,
+            avatar: avtImg,
+            gallery: images,
             owner: req.body.owner,
             experience: req.body.experience,
             establishment: req.body.establishment,
@@ -57,14 +87,15 @@ router.post('/user/add-service', (req, res) => {
             profession: req.body.profession,
             address: req.body.address,
             state: req.body.state,
-            services: req.body.userListedServices
+            services: servicesSanitized
         });
+        
         service.save((err, doc) => {
-            if(err) req.flash('failure', 'There was an error in registering your service, try again');
-            else {
-                console.log(doc);
-                req.flash('success', 'Your service has been successfully registered in tax TDS');
+            if(err){
+                console.log(err);
+                req.flash('failure', 'There was an error in registering your service, try again');
             }
+            else req.flash('success', 'Your service has been successfully registered in tax TDS');
             res.redirect('/user');
         });
     }
@@ -75,25 +106,27 @@ router.post('/login', (req, res) => {
         username: req.body.username,
         password: req.body.password
     });
-
-    req.login(user, err => {
+    
+    passport.authenticate('local', { failureRedirect: '/' })(req, res, (err) => {
         if(err){
-            console.log(err);
-            req.flash('failure', 'No user found, check your username/password and try again')
-            return res.redirect('/');
-        }
-        else if(!user){
-            req.flash('failure', 'No user');
-            return res.redirect('/');
+           console.log(err);
+           req.flash('failure', 'An error occured');
+           return res.redirect('/');
         }
         else{
-            let flash = req.flash('failure', 'Incorrect username or password');
-            passport.authenticate('local', { failureRedirect: '/', flash })(req, res, () => {
-                // signupMailer();
-                return res.redirect('/user');
-            });
+            req.login(user, (error) => {
+                if(error){
+                    console.log(error);
+                    req.flash('failure', 'An error occured');
+                    return res.redirect('/');
+                }
+                else{
+                    // TODO Make a mailer template for login
+                    req.flash('success', 'Successfully logged in to your account')
+                    res.redirect('/user');
+                }
+            })
         }
-
     });
 });
 
@@ -113,13 +146,12 @@ router.post('/signup', (req, res) => {
                 User.register({username: req.body.username, name: req.body.name}, req.body.password, (err, user) => {
                     if(err){
                         console.log(err);
-                        res.redirect('back');
+                        return res.redirect('back');
                     }
                     else{
                         passport.authenticate('local')(req, res, () => {
                             req.flash('success', 'Successfully created your account on tax TDS');
-                            signupMailer(user);
-                            console.log(user.username);
+                            // TODO signup mailer template
                             res.redirect('/user');
                         });
                     }

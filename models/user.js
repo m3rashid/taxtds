@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     password: String,
     name: {
         type: String,
-        default: null
+        required: true
     }
 }, { timestamps: true });
 userSchema.plugin(require('passport-local-mongoose'));

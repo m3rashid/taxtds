@@ -11,9 +11,7 @@ let transporter = nodemailer.createTransport({
         user: process.env.GMAIL_USERNAME,
         pass: process.env.GMAIL_PASSWORD
     },
-    tls: {
-        rejectUnauthorized: false
-    }
+    tls: { rejectUnauthorized: false }
 });
 
 let renderTemplate = (data, filename) => {
@@ -28,7 +26,22 @@ let renderTemplate = (data, filename) => {
     return mailHTML;
 }
 
-module.exports = {
-    transporter: transporter,
-    renderTemplate: renderTemplate
-};
+module.exports = (user, template, subject) => {
+    let html = nodemailer.renderTemplate(user, template);
+    let mailOptions = {
+        from: '"Tax TDS admin", test.mega007@gmail.com',
+        to: user.username,
+        subject: subject,
+        html: html
+    };
+    nodemailer.transporter.sendMail(mailOptions, (err, info) => {
+        if(err){
+            console.log('Error in sending mail', err);
+            return;
+        }
+        console.log('Message sent', info);
+        console.log(email)
+        return; // Optional as this needs to run asynchronous
+    })
+}
+

@@ -6,6 +6,36 @@ const serviceSchema = new mongoose.Schema({
         required: true
     },
     tagline: String,
+    avatar: {
+        filename: {
+            type: String,
+            unique: true,
+            required: true
+        },
+        contentType: {
+            type: String,
+            required: true
+        },
+        img: {
+            type: String,
+            required: true
+        }
+    },
+    gallery: [{
+        filename: {
+            type: String,
+            unique: true,
+            required: true
+        },
+        contentType: {
+            type: String,
+            required: true
+        },
+        img: {
+            type: String,
+            required: true
+        }
+    }],
     owner: {
         type: String,
         required: true

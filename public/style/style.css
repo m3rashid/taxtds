@@ -723,6 +723,7 @@ footer #footer-copyright {
 
 .flash {
   position: fixed;
+  z-index: 100;
   top: 15px;
   right: 15px;
   width: 400px;
@@ -1116,6 +1117,8 @@ main#user-profile div.user-profile-main-page div.user-profile-form form.user-pro
 main#user-profile div.user-profile-main-page div.user-profile-form form.user-profile-register-service div i {
   background-color: #ff3300;
   font-size: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
   margin-right: 8px;
 }
 
@@ -1126,6 +1129,35 @@ main#user-profile div.user-profile-main-page div.user-profile-form form.user-pro
   font-size: 1.05rem;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-form form.user-profile-register-service div input[type="file"]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-form form.user-profile-register-service div input[type="file"]::before {
+  content: attr(data-before);
+  display: inline-block;
+  background-color: white;
+  color: #646464;
+  height: 35px;
+  width: 265px;
+  position: relative;
+  top: -2px;
+  left: -10px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-form form.user-profile-register-service div#displayGallery {
+  display: none;
+  padding: 8px 12px;
+  height: auto;
+  background-color: white;
+  color: black;
+  width: 320px;
+  border-top: 8px solid #ff3300;
+  border-bottom: 8px solid #ff3300;
 }
 
 main#user-profile div.user-profile-main-page div.user-profile-form form.user-profile-register-service div#allListedServices {
@@ -1202,6 +1234,29 @@ main#user-profile div.user-profile-main-page div.user-profile-cards div.user-pro
   }
 }
 
+main#user-profile div.user-profile-main-page div.user-profile-cards div.user-profile-advert div.avatar {
+  margin: 20px 0;
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-cards div.user-profile-advert div.avatar p {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-cards div.user-profile-advert div.avatar img {
+  width: 200px;
+  border: radius 5px;
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-cards div.user-profile-advert p.service-gallery-images {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+main#user-profile div.user-profile-main-page div.user-profile-cards div.user-profile-advert div.gallery img {
+  width: 300px;
+}
+
 main#user-profile div.user-profile-main-page div.user-profile-cards div.user-profile-advert p {
   font-size: 1.1rem;
 }
@@ -1212,8 +1267,8 @@ main#user-profile div.user-profile-main-page div.user-profile-cards div.user-pro
 }
 
 main#user-profile div.user-profile-main-page div.user-profile-cards div.user-profile-advert .back-red {
-  display: block;
-  font-size: 1.2rem;
+  display: inline-block;
+  font-size: 1.1rem;
   padding: 8px 10px;
   width: -webkit-max-content;
   width: -moz-max-content;
@@ -1222,6 +1277,8 @@ main#user-profile div.user-profile-main-page div.user-profile-cards div.user-pro
   color: white;
   border-radius: 5px;
   margin-top: 10px;
+  margin-right: 5px;
+  cursor: pointer;
 }
 
 main#user-profile {
@@ -1260,12 +1317,124 @@ main#user-profile div.details-page-main div.details-col-left div.service p span,
   font-weight: bold;
 }
 
+main#user-profile div.details-page-main div.details-col-left div.avatar {
+  max-height: 600px;
+  max-width: 600px;
+  margin-bottom: 15px;
+  padding: 0;
+}
+
+main#user-profile div.details-page-main div.details-col-left div.avatar img {
+  width: 100%;
+  border-radius: 5px;
+}
+
 main#user-profile div.details-page-main div.details-col-right div {
   background-color: white;
   padding: 6px 10px;
   border-radius: 5px;
   margin-bottom: 5px;
   font-weight: 600;
+}
+
+main#user-profile div.slideshow-outer {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  overflow: hidden;
+  position: relative;
+  margin-top: 10px;
+  border-radius: 5px;
+  width: 98%;
+}
+
+@media (max-width: 600px) {
+  main#user-profile div.slideshow-outer {
+    width: 94%;
+  }
+}
+
+main#user-profile div.slideshow-outer div.slideshow-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: calc(700px * 3 * 2);
+  -webkit-animation: scrollPC 20s linear infinite;
+          animation: scrollPC 20s linear infinite;
+}
+
+@media (max-width: 600px) {
+  main#user-profile div.slideshow-outer div.slideshow-container {
+    width: calc(350px * 3 * 2);
+    -webkit-animation: scrollMob 20s linear infinite;
+            animation: scrollMob 20s linear infinite;
+  }
+}
+
+main#user-profile div.slideshow-outer div.slideshow-container:hover {
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+
+@-webkit-keyframes scrollPC {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(calc(-700px * 3));
+            transform: translateX(calc(-700px * 3));
+  }
+}
+
+@keyframes scrollPC {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(calc(-700px * 3));
+            transform: translateX(calc(-700px * 3));
+  }
+}
+
+@-webkit-keyframes scrollMob {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(calc(-350px * 3));
+            transform: translateX(calc(-350px * 3));
+  }
+}
+
+@keyframes scrollMob {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(calc(-350px * 3));
+            transform: translateX(calc(-350px * 3));
+  }
+}
+
+main#user-profile div.slideshow-outer div.slideshow-container div.mySlides {
+  max-width: 700px;
+}
+
+main#user-profile div.slideshow-outer div.slideshow-container div.mySlides img {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  main#user-profile div.slideshow-outer div.slideshow-container div.mySlides img {
+    width: 100vw;
+  }
 }
 
 main#user-profile div.details-page-reviews {
@@ -1475,7 +1644,9 @@ div#admin-page-grid div.admin-all-users div.card {
   background-color: white;
   border-radius: 5px;
   margin-bottom: 10px;
-  position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
 }
 
 div#admin-page-grid div.admin-all-users div.card:hover {
@@ -1500,16 +1671,9 @@ div#admin-page-grid div.admin-all-users div.card a.button {
   background-color: #f44336;
   color: white;
   border-radius: 5px;
-  position: absolute;
-  right: 15px;
-  top: 15px;
-}
-
-@media (max-width: 600px) {
-  div#admin-page-grid div.admin-all-users div.card a.button {
-    right: 8px;
-    top: 8px;
-  }
+  position: relative;
+  top: -28px;
+  float: right;
 }
 
 div#admin-page-grid div.admin-all-services h2 {

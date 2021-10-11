@@ -60,10 +60,10 @@ const serviceSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    profession: {
+    professions: [{
         type: String,
         required: true
-    },
+    }],
     address: {
         type: String,
         required: true

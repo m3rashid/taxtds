@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const User = require('../models/user');
 const Service = require('../models/service');
-
+const email = require('../config/nodemailer');
 const JWT_SECRET = 'somesuperlinkhere'
 
 
@@ -30,11 +30,10 @@ router.post('/forgot-password', (req, res) => {
                 id: foundUser.id
             }
             const token = jwt.sign(payload, secret, {expiresIn: '15m'});
-            const link = `http://localhost:3000/reset-password/${foundUser.id}/${token}`;
-
-            // TODO write code to send email to the client
-            //! mailer(link) [not defined yet, add template for this]
-            
+            // const link = `http://localhost:3000/reset-password/${foundUser.id}/${token}`;       // link to work locally
+            const link = `https://taxtds.herokuapp.com//reset-password/${foundUser.id}/${token}`;    // link for test deployment (heroku)
+            foundUser.link = link;
+            email(foundUser, 'forgotPassword.ejs', 'Reset Password link');
             req.flash('success', 'Password reset link has been sent to your email');
             console.log(link);
 
@@ -62,8 +61,6 @@ router.get('/reset-password/:id/:token', (req, res) => {
                 res.render('partials/reset-password.ejs', {
                     titleTop: 'Forgot Password',
                     user: user
-                    // success: req.flash('success'),
-                    // failure: req.flash('failure'),
                 });
             }
             catch(error){

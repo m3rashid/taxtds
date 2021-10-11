@@ -26,21 +26,20 @@ let renderTemplate = (data, filename) => {
     return mailHTML;
 }
 
-module.exports = (user, template, subject) => {
-    let html = nodemailer.renderTemplate(user, template);
+module.exports = (user, template, subject) => { // other data to be passed inside the 'user'
+    let html = renderTemplate(user, template);
     let mailOptions = {
         from: '"Tax TDS admin", test.mega007@gmail.com',
         to: user.username,
         subject: subject,
         html: html
     };
-    nodemailer.transporter.sendMail(mailOptions, (err, info) => {
+    transporter.sendMail(mailOptions, (err, info) => {
         if(err){
             console.log('Error in sending mail', err);
             return;
         }
         console.log('Message sent', info);
-        console.log(email)
         return; // Optional as this needs to run asynchronous
     })
 }

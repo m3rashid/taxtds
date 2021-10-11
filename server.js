@@ -37,15 +37,15 @@ app.use((req, res, next) => {
 }); 
 
 // Connection to atlas
-// mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@taxtds.nhimu.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
-    // .then(() => console.log('Mongoose is connected'))
-    // .catch(err => console.log(err));
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@taxtds.nhimu.mongodb.net/${process.env.DATABASE}?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Mongoose is connected'))
+    .catch(err => console.log(err));
 
 
 // Connection to local DB
-mongoose.connect(`mongodb://localhost:27017/taxtds`, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Mongoose is connected'))
-    .catch(err => console.log(err));
+// mongoose.connect(`mongodb://localhost:27017/taxtds`, { useNewUrlParser: true, useUnifiedTopology: true })
+//     .then(() => console.log('Mongoose is connected'))
+//     .catch(err => console.log(err));
 
 app.use('/', require('./routes/home'));
 app.use('/', require('./routes/auth'));

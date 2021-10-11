@@ -10,8 +10,8 @@
                 <p>Manage your services here</p>
             </div>
             <div>
-                <a id="settingsBtn" onclick=""><i class="fas fa-cog"></i> Settings</a>
                 <a id="logoutBtn" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="/"><i class="fas fa-home"></i> Home</a>
                 <script>
                     function logoutUser(){
                         if(confirm('Are you sure you want to logout? ')) window.location.href = '/logout';
@@ -41,23 +41,18 @@
                         <i class="fas fa-image"></i>
                         <input type="file" name="avatar" data-before="Select profile picture" onchange="javascript:updateFileName(this)" required>
                     </div>
-
-                    <script>
-                        function showGalleryImages(e){
-                            const gallery = document.getElementById('displayGallery');
-                            for(let i=0; i<e.files.length; i++){
-                                let li = document.createElement('li');
-                                li.appendChild(document.createTextNode(e.files[i].name))
-                                gallery.appendChild(li);
-                            }
-                            gallery.style.display = 'block';
-                        }
-                    </script>
                     <div>
                         <i class="fas fa-images"></i>
-                        <input id="uploadGalleryImages" accept='image/*' name="gallery" onchange="showGalleryImages(this)" type="file" data-before="Select service gallery images" multiple>
+                        <input id="uploadGalleryImages" accept='image/*' name="galleryImg1" onchange="javascript:updateFileName(this)" type="file" data-before="Select service gallery image 1" required>
                     </div>
-                    <div id="displayGallery"><p style="font-weight: bolder;">Gallery images to be uploaded :</p></div>
+                    <div>
+                        <i class="fas fa-images"></i>
+                        <input id="uploadGalleryImages" accept='image/*' name="galleryImg2" onchange="javascript:updateFileName(this)" type="file" data-before="Select service gallery image 2" required>
+                    </div>
+                    <div>
+                        <i class="fas fa-images"></i>
+                        <input id="uploadGalleryImages" accept='image/*' name="galleryImg3" onchange="javascript:updateFileName(this)" type="file" data-before="Select service gallery image 3" required>
+                    </div>
                     <div>
                         <i class="fas fa-user-tie"></i>
                         <input type="text" name="owner" placeholder="Name of the owner" required>
@@ -78,10 +73,20 @@
                         <i class="fas fa-envelope-open-text"></i>
                         <input type="email" name="email" placeholder="Email (service/owner)" required>
                     </div>
-                    <div>
-                        <i class="fas fa-briefcase"></i>
-                        <input type="text" name="profession" placeholder="Your Profession" required>
-                    </div>
+                    <% const allProfessions = ["", " CA", " CMA", " CS", " LLB"] %>
+                    <% let professions = [] %>
+                    <div id="professions">
+                        <p style="font-weight: bold; margin-bottom:10px">Choose your profession(s)</p>
+                        <div class="inputs">
+                            <% for(let i=1; i<allProfessions.length; i++){ %>
+                                <label>
+                                    <input type="checkbox" name="professions[<%= i %>]" value="<%= allProfessions[i] %>" <%= allProfessions[i].enabled ? "checked" : null %> >
+                                    <span><%= allProfessions[i] %></span>
+                                </label>
+                            <% } %>
+                        </div>
+                        <input type="text" name="professions[0]" placeholder="Other (if not included above)">
+                    </div>                    
                     <div>
                         <i class="fas fa-street-view"></i>
                         <input type="text" name="address" placeholder="Full address of the service" required>
@@ -99,7 +104,7 @@
                     </script>
                     <div id="togglerButton" onclick="toggleList()" style="cursor: pointer;">
                         <i class="fas fa-file-invoice-dollar"></i>
-                        <span style="color: white; font-weight: bold">Choose Your Services &nbsp;</span>
+                        <span style="color: white; font-weight: bold">Choose Your Service(s) &nbsp;</span>
                     </div>
                     <div id="allListedServices">
                         <% let userListedServices = [] %>
@@ -132,7 +137,7 @@
                         <p><span>Established: </span><%= services[i].establishment %></p>
                         <p><span>Phone: </span><%= services[i].phone %></p>
                         <p><span>Email: </span><%= services[i].email %></p>
-                        <p><span>Profession: </span><%= services[i].profession %></p>
+                        <p><span>Profession: </span><%= services[i].professions %></p>
                         <p><span>Address: </span><%= services[i].address %></p>
                         <p><span>State: </span><%= services[i].state %></p>
                         <br>
@@ -157,11 +162,11 @@
                         <% } %>
 
                         <br>
-                        <a href="" class="button back-red" style="background-color: #343c42;"><i class="fas fa-edit"></i> Edit Listing</a>
+                        <a href="/service/edit/<%= services[i].id %>" class="button back-red" style="background-color: #343c42;"><i class="fas fa-edit"></i> Edit Listing</a>
                         <a onclick="checkServiceDelete()" class="button back-red"><i class="fas fa-trash"></i> Remove Listing</a>
                         <script>
                             function checkServiceDelete(){
-                                if(confirm("Are you sure, you wnat to delete this service? ")) window.location.href = "/admin/delete-service/<%= services[i].id %>";
+                                if(confirm("Are you sure, you wnat to delete this service? ")) window.location.href = "/user/delete-service/<%= services[i].id %>";
                             };
                         </script>
                     </div>

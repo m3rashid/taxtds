@@ -1,0 +1,121 @@
+<% const allListedServices = [ "Registration Services", "Company compliance", "Tax filling", "Audit and Insurance", "Taxation Advisory and Personal Advisory", "FCRA FEMA NGOs", "Valuations", "Accounting Services", "Investment Planning", "GST Return", "GST Registration", "GST Registration for foreigners", "Cancel GST Registration", "Temporary Registration", "Income Tax Registration", "company Registration", "Private Limited company", "Public Limited company", "Proprietorship Registration", "Partnership Registration", "LLP Registration", "Society Registration", "Trust Registration", "PF Registration", "ESI Registration", "MSME Registration", "FSSAI Registration", "Digital Registration", "Patent Registration", "Import Export Code", "Copy Right Registration", "Trademark Registration", "Trademark Rectification", "Trade mark Objection", "Trademark Renewal", "Logo Registration", "Provisional Patent Registration", "Partnership deed", "Company name change", "Registration office Change", "Add Directors", "Remove directores", "Increase Authorized Capital", "Shares Transfer", "MOA Amendment", "Add Partner", "Winding Up company", "Winding Up LLP", "Filing of Income tax", "Wealth tax returns", "TDS Return", "ESI Return", "Statutory Audits", "Tax Audits", "Internal and Management Audits", "Internal Control Review", "Due diligence", "Business and Asset Valuation", "System Audit", "Risk Assessment and Management", "Corporate and personal tax compliance including income-tax assessments", "Appeals before the Commissioner (Appeals)", "International and Domestic Tax Planning", "Filing of Income tax", "Wealth-tax returns of residents and non-residents individuals", "Tax and tds services", "domestic and foreign companies and other entities", "Compliance with law relating to Indirect taxes", "Personal financial planning", "Insurance and pension planning", "Advice on various foreign exchange matters under the Act", "Trust/Society Formation", "Registration u/s 12A and 80G of Income Tax Act", "Registration under FCRA", "Business Valuation", "Partnership Valuation", "Fair Valuation for IFRS Valuation in Shareholder Disputes", "Intangible Asset Valuation", "Maintenance of statutory records registers and minutes books", "Book Keeping and general accounting services", "Preparation of Financial Statements", "Payroll Processing", "Cash Forecasting Design, implementation and review of accounting manuals", "Book Keeping and general accounting services", "Preparation of Financial Statements", "Payroll Processing", "Cash Forecasting Design", "implementation and review of accounting manuals", "Life Insurance Policy (LIC)", "Public Provident Fund", "Mutual fund", "Equity Share", "Real estate investment", "Gold ETF", "Post Office investment", "Company Fixed Deposits", "Bank fixed deposits", "Recurring Deposits", "Double Accounting System", "Economics - Micro", "Economics - Macro", "Business Studies", "Fundamentals of Accounting", "Mercantile Law", "General Economics", "Quantitative Aptitude", "Accounting", "Cost Accounting and Financial Management", "Advanced Accounting", "Taxation", "Auditing and Assurance", "Business Laws, Ethics and Communication", "Information Technology and Strategic Management", "Corporate and other Laws", "Advanced Auditing and Professional Ethics", "Financial Reporting", "Strategic Financial Management", "Strategic Cost Management and Performance Evaluation", "Corporate and Economic Laws", "Direct Tax Laws and International Taxation", "Indirect Tax Laws", "Risk Management", "International Taxation", "Economic Laws", "Financial Services and Capital Markets", "Global Financial Reporting Standards", "Multidisciplinary Case Study" ]; %>
+
+<%- include('../partials/header/_topLinks.ejs') %>
+
+<main id="user-profile">
+    <div class="user-profile-header">
+        <div>
+            <h1 >Hello <%= name %></h1>
+            <!-- <p>Manage your service here</p> -->
+        </div>
+        <div>
+            <a href="/user"><i class="fas fa-user"></i> Profile</a>
+            <a href="/"><i class="fas fa-home"></i> Home</a>
+        </div>
+    </div>
+
+    <div class="user-profile-main-page edit-service">
+        <div class="user-profile-form">
+            <h2>Edit your service</h2>
+            <!-- form-attribute for file handling/uploads enctype="multipart/form-data"  -->
+            <form id="add-service" action="/service/edit/<%= services.id %>" method="POST" class="user-profile-register-service">
+                <p style="color: white; text-align: center;">Data entered will be shown on the main page as a listing, please fill this form carefully</p>
+                <br>
+                <div>
+                    <i class="fas fa-building"></i>
+                    <input type="text" name="brandName" placeholder="Name of your organisation" required value="<%= services.brandName %>">
+                </div>
+                <div>
+                    <i class="fas fa-star-half-alt"></i>
+                    <input type="text" name="tagline" placeholder="Organisation tagline" value="<%= services.tagline %>">
+                </div>
+                <script>
+                    // function updateFileName(e){ e.setAttribute('data-before', e.files[0].name); }
+                </script>
+                <!-- <div>
+                    <i class="fas fa-image"></i>
+                    <input type="file" name="avatar" data-before="<%=// services.avatar.filename %>" onchange="javascript:updateFileName(this)" required>
+                </div>
+                <div>
+                    <i class="fas fa-images"></i>
+                    <input id="uploadGalleryImages" accept='image/*' name="galleryImg1" onchange="javascript:updateFileName(this)" type="file" data-before="<%=// services.gallery[0].filename %>" required>
+                </div>
+                <div>
+                    <i class="fas fa-images"></i>
+                    <input id="uploadGalleryImages" accept='image/*' name="galleryImg2" onchange="javascript:updateFileName(this)" type="file" data-before="<%=// services.gallery[1].filename %>" required>
+                </div>
+                <div>
+                    <i class="fas fa-images"></i>
+                    <input id="uploadGalleryImages" accept='image/*' name="galleryImg3" onchange="javascript:updateFileName(this)" type="file" data-before="<%=// services.gallery[2].filename %>" required>
+                </div> -->
+                <div>
+                    <i class="fas fa-user-tie"></i>
+                    <input type="text" name="owner" placeholder="Name of the owner" required  value="<%= services.owner %>">
+                </div>
+                <div>
+                    <i class="fas fa-hourglass-half"></i>
+                    <input type="text" name="experience" placeholder="Experience in the field" required  value="<%= services.experience %>">
+                </div>
+                <div>
+                    <i class="fas fa-certificate"></i>
+                    <input type="text" name="establishment" placeholder="Year of establishment" required  value="<%= services.establishment %>">
+                </div>
+                <div>
+                    <i class="fas fa-phone-alt"></i>
+                    <input type="tel" name="phone" placeholder="Phone number (office/owner)" required  value="<%= services.phone %>">
+                </div>
+                <div>
+                    <i class="fas fa-envelope-open-text"></i>
+                    <input type="email" name="email" placeholder="Email (service/owner)" required  value="<%= services.email %>">
+                </div>
+                <% const allProfessions = ["", "CA", "CMA", "CS", "LLB"] %>
+                <% let professions = [] %>
+                <div id="professions">
+                    <p style="font-weight: bold; margin-bottom:10px">Fresh choose your profession(s)</p>
+                    <div class="inputs">
+                        <% for(let i=1; i<allProfessions.length; i++){ %>
+                            <label>
+                                <input type="checkbox" name="professions[<%= i %>]" value="<%= allProfessions[i] %>" <%= allProfessions[i].enabled ? "checked" : null %> >
+                                <span><%= allProfessions[i] %></span>
+                            </label>
+                        <% } %>
+                    </div>
+                    <input type="text" name="professions[0]" placeholder="Other (if not included above)">
+                </div>                    
+                <div>
+                    <i class="fas fa-street-view"></i>
+                    <input type="text" name="address" placeholder="Full address of the service" required  value="<%= services.address %>">
+                </div>
+                <div>
+                    <i class="fab fa-font-awesome-flag"></i>
+                    <input type="text" name="state" placeholder="Enter your State (only)" required  value="<%= services.state %>">
+                </div>
+                <script>
+                    function toggleList(){
+                        const s = document.getElementById('allListedServices')
+                        if(s.style.display == 'none') s.style.display = 'block';
+                        else s.style.display = 'none';
+                    }
+                </script>
+                <div id="togglerButton" onclick="toggleList()" style="cursor: pointer;">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <span style="color: white; font-weight: bold">Fresh choose Your Service(s) &nbsp;</span>
+                </div>
+                <div id="allListedServices">
+                    <% let userListedServices = [] %>
+                    <% for(let i=0; i<allListedServices.length; i++){ %>
+                        <label>
+                            <input type="checkbox" name="userListedServices[<%= i %>]" value="<%= allListedServices[i] %>" <%= allListedServices[i].enabled ? "checked" : null %> >
+                            <span><%= allListedServices[i] %></span>
+                        </label>                            
+                        <br>
+                    <% } %>
+                </div>                        
+                <button type="submit">Update this service</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <%- include('../partials/footer/actualFooter.ejs') %> 

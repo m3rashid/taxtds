@@ -91,7 +91,7 @@ router.get('/adminLogout', (req, res) => {
 
 router.get('/admin/delete-user/:userId', (req, res) => {
     //* First send mail to the user that it is about to be deleted
-    User.findById(req.params.userId, (err, user) => {
+    User.findById(req.params.userId, async (err, user) => {
         if(err){
             console.log(err);
             req.flash('failure', 'An error occured');
@@ -100,7 +100,7 @@ router.get('/admin/delete-user/:userId', (req, res) => {
             req.flash('failure', 'No users found');
         }
         else{
-            // TODO Make a mailer template for deleting the user
+            await email(user, 'deleteUser.ejs', 'Your Account deleted by the taxtds Admin');
         }
     })
 
@@ -130,7 +130,7 @@ router.get('/admin/delete-service/:serviceId', (req, res) => {
             User.findById(service.addedBy, (err,user) => {
                 if(err) console.log(err);
                 else{
-                    // TODO make a service-delete mailer template to be sent to the user
+                    email(user, 'deleteServiceByadmin.ejs', 'Service deleted by Tax TDS admin');
                     req.flash('success', 'Service delete mail sent to the user');
                 }
             })
@@ -161,6 +161,21 @@ router.post('/service/write-review/:serviceId', (req, res) => {
         }
         else req.flash('success', 'Successfully posted the review');
     });
+
+    Service.findById(req.params.serviceId, (err, service) => {
+        if(err) console.log(err);
+        else{
+            User.findById(service.addedBy, (err,user) => {
+                if(err) console.log(err);
+                else{
+                    user.commentedBy = review.name;
+                    user.rating = review.rating;
+                    user.review = review.comment;
+                    email(user, 'review.ejs', 'Someone posted a review');
+                }
+            })
+        }
+    })
     res.redirect('back');
 });
 
@@ -204,8 +219,6 @@ router.get('/', (req, res) => {
             user: req.user,
             services: userServices,
             admin: getAdmin()
-            // failure: req.flash('failure'),
-            // success: req.flash('success'),
         });
     });
 });
@@ -218,8 +231,6 @@ router.get('/search', async (req, res) => {
     res.render('index.ejs', {
         titleTop: 'Taxtds',
         user: req.user
-        // success: req.flash('success'),
-        // failure: req.flash('failure')
     });
 });
 

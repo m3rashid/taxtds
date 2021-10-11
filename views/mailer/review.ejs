@@ -26,6 +26,19 @@
         }
         table.main tr td{ text-align: center; }
         table.main tr td img.tax{ width: 100%; }
+        table.inner{
+            background-color: white;
+            color: black;
+            padding: 15px;
+            padding-bottom: 40px;
+        }
+        table.inner tr{
+          height: 25px;
+        }
+        table.inner tr td:first-child{
+            padding-right: 30px;
+            font-weight: bold;
+        }
         table.social-icons-container{
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
@@ -38,13 +51,21 @@
     <table class="main" align="center">
         <%- include('mailerPartials/bannerLogo.ejs') %> 
         <tr class="content">
-            <td>Follow the link given below to reset your password</td>
+            <td>Someone posted a review on your service, see how they felt about it</td>
         </tr>
         <tr><td><br></td></tr>
+    </table>
+
+    <table class="inner" align="center">
         <tr>
-            <td style="text-align:center;"><a style="color: red;"  target="_blank" href="<%= data.link %>">Click here</a> to reset your password</td>
+            <td>Name : </td><td> <%= data.commentedBy %></td>
         </tr>
-        <tr><td><br></td></tr>
+        <tr>
+            <td>Rating : </td><td> <%= data.rating %></td>
+        </tr>
+        <tr>
+            <td>Review : </td><td> <%= data.review %></td>
+        </tr>
     </table>
     <%- include('mailerPartials/social.ejs') %> 
 </body>

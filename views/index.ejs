@@ -14,32 +14,38 @@
             <%- include('partials/content/_listed_services.ejs') %> 
     
             <div class="info-card-section">
-                <% for(let i=0; i< services.length; i++){ %>
-                    <div class="card" id="card<%= i %>">
-                        <h1 class="brand"><a href="/service/details/<%= services[i].id %>"><%= services[i].brandName %></a></h1>
-                        <p class="name"><%= services[i].owner %></p>
-                        <p class="address"><span>Address: </span><%= services[i].address %></p>
-                        <div class="call"><i class="fas fa-phone-volume"></i> <%= services[i].phone %></div>
-                        <div class="message"><i class="far fa-envelope"></i> <%= services[i].email %></div>
-                        <a class="button back-black">
-                            <% let rate = 0; %>
-                            <% let j=0; %>
-                            <% for(j=0; j<services[i].reviews.length; j++){ %>
-                                <% rate += services[i].reviews[j].rating; %>
-                            <% } %>
-                            <% rate = rate/j; %>
-                            <% if(rate !== rate){ %>
-                                No ratings yet
-                            <% } else{ %>
-                                <span >Rating: </span>
-                                <%= rate.toFixed(1) %>
-                                <i class="fas fa-star" style="color: gold;"></i>
-                            <% } %>
-                        </a>
-                        <a href="/service/details/<%= services[i].id %>/#user-write-review" class="button back-black"><i class="far fa-star"></i> Write Review</a>
-                        <a href="tel:<%= services[i].phone %>" class="button back-black"><i class="fas fa-phone-alt"></i> Call Now</a>
+                <% if(services.length == 0){ %>
+                    <div class="card" id="card0">
+                        <h1>No services found . . . . &nbsp; (≥o≤)</h1>
                     </div>
-                <% } %> 
+                <% } else{ %>
+                    <% for(let i=0; i< services.length; i++){ %>
+                        <div class="card" id="card<%= i %>">
+                            <h1 class="brand"><a href="/service/details/<%= services[i].id %>"><%= services[i].brandName %></a></h1>
+                            <p class="name"><%= services[i].owner %></p>
+                            <p class="address"><span>Address: </span><%= services[i].address %></p>
+                            <div class="call"><i class="fas fa-phone-volume"></i> <%= services[i].phone %></div>
+                            <div class="message"><i class="far fa-envelope"></i> <%= services[i].email %></div>
+                            <a class="button back-black">
+                                <% let rate = 0; %>
+                                <% let j=0; %>
+                                <% for(j=0; j<services[i].reviews.length; j++){ %>
+                                    <% rate += services[i].reviews[j].rating; %>
+                                <% } %>
+                                <% rate = rate/j; %>
+                                <% if(rate !== rate){ %>
+                                    No ratings yet
+                                <% } else{ %>
+                                    <span >Rating: </span>
+                                    <%= rate.toFixed(1) %>
+                                    <i class="fas fa-star" style="color: gold;"></i>
+                                <% } %>
+                            </a>
+                            <a href="/service/details/<%= services[i].id %>/#user-write-review" class="button back-black"><i class="far fa-star"></i> Write Review</a>
+                            <a href="tel:<%= services[i].phone %>" class="button back-black"><i class="fas fa-phone-alt"></i> Call Now</a>
+                        </div>
+                    <% } %> 
+                <% } %>
             </div>
         </div>
     </main>

@@ -8,10 +8,6 @@ const User = require('../models/user');
 const Service = require('../models/service');
 const email = require('../config/nodemailer');
 
-// Tesing mailer
-router.get('/mail', (req, res) => {
-    res.render('mailer/deleteServiceByUser.ejs', {data: req.user, link: 'www.google.com'});
-})
 
 // TODO make this work
 router.get('/admin/advertise-service/:serviceId', (req, res) => {
@@ -25,45 +21,34 @@ router.post('/adminLogin', (req, res) => {
         sessions = req.session;
         sessions.userid = req.body.username;
         req.flash('success', 'Successfully authenticated as an admin of Tax TDS');
-        res.redirect('/admin');
+        return res.redirect('/admin');
     }
     else{
         req.flash('failure', 'Admin username or Admin password wrong');
-        res.redirect('/');
+        return res.redirect('/');
     }
 });
 
+
 let allUsers = []; 
 let services = [];
-router.get('/admin', (req, res) => {
+router.get('/admin', async (req, res) => {
     if(!sessions){
         req.flash('failure', 'session not set as admin');
-        res.redirect('/');
+        return res.redirect('/');
     }
     else if(sessions.userid){
-        User.find({}, (err, docs) => {
-            if(err) console.log(err);
-            else{
-                if(docs) allUsers = docs;
-                else{
-                    allusers = [];
-                    req.flash('failure', 'No registered users found');
-                }
-            }
-        });
-        Service.find({}, (err, docs) => {
-            if(err) console.log(err);
-            else{
-                if(docs) services = docs;
-                else{
-                    services = [];
-                    req.flash('failure', 'No registered services found');
-                }
-            }
-        })    
-
         req.flash('success', 'successfully logged in as admin');
-        res.render('admin.ejs', {
+        try{
+            allUsers = await User.find({})
+            services = await Service.find({})
+        }   
+        catch(err){
+            console.log(err);
+            req.flash('failure', 'There was an error accessing the database. try again')
+        } 
+
+        return res.render('admin.ejs', {
             titleTop: 'Tax TDS | Admin',
             allUsers: allUsers,
             services: services
@@ -71,9 +56,10 @@ router.get('/admin', (req, res) => {
     }
     else{
         req.flash('failure', 'An error occured, Admin not found');
-        res.redirect('/');
+        return res.redirect('/');
     }
 });
+
 
 function getAdmin(){
     if(sessions == null || sessions == undefined) return false;
@@ -85,161 +71,147 @@ function getAdmin(){
 router.get('/adminLogout', (req, res) => {
     sessions = undefined;
     req.flash('success', 'Successfully logged out of admin');
-    res.redirect('/');
+    return res.redirect('/');
 });
 
 
-router.get('/admin/delete-user/:userId', (req, res) => {
+router.get('/admin/delete-user/:userId', async (req, res) => {
     //* First send mail to the user that it is about to be deleted
-    User.findById(req.params.userId, async (err, user) => {
-        if(err){
-            console.log(err);
-            req.flash('failure', 'An error occured');
-        }
-        else if(!user){
-            req.flash('failure', 'No users found');
-        }
-        else{
-            await email(user, 'deleteUser.ejs', 'Your Account deleted by the taxtds Admin');
-        }
-    })
-
-    //! Do the delete operation
-    Service.deleteMany({addedBy: req.params.userId}, (err, doc) => {
-        if(err){
-            console.log(err);
-            req.flash('failure', 'A problem occured. Cannot delete services of this user');
-        }
-        else req.flash('success', 'Deleted all services of this user');
-    });
-    User.deleteOne({id: req.params.userId}, (err, doc) => {
-        if (err){
-            console.log(err);
-            req.flash('failure', 'A problem occured. Cannot delete user, try again');
-        }
-        else req.flash('success', 'Successfully deleted user');
-        res.redirect('/admin');
-    })
+    try{
+        let user = await User.findById(req.params.userId)
+        // await email(user, 'deleteUser.ejs', 'Your Account deleted by the taxtds Admin');
+        req.flash('success', 'Deletion email sent to the user')
+        
+        //! Do the delete operation
+        await Service.deleteMany({addedBy: req.params.userId})
+        await User.deleteOne({id: req.params.userId})
+        req.flash('success', 'The user and all their services were deleted successfully')
+    }
+    catch(err){
+        console.log(err);
+        req.flash('failure', 'There was a problem in completely deleting the user')
+    }
+    return res.redirect('/admin');
 })
 
-router.get('/admin/delete-service/:serviceId', (req, res) => {
-    //* send mail to the user that its service is deleted
-    Service.findById(req.params.serviceId, (err, service) => {
-        if(err) console.log(err);
-        else{
-            User.findById(service.addedBy, (err,user) => {
-                if(err) console.log(err);
-                else{
-                    email(user, 'deleteServiceByadmin.ejs', 'Service deleted by Tax TDS admin');
-                    req.flash('success', 'Service delete mail sent to the user');
-                }
-            })
-        }
-    })
 
-    //! do the delete operation
-    Service.deleteOne({id: req.params.serviceId}, (err, doc) => {
-        if (err){
-            console.log(err);
-            req.flash('failure', 'A problem occured. Cannot delete service, try again');
-        }
-        else req.flash('success', 'Successfully deleted the service');
-        res.redirect('back');
-    })
+router.get('/admin/delete-service/:serviceId', async (req, res) => {
+    //* send mail to the user that its service is deleted (check this again with email functionality)
+    try{
+        let service = await Service.findById(req.params.serviceId);
+        let user = await User.findById(service.addedBy)
+        // await email(user, 'deleteServiceByadmin.ejs', 'Service deleted by Tax TDS admin');
+        req.flash('success', 'Service delete mail sent to the user');
+        
+        //! do the delete operation
+        await Service.deleteOne({id: req.params.serviceId})
+        req.flash('success', 'Successfully deleted the service');
+    }
+    catch(err){
+        console.log(err);
+        req.flash('failure', 'An error occurred while deleting the service')
+    }
+    return res.redirect('back');
 })
 
-router.post('/service/write-review/:serviceId', (req, res) => {
+
+router.post('/service/write-review/:serviceId', async (req, res) => {
     const review = {
         name: req.body.name,
         rating: req.body.rating,
         comment: req.body.comment
     };
-    Service.findByIdAndUpdate(req.params.serviceId, {'$push': {reviews: review}}, (err, docs) => {
-        if(err){
-            console.log(err);
-            req.flash('failure', 'Error in posting review');
-        }
-        else req.flash('success', 'Successfully posted the review');
-    });
-
-    Service.findById(req.params.serviceId, (err, service) => {
-        if(err) console.log(err);
-        else{
-            User.findById(service.addedBy, (err,user) => {
-                if(err) console.log(err);
-                else{
-                    user.commentedBy = review.name;
-                    user.rating = review.rating;
-                    user.review = review.comment;
-                    email(user, 'review.ejs', 'Someone posted a review');
-                }
-            })
-        }
-    })
-    res.redirect('back');
-});
-
-router.get('/service/details/:serviceId', (req, res) => {
-    Service.findById(req.params.serviceId, (err, docs) => {
-        if(err) console.log(err);
-        else{
-            if(docs){
-                res.render('details.ejs', {
-                    titleTop: 'User Details',
-                    services: docs,
-                });
-            }
-            else{
-                req.flash('failure', 'Service not found');
-                res.redirect('back');
-            }
-        }
-    });
+    try{
+        let docs = await Service.findByIdAndUpdate(req.params.serviceId, {'$push': {reviews: review}})
+        req.flash('success', 'Successfully posted the review');
+        
+        let user = User.findById(docs.addedBy)
+        user.commentedBy = review.name;
+        user.rating = review.rating;
+        user.review = review.comment;
+        // email(user, 'review.ejs', 'Someone posted a review');
+    }
+    catch(err){
+        console.log(err);
+        req.flash('failure', 'There was a problem in posting the review. Please try again')
+    }
+    return res.redirect('back');
 });
 
 
-
-
-
-
-
-
-router.get('/', (req, res) => {
-    let userServices = [];
-    Service.find({}).sort({date: 1}).exec((err, docs) => {
-        if(err) console.log(err);
-        else{
-            if(docs && docs.length>0){
-                userServices = docs;
-            }
-            else console.log('no docs found');
+router.get('/service/details/:serviceId', async (req, res) => {
+    try{
+        let docs = await Service.findById(req.params.serviceId)
+        if(docs.length != 0){
+            return res.render('details.ejs', {
+                titleTop: 'User Details',
+                services: docs
+            });
         }
-        res.render('index.ejs', {
-            titleTop: 'Home | Tax TDS',
-            user: req.user,
-            services: userServices,
-            admin: getAdmin()
-        });
+    }
+    catch(err){
+        console.log(err);
+        req.flash('failure', 'Service not found');
+        return res.redirect('back');
+    }
+});
+
+
+router.get('/', async (req, res) => {
+    let userServices = []
+    try{
+        userServices = await Service.find({}).sort({date: 1})
+    }
+    catch(err){ 
+        console.log(err) 
+    }
+    return res.render('index.ejs', {
+        titleTop: 'Home | Tax TDS',
+        user: req.user,
+        services: userServices,
+        admin: getAdmin()
     });
 });
+
 
 // Searching (title bar state/service search)
 router.get('/search', async (req, res) => {
     const state = req.query.state;
     const service = req.query.service;
-    // Nothing is done here as of now
-    res.render('index.ejs', {
-        titleTop: 'Taxtds',
-        user: req.user
+    console.log(state, service);
+    let userServices = [];
+    try{
+        if(state  != '' && service != ''){
+            userServices =  await Service.find({ $or: [{ 'state': state }, { 'services': service }] })
+        }
+        else if(state != '' && service == ''){
+            userServices = await Service.find({ state: state })
+        }
+        else{
+            userServices = await Service.find({ services: service })
+        }
+    }catch(err){ 
+        console.log(err) 
+    }
+
+    if(userServices.length == 0){ 
+        req.flash('failure', 'No data found'); 
+    }
+    return res.render('index.ejs', {
+        titleTop: 'Search | Tax TDS',
+        user: req.user,
+        services: userServices,
+        admin: getAdmin()
     });
 });
+
 
 // Searching (left panel category search)
 router.get('/services/category/:list', (req, res) => {
     const list = req.params.list;
     console.log(_.lowerCase(list));
     // Nothing as of now
-    res.redirect('/');
+    return res.redirect('/');
 })
 
 module.exports = router;

@@ -1,13 +1,24 @@
 <header>
     <form action="/search" method="GET">
-        <input type="text" placeholder="Enter State" name="state" required>
+        <input id="state" type="text" placeholder="Enter State" name="state">
         <div class="search-service">
             <i class="fas fa-search"></i>
-            <input type="text" name="service" placeholder="Search your services like income tax consultant, gst consultants and more" required>
+            <input id="service" type="text" name="service" placeholder="Search your services like income tax consultant, gst consultants and more">
         </div>
         <button type="submit" class="search-icon">
             <i class="fas fa-search"></i>
         </button>
+
+        <script>
+            const state = document.getElementById('state');
+            const service = document.getElementById('service');
+            document.querySelector('.search-icon').addEventListener('click', (e) => {
+                if(state.value == '' && service.value == ''){
+                    e.preventDefault();
+                    alert('Both search query cannot be empty')
+                }
+            })
+        </script>
 
         <div class="nav-links">
             <% if(user != null || user != undefined){ %>

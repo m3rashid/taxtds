@@ -179,51 +179,28 @@ router.post('/service/edit/:serviceId', (req, res) => {
 
 })
 
-
-
-
-
-
-
-
-
-router.get('/user/delete-service/:serviceId', (req, res) => {
+router.get('/user/delete-service/:serviceId', async (req, res) => {
     if(!req.isAuthenticated()){
         req.flash('flash', 'You are not authenticated to add service, signup (create account) or login first!');
         return res.redirect('/');
     }
     else{
-        Service.findById(req.params.serviceId, (err, service) => {
-            if(err) console.log(err);
-            else{
-                User.findById(service.addedBy, (err,user) => {
-                    if(err) console.log(err);
-                    else{
-                        email(user, 'deleteServiceByUser.ejs', 'You deleted one of your service(s)');
-                    }
-                })
-            }
-        })
-    
-        //! do the delete operation
-        Service.deleteOne({id: req.params.serviceId}, (err, doc) => {
-            if (err){
-                console.log(err);
-                req.flash('failure', 'A problem occured. Cannot delete service, try again');
-            }
-            else req.flash('success', 'Successfully deleted the service');
-            res.redirect('back');
-        })
+        try{
+            const service = await Service.findById(req.params.serviceId)
+            const user = await User.findById(service.addedBy)
+            // await email(user, 'deleteServiceByUser.ejs', 'You deleted one of your service(s)');
+            
+            //! do the delete operation
+            await Service.deleteOne({id: req.params.serviceId})
+            req.flash('success', 'Successfully deleted the service');
+        }
+        catch(err){
+            console.log(err);
+            req.flash('failure', 'A problem occured. Cannot delete service, try again');
+        }   
+        res.redirect('back');
     }
 })
-
-
-
-
-
-
-
-
 
 
 router.post('/login', (req, res) => {
@@ -275,7 +252,7 @@ router.post('/signup', (req, res) => {
                     else{
                         passport.authenticate('local')(req, res, () => {
                             req.flash('success', 'Successfully created your account on tax TDS');
-                            email(user, 'signup.ejs', 'You have successfully created your account in Tax TDS');
+                            // email(user, 'signup.ejs', 'You have successfully created your account in Tax TDS');
                             res.redirect('/user');
                         });
                     }

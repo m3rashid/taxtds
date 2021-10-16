@@ -30,10 +30,10 @@ router.post('/forgot-password', (req, res) => {
                 id: foundUser.id
             }
             const token = jwt.sign(payload, secret, {expiresIn: '15m'});
-            // const link = `http://localhost:3000/reset-password/${foundUser.id}/${token}`;       // link to work locally
-            const link = `https://taxtds.herokuapp.com//reset-password/${foundUser.id}/${token}`;    // link for test deployment (heroku)
+            const link = `http://localhost:3000/reset-password/${foundUser.id}/${token}`;       // link to work locally
+            // const link = `https://taxtds.herokuapp.com//reset-password/${foundUser.id}/${token}`;    // link for test deployment (heroku)
             foundUser.link = link;
-            email(foundUser, 'forgotPassword.ejs', 'Reset Password link');
+            // email(foundUser, 'forgotPassword.ejs', 'Reset Password link');
             req.flash('success', 'Password reset link has been sent to your email');
             console.log(link);
 

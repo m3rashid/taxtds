@@ -9,9 +9,24 @@ const Service = require('../models/service');
 const email = require('../config/nodemailer');
 
 
-// TODO make this work
-router.get('/admin/advertise-service/:serviceId', (req, res) => {
-    res.send('<h1>Under Construction</h1>')
+router.post('/admin/advertise', (req, res) => {
+    const email = req.body.email;
+    const phone = req.body.phone;
+    const companyName = req.body.name;
+    const query = req.body.query;
+    console.log(email, phone, companyName, query)
+    const admin = {
+        username: process.env.ADMIN_EMAIL,
+        data: {
+            email: email,
+            phone: phone,
+            companyName: companyName,
+            query: query
+        }
+    }
+    email(admin, 'quoteToAdmin.ejs', 'Someone asked for quote');
+    req.flash('success', 'Your request for quote was sent to the admin');
+    res.redirect('back');
 })
 
 
@@ -79,7 +94,7 @@ router.get('/admin/delete-user/:userId', async (req, res) => {
     //* First send mail to the user that it is about to be deleted
     try{
         let user = await User.findById(req.params.userId)
-        // await email(user, 'deleteUser.ejs', 'Your Account deleted by the taxtds Admin');
+        await email(user, 'deleteUser.ejs', 'Your Account deleted by the taxtds Admin');
         req.flash('success', 'Deletion email sent to the user')
         
         //! Do the delete operation
@@ -100,7 +115,7 @@ router.get('/admin/delete-service/:serviceId', async (req, res) => {
     try{
         let service = await Service.findById(req.params.serviceId);
         let user = await User.findById(service.addedBy)
-        // await email(user, 'deleteServiceByadmin.ejs', 'Service deleted by Tax TDS admin');
+        await email(user, 'deleteServiceByadmin.ejs', 'Service deleted by Tax TDS admin');
         req.flash('success', 'Service delete mail sent to the user');
         
         //! do the delete operation
@@ -129,7 +144,7 @@ router.post('/service/write-review/:serviceId', async (req, res) => {
         user.commentedBy = review.name;
         user.rating = review.rating;
         user.review = review.comment;
-        // email(user, 'review.ejs', 'Someone posted a review');
+        email(user, 'review.ejs', 'Someone posted a review');
     }
     catch(err){
         console.log(err);
@@ -167,6 +182,7 @@ router.get('/', async (req, res) => {
     }
     return res.render('index.ejs', {
         titleTop: 'Home | Tax TDS',
+        additional: '',
         user: req.user,
         services: userServices,
         admin: getAdmin()
@@ -178,19 +194,21 @@ router.get('/', async (req, res) => {
 router.get('/search', async (req, res) => {
     const state = req.query.state;
     const service = req.query.service;
-    console.log(state, service);
+    const stateSearch = { '$regex': state, '$options': 'i'  }
+    const serviceSearch = { '$regex': service, '$options': 'i'}
     let userServices = [];
     try{
         if(state  != '' && service != ''){
-            userServices =  await Service.find({ $or: [{ 'state': state }, { 'services': service }] })
+            userServices =  await Service.find({ $or: [{ 'state': stateSearch }, { 'services': serviceSearch }] })
         }
         else if(state != '' && service == ''){
-            userServices = await Service.find({ state: state })
+            userServices = await Service.find({ state: stateSearch })
         }
         else{
-            userServices = await Service.find({ services: service })
+            userServices = await Service.find({ services: serviceSearch })
         }
-    }catch(err){ 
+    }
+    catch(err){ 
         console.log(err) 
     }
 
@@ -199,6 +217,7 @@ router.get('/search', async (req, res) => {
     }
     return res.render('index.ejs', {
         titleTop: 'Search | Tax TDS',
+        additional: 'Search Query Results . . . . ',
         user: req.user,
         services: userServices,
         admin: getAdmin()
@@ -206,12 +225,27 @@ router.get('/search', async (req, res) => {
 });
 
 
-// Searching (left panel category search)
-router.get('/services/category/:list', (req, res) => {
-    const list = req.params.list;
-    console.log(_.lowerCase(list));
-    // Nothing as of now
-    return res.redirect('/');
+router.get('/professions', async (req, res) => {
+    const profession = req.query.profession
+    let userServices = [];
+    try{
+        if(profession == 'all'){
+            userServices = await Service.find({})
+        }
+        else{
+            userServices = await Service.find({ professions: profession })
+        }
+    }
+    catch(err){
+        console.log(err);
+    }
+    return res.render('index.ejs', {
+        titleTop: 'Search | Tax TDS',
+        additional: 'Search Query Results . . . . ',
+        user: req.user,
+        services: userServices,
+        admin: getAdmin()
+    });
 })
 
 module.exports = router;

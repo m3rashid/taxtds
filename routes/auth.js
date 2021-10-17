@@ -188,7 +188,7 @@ router.get('/user/delete-service/:serviceId', async (req, res) => {
         try{
             const service = await Service.findById(req.params.serviceId)
             const user = await User.findById(service.addedBy)
-            // await email(user, 'deleteServiceByUser.ejs', 'You deleted one of your service(s)');
+            await email(user, 'deleteServiceByUser.ejs', 'You deleted one of your service(s)');
             
             //! do the delete operation
             await Service.deleteOne({id: req.params.serviceId})
@@ -252,7 +252,7 @@ router.post('/signup', (req, res) => {
                     else{
                         passport.authenticate('local')(req, res, () => {
                             req.flash('success', 'Successfully created your account on tax TDS');
-                            // email(user, 'signup.ejs', 'You have successfully created your account in Tax TDS');
+                            email(user, 'signup.ejs', 'You have successfully created your account in Tax TDS');
                             res.redirect('/user');
                         });
                     }

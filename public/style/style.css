@@ -839,7 +839,7 @@ footer #footer-copyright {
   opacity: 0.6;
 }
 
-div#loginMain, div#signupMain, div#logoutMain, div#adminLoginMain {
+div#loginMain, div#signupMain, div#adminLoginMain, div#advertiseMain {
   background-color: #d5e2f5;
   display: none;
   position: fixed;
@@ -851,28 +851,28 @@ div#loginMain, div#signupMain, div#logoutMain, div#adminLoginMain {
 }
 
 @media (max-width: 450px) {
-  div#loginMain, div#signupMain, div#logoutMain, div#adminLoginMain {
+  div#loginMain, div#signupMain, div#adminLoginMain, div#advertiseMain {
     padding: 15px;
     width: 100%;
     left: 0;
   }
 }
 
-div#loginMain span.close, div#signupMain span.close, div#logoutMain span.close, div#adminLoginMain span.close {
+div#loginMain span.close, div#signupMain span.close, div#adminLoginMain span.close, div#advertiseMain span.close {
   position: relative;
-  left: 90%;
+  left: 87%;
   top: -10px;
   font-size: 3rem;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-div#loginMain span.close:hover, div#signupMain span.close:hover, div#logoutMain span.close:hover, div#adminLoginMain span.close:hover {
+div#loginMain span.close:hover, div#signupMain span.close:hover, div#adminLoginMain span.close:hover, div#advertiseMain span.close:hover {
   color: red;
   cursor: pointer;
 }
 
-div#loginMain .loginCard, div#signupMain .loginCard, div#logoutMain .loginCard, div#adminLoginMain .loginCard {
+div#loginMain .loginCard, div#signupMain .loginCard, div#adminLoginMain .loginCard, div#advertiseMain .loginCard {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -895,12 +895,12 @@ div#loginMain .loginCard, div#signupMain .loginCard, div#logoutMain .loginCard, 
 }
 
 @media (max-width: 450px) {
-  div#loginMain .loginCard, div#signupMain .loginCard, div#logoutMain .loginCard, div#adminLoginMain .loginCard {
+  div#loginMain .loginCard, div#signupMain .loginCard, div#adminLoginMain .loginCard, div#advertiseMain .loginCard {
     width: 100%;
   }
 }
 
-div#loginMain .loginCard img, div#signupMain .loginCard img, div#logoutMain .loginCard img, div#adminLoginMain .loginCard img {
+div#loginMain .loginCard img, div#signupMain .loginCard img, div#adminLoginMain .loginCard img, div#advertiseMain .loginCard img {
   position: relative;
   height: 120px;
   width: 120px;
@@ -909,7 +909,7 @@ div#loginMain .loginCard img, div#signupMain .loginCard img, div#logoutMain .log
   top: -60px;
 }
 
-div#loginMain .loginCard form, div#signupMain .loginCard form, div#logoutMain .loginCard form, div#adminLoginMain .loginCard form {
+div#loginMain .loginCard form, div#signupMain .loginCard form, div#adminLoginMain .loginCard form, div#advertiseMain .loginCard form {
   margin-top: -30px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -926,7 +926,7 @@ div#loginMain .loginCard form, div#signupMain .loginCard form, div#logoutMain .l
           align-items: center;
 }
 
-div#loginMain .loginCard form .loginUsername, div#loginMain .loginCard form .loginPassword, div#signupMain .loginCard form .loginUsername, div#signupMain .loginCard form .loginPassword, div#logoutMain .loginCard form .loginUsername, div#logoutMain .loginCard form .loginPassword, div#adminLoginMain .loginCard form .loginUsername, div#adminLoginMain .loginCard form .loginPassword {
+div#loginMain .loginCard form .loginUsername, div#loginMain .loginCard form .loginPassword, div#signupMain .loginCard form .loginUsername, div#signupMain .loginCard form .loginPassword, div#adminLoginMain .loginCard form .loginUsername, div#adminLoginMain .loginCard form .loginPassword, div#advertiseMain .loginCard form .loginUsername, div#advertiseMain .loginCard form .loginPassword {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -947,13 +947,13 @@ div#loginMain .loginCard form .loginUsername, div#loginMain .loginCard form .log
   border-radius: 5px;
 }
 
-div#loginMain .loginCard form .loginUsername i, div#loginMain .loginCard form .loginPassword i, div#signupMain .loginCard form .loginUsername i, div#signupMain .loginCard form .loginPassword i, div#logoutMain .loginCard form .loginUsername i, div#logoutMain .loginCard form .loginPassword i, div#adminLoginMain .loginCard form .loginUsername i, div#adminLoginMain .loginCard form .loginPassword i {
+div#loginMain .loginCard form .loginUsername i, div#loginMain .loginCard form .loginPassword i, div#signupMain .loginCard form .loginUsername i, div#signupMain .loginCard form .loginPassword i, div#adminLoginMain .loginCard form .loginUsername i, div#adminLoginMain .loginCard form .loginPassword i, div#advertiseMain .loginCard form .loginUsername i, div#advertiseMain .loginCard form .loginPassword i {
   background-color: #ff3300;
   font-size: 1.5rem;
   margin-right: 8px;
 }
 
-div#loginMain .loginCard form .loginUsername input, div#loginMain .loginCard form .loginPassword input, div#signupMain .loginCard form .loginUsername input, div#signupMain .loginCard form .loginPassword input, div#logoutMain .loginCard form .loginUsername input, div#logoutMain .loginCard form .loginPassword input, div#adminLoginMain .loginCard form .loginUsername input, div#adminLoginMain .loginCard form .loginPassword input {
+div#loginMain .loginCard form .loginUsername input, div#loginMain .loginCard form .loginPassword input, div#signupMain .loginCard form .loginUsername input, div#signupMain .loginCard form .loginPassword input, div#adminLoginMain .loginCard form .loginUsername input, div#adminLoginMain .loginCard form .loginPassword input, div#advertiseMain .loginCard form .loginUsername input, div#advertiseMain .loginCard form .loginPassword input {
   height: 35px;
   width: 250px;
   padding-left: 10px;
@@ -962,7 +962,7 @@ div#loginMain .loginCard form .loginUsername input, div#loginMain .loginCard for
   border-bottom-right-radius: 5px;
 }
 
-div#loginMain .loginCard form button, div#signupMain .loginCard form button, div#logoutMain .loginCard form button, div#adminLoginMain .loginCard form button {
+div#loginMain .loginCard form button, div#signupMain .loginCard form button, div#adminLoginMain .loginCard form button, div#advertiseMain .loginCard form button {
   font-size: 1.5rem;
   padding: 5px;
   width: 200px;
@@ -970,6 +970,23 @@ div#loginMain .loginCard form button, div#signupMain .loginCard form button, div
   color: white;
   border-radius: 5px;
   margin-bottom: 10px;
+}
+
+div#advertiseMain {
+  top: calc(50vh - 280px);
+}
+
+div#advertiseMain .loginCard form textarea {
+  min-height: 150px;
+  width: 100%;
+  padding-left: 0;
+  padding-left: 10px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  resize: none;
+  margin-bottom: 15px;
+  border-top: 8px solid #ff3300;
+  border-bottom: 8px solid #ff3300;
 }
 
 main#user-profile {

@@ -525,7 +525,7 @@ footer{
     filter: blur(3px);
     opacity: 0.6;
 }
-div#loginMain, div#signupMain, div#logoutMain, div#adminLoginMain{
+div#loginMain, div#signupMain, div#adminLoginMain, div#advertiseMain{
     background-color: rgb(213, 226, 245);
     display: none;
     position: fixed;
@@ -541,7 +541,7 @@ div#loginMain, div#signupMain, div#logoutMain, div#adminLoginMain{
     }
     span.close{
         position: relative;
-        left: 90%;
+        left: 87%;
         top: -10px;
         font-size: 3rem;
         padding-left: 5px;
@@ -607,6 +607,21 @@ div#loginMain, div#signupMain, div#logoutMain, div#adminLoginMain{
                 margin-bottom: 10px;
             }
         }
+    }
+}
+div#advertiseMain{
+    top: calc(50vh - 280px);
+    .loginCard form textarea{
+        min-height: 150px;
+        width: 100%;
+        padding-left: 0;
+        padding-left: 10px;
+        font-size: 1.2rem;
+        border-radius: 5px;
+        resize: none;
+        margin-bottom: 15px;
+        border-top: 8px solid rgb(255, 51, 0);
+        border-bottom: 8px solid rgb(255, 51, 0);
     }
 }
 // Modlals End

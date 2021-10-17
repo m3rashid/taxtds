@@ -7,13 +7,15 @@ copyright.innerHTML = `copyrights &copy; ${date.getFullYear()}, &nbsp;&nbsp; All
 const modals = [
     document.getElementById('loginMain'),
     document.getElementById('signupMain'),
-    document.getElementById('adminLoginMain')
+    document.getElementById('adminLoginMain'),
+    document.getElementById('advertiseMain')
 ];
 
 const btns = [
     document.getElementById('loginBtn'),
     document.getElementById('signupBtn'),
-    document.getElementById('userAdminBtn')
+    document.getElementById('userAdminBtn'),
+    document.getElementById('getQuotesBtn')
 ];
 
 const closebtns = document.querySelectorAll('span.close');

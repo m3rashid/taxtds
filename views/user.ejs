@@ -152,7 +152,7 @@
             <div class="user-profile-form">
                 <h2>Register your services</h2>
                 <form enctype="multipart/form-data" id="add-service" action="/user/add-service" method="POST" class="user-profile-register-service">
-                    <p style="color: white; text-align: center;">Data entered will be shown on the main page as a listing, please fill this form carefully</p>
+                    <p style="color: white; line-height: 1.5rem; text-align: center;">Data entered will be shown on the main page as a listing, please fill this form carefully including authentic details about your service</p>
                     <br>
                     <div>
                         <i class="fas fa-building"></i>
@@ -250,8 +250,17 @@
 
             <div class="user-profile-cards">
                 <h2>Your Already Listed Services</h2>
-                <% if(services.length ==0){ %>
+                <% if(services.length == 0){ %>
                     <h3 style="text-align: center">-----No registered services-----</h3>
+                    <br>
+                    <br>
+                    <div style="padding: 30px">
+                        <h3 style="margin-bottom: 1rem; font-weight: bold;">There are certain guidelines for registering your service</h3>
+                        <ol>
+                            <li>Gallery images should be of the same dimensions, else this will hamper the look of your service's public profile</li>
+                            <li>After pressing the add service button, it may take a while to process data. So, please have patience at that time, dont close the browser tab</li>
+                        </ol>
+                    </div>
                 <% } %>
 
                 <% for(let i=0; i<services.length; i++){ %>
@@ -277,14 +286,14 @@
                         </p>
                         <div class="avatar">
                             <p>Your service avatar (profile picture)</p>
-                            <img src="data:<%= services[i].avatar.contentType %>;base64,<%= services[i].avatar.img %>" alt="service avatar">
+                            <img src="<%= services[i].avatar %>" alt="service avatar">
                         </div>
 
                         <% if(services[i].gallery.length>0){ %>
                             <p class="service-gallery-images">Your service gallery images</p>
                             <div class="gallery">
                                 <% for(let j=0; j<3; j++){ %>
-                                    <img src="data:<%= services[i].gallery[j].contentType %>;base64,<%= services[i].gallery[j].img %>" alt="gallery image">
+                                    <img src="<%= services[i].gallery[j] %>" alt="gallery image">
                                 <% } %>    
                             </div>
                         <% } %>

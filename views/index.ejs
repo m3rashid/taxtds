@@ -2,10 +2,10 @@
     <%- include('partials/header/titleBar.ejs') %>
     <%- include('partials/header/subTitleBar.ejs') %>
     
+    <%- include('partials/modals/advertise.ejs') %>
     <%- include('partials/modals/login.ejs') %>
     <%- include('partials/modals/signup.ejs') %>
     <%- include('partials/modals/adminLogin.ejs') %>
-    <%- include('partials/modals/advertise.ejs') %>
     
     <main>
         <div class="image-top-main">
@@ -27,6 +27,17 @@
                             <p class="name" style="margin-top: 20px; text-align: center;"><a style="color: red" href="/">Back to Home <i class="fas fa-home"></i> </a></p>
                         </div>
                     <% } %> 
+                    <!-- $('#demo').pagination({
+                        dataSource: <% services %>,
+                        pageSize: 3,
+                        showPageNumbers: false,
+                        showNavigator: true,
+                        callback: function(data, pagination) {
+                            // template method of yourself
+                            var html = template(data);
+                            dataContainer.html(html);
+                        }
+                    }) -->
                     <% for(let i=0; i< services.length; i++){ %>
                         <div class="card" id="card<%= i %>">
                             <h1 class="brand"><a href="/service/details/<%= services[i].id %>"><%= services[i].brandName %></a></h1>
@@ -49,8 +60,15 @@
                             <a href="/service/details/<%= services[i].id %>/#user-write-review" class="button back-black"><i class="far fa-star"></i> Write Review</a>
                             <a href="tel:<%= services[i].phone %>" class="button back-black"><i class="fas fa-phone-alt"></i> Call Now</a>
                         </div>
-                    <% } %> 
+                    <% } %>
                 <% } %>
+                <div class="pagination">
+                    <% for(let i=1; i<=total; i++){ %>
+                        <% if(page != i){ %>
+                            <a href="/?page=<%= i %>"><%= i %></a>    
+                        <% } %>
+                    <% } %>
+                </div>
             </div>
         </div>
     </main>

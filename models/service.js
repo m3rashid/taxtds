@@ -7,34 +7,14 @@ const serviceSchema = new mongoose.Schema({
     },
     tagline: String,
     avatar: {
-        filename: {
-            type: String,
-            unique: true,
-            required: true
-        },
-        contentType: {
-            type: String,
-            required: true
-        },
-        img: {
-            type: String,
-            required: true
-        }
+        type: String,
+        unique: true,
+        required: true
     },
     gallery: [{
-        filename: {
-            type: String,
-            unique: true,
-            required: true
-        },
-        contentType: {
-            type: String,
-            required: true
-        },
-        img: {
-            type: String,
-            required: true
-        }
+        type: String,
+        unique: true,
+        required: true
     }],
     owner: {
         type: String,

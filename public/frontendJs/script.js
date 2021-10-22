@@ -5,17 +5,17 @@ copyright.innerHTML = `copyrights &copy; ${date.getFullYear()}, &nbsp;&nbsp; All
 
 // Modals for login and signup in the index page 
 const modals = [
+    document.getElementById('advertiseMain'),
     document.getElementById('loginMain'),
     document.getElementById('signupMain'),
-    document.getElementById('adminLoginMain'),
-    document.getElementById('advertiseMain')
+    document.getElementById('adminLoginMain')
 ];
 
 const btns = [
+    document.getElementById('getQuotesBtn'),
     document.getElementById('loginBtn'),
     document.getElementById('signupBtn'),
-    document.getElementById('userAdminBtn'),
-    document.getElementById('getQuotesBtn')
+    document.getElementById('userAdminBtn')
 ];
 
 const closebtns = document.querySelectorAll('span.close');

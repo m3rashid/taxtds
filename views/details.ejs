@@ -16,12 +16,12 @@
             <div class="slideshow-container">
                 <% for(let i=0; i<3; i++){ %>
                     <div class="mySlides">
-                        <img src="data:<%= services.gallery[i].contentType %>;base64,<%= services.gallery[i].img %>" alt="">
+                        <img src="<%= services.gallery[i] %>" alt="">
                     </div>
                 <% } %>
                 <% for(let i=0; i<3; i++){ %>
                     <div class="mySlides">
-                        <img src="data:<%= services.gallery[i].contentType %>;base64,<%= services.gallery[i].img %>" alt="">
+                        <img src="<%= services.gallery[i] %>" alt="">
                     </div>
                 <% } %>    
             </div>
@@ -31,8 +31,8 @@
     <div class="details-page-main">
         <div class="details-col-left">
             <div class="avatar">
-                <% if(services.avatar.img){ %>
-                    <img src="data:<%= services.avatar.contentType %>;base64,<%= services.avatar.img %>">
+                <% if(services.avatar){ %>
+                    <img src="<%= services.avatar %>">
                 <% } %>
             </div>
 

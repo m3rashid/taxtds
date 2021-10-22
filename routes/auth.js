@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const bodyParser = require('body-parser');
 const passport = require('passport');
-
 // const passportLocalMongoose = require('passport-local-mongoose');
 const mongoose = require('mongoose');
 const User = require('../models/user')
@@ -9,6 +8,16 @@ const Service = require('../models/service')
 const email = require('../config/nodemailer');
 const upload = require('../config/multer')
 const fs = require('fs');
+const path = require('path')
+const cloudinary = require('cloudinary').v2;
+const sharp = require('sharp');
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    secure: true
+})
 
 passport.use((User.createStrategy()));
 passport.serializeUser(User.serializeUser());
@@ -37,12 +46,24 @@ router.get('/user', (req, res) => {
     }
 });
 
+async function uploadFiles(file, width){
+    try{
+        let filePath = path.resolve(__dirname, `../uploads/resized/${file.filename}`)
+        await sharp(file.path).resize({width: width}).toFile(filePath)
+        let data = await cloudinary.uploader.upload(filePath)
+        return data
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
 router.post('/user/add-service', upload.fields([
     { name: 'avatar', maxCount: 1 }, 
     { name: 'galleryImg1', maxCount: 1 }, 
     { name: 'galleryImg2', maxCount: 1 }, 
     { name: 'galleryImg3', maxCount: 1 }
-]), (req, res) => {
+]), async (req, res) => {
     if(!req.isAuthenticated()){
         req.flash('flash', 'You are not authenticated to add service, signup (create account) or login first!');
         return res.redirect('/');
@@ -58,53 +79,43 @@ router.post('/user/add-service', upload.fields([
         for(let i=0; i<professions.length; i++){
             if(professions[i] != null && professions[i] != '') sanitizedProfessions.push(professions[i]);
         }
-        const gallery = [req.files['galleryImg1'][0], req.files['galleryImg2'][0], req.files['galleryImg3'][0]]
-        const avatar = req.files['avatar'][0];
-        
-        let imgArray = gallery.map((file) => {
-            return encode_image = fs.readFileSync(file.path).toString('base64'); 
-        });
-        let avt = fs.readFileSync(avatar.path).toString('base64');
+        const gallery = [req.files.galleryImg1[0], req.files.galleryImg2[0], req.files.galleryImg3[0]]
+        const avatar = req.files.avatar[0]
 
-        const images = imgArray.map((src, index) => {
-            return img = {
-                filename: gallery[index].originalname, 
-                contentType: gallery[index].mimetype, 
-                img: src 
-            } 
-        });
-        const avtImg = {
-            filename: avatar.originalname, 
-            contentType: avatar.mimetype, 
-            img: avt 
-        }
-        
-        const service = new Service({
-            brandName: req.body.brandName,
-            tagline: req.body.tagline,
-            avatar: avtImg,
-            gallery: images,
-            owner: req.body.owner,
-            experience: req.body.experience,
-            establishment: req.body.establishment,
-            addedBy: req.user.id,
-            phone: req.body.phone,
-            email: req.body.email,
-            professions: sanitizedProfessions,
-            address: req.body.address,
-            state: req.body.state,
-            services: servicesSanitized
-        });
-        
-        service.save((err, doc) => {
-            if(err){
-                console.log(err);
-                req.flash('failure', 'There was an error in registering your service, try again');
-                req.flash('failure', 'error: ' + err.message);
+        let galleryUrls = [];
+        let avatarUrl;
+        try{
+            for(let i=0; i<3; i++){
+                let abc = await uploadFiles(gallery[i], 700)
+                galleryUrls.push(abc.secure_url)
             }
-            else req.flash('success', 'Your service has been successfully registered in tax TDS');
+            avatarUrl = await uploadFiles(avatar, 600);
+
+            const service = new Service({
+                brandName: req.body.brandName,
+                tagline: req.body.tagline,
+                avatar: avatarUrl.secure_url,
+                gallery: galleryUrls,
+                owner: req.body.owner,
+                experience: req.body.experience,
+                establishment: req.body.establishment,
+                addedBy: req.user.id,
+                phone: req.body.phone,
+                email: req.body.email,
+                professions: sanitizedProfessions,
+                address: req.body.address,
+                state: req.body.state,
+                services: servicesSanitized
+            });
+            await service.save();
+            req.flash('success', 'Your service has been successfully registered in tax TDS');
             res.redirect('/user');
-        });
+        }
+        catch(err){
+            console.log(err)
+            req.flash('failure', 'There was an error in registering your service, try again');
+            res.redirect('back')
+        }
     }
 })
 

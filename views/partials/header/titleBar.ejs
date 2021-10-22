@@ -21,6 +21,7 @@
         </script>
 
         <div class="nav-links">
+            <a id="getQuotesBtn"><i class="fas fa-question-circle"></i> Get Quotes</a>
             <% if(user != null || user != undefined){ %>
                 <a id="user-profile" href="/user"><i class="fas fa-user"></i> Profile</a>
             <% } else{ %>
@@ -33,6 +34,5 @@
             <% } else{ %>
                 <a id="userAdminBtn"><i class="fas fa-user-cog"></i> Admin</a>
             <% } %>
-            <a id="getQuotesBtn"><i class="fas fa-question-circle"></i> Get Quotes</a>
         </div>
     </form>

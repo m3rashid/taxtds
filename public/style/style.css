@@ -387,6 +387,13 @@ main div.main-details div.info-card-section div.card {
   padding: 20px 20px 30px 20px;
   border-radius: 5px;
   font-size: 1rem;
+  min-width: 520px;
+}
+
+@media (max-width: 1100px) {
+  main div.main-details div.info-card-section div.card {
+    min-width: 350px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -496,6 +503,25 @@ main div.main-details div.info-card-section div.card a.back-black:hover {
   background-color: #343c42;
   border-color: #343c42;
   color: white;
+}
+
+main div.main-details div.info-card-section div.pagination {
+  margin: 30px 0;
+  float: right;
+}
+
+main div.main-details div.info-card-section div.pagination a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  background-color: white;
+  color: black;
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+
+main div.main-details div.info-card-section div.pagination a:hover {
+  background-color: #fdf2d4;
+  color: red;
 }
 
 footer {
@@ -1344,8 +1370,8 @@ main#user-profile div.details-page-main {
   min-height: 25vh;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 3fr 2fr;
-      grid-template-columns: 3fr 2fr;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
   grid-gap: 30px;
   margin: 30px 10px 15px 10px;
 }

@@ -8,7 +8,6 @@ const User = require('../models/user');
 const Service = require('../models/service');
 const email = require('../config/nodemailer');
 
-
 router.post('/admin/advertise', (req, res) => {
     const email = req.body.email;
     const phone = req.body.phone;
@@ -173,22 +172,29 @@ router.get('/service/details/:serviceId', async (req, res) => {
 
 
 router.get('/', async (req, res) => {
-    let userServices = []
+    let userServices = [];
+    let count = await Service.count();    
+    const resultsPerPage = 25;
+    let page = req.query.page ? Number(req.query.page) : 1;
+    let totalNumberofPages = Math.ceil(Number(count)/resultsPerPage);
+
     try{
-        userServices = await Service.find({}).sort({date: 1})
+        userServices = await Service.find({}).limit(resultsPerPage).skip((page - 1) * resultsPerPage)
     }
     catch(err){ 
         console.log(err) 
     }
+
     return res.render('index.ejs', {
         titleTop: 'Home | Tax TDS',
         additional: '',
         user: req.user,
         services: userServices,
+        page: page,
+        total: totalNumberofPages,
         admin: getAdmin()
     });
 });
-
 
 // Searching (title bar state/service search)
 router.get('/search', async (req, res) => {
@@ -217,7 +223,7 @@ router.get('/search', async (req, res) => {
     }
     return res.render('index.ejs', {
         titleTop: 'Search | Tax TDS',
-        additional: 'Search Query Results . . . . ',
+        additional: 'Search Query Results . . . .',
         user: req.user,
         services: userServices,
         admin: getAdmin()

@@ -190,9 +190,9 @@ router.get('/', async (req, res) => {
         additional: '',
         user: req.user,
         services: userServices,
+        admin: getAdmin(),
         page: page,
-        total: totalNumberofPages,
-        admin: getAdmin()
+        total: totalNumberofPages
     });
 });
 
@@ -226,7 +226,9 @@ router.get('/search', async (req, res) => {
         additional: 'Search Query Results . . . .',
         user: req.user,
         services: userServices,
-        admin: getAdmin()
+        admin: getAdmin(),
+        page: 1,
+        total: 1
     });
 });
 
@@ -250,7 +252,9 @@ router.get('/professions', async (req, res) => {
         additional: 'Search Query Results . . . . ',
         user: req.user,
         services: userServices,
-        admin: getAdmin()
+        admin: getAdmin(),
+        page: 1,
+        total: 1
     });
 })
 

@@ -29,7 +29,7 @@ let renderTemplate = (data, filename) => {
 module.exports = (user, template, subject) => { // other data to be passed inside the 'user'
     let html = renderTemplate(user, template);
     let mailOptions = {
-        from: '"Tax TDS admin", test.mega007@gmail.com',
+        from: `"Tax TDS admin", ${process.env.GMAIL_USERNAME}@gmail.com`,
         to: user.username,
         subject: subject,
         html: html

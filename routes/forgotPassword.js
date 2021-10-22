@@ -30,8 +30,12 @@ router.post('/forgot-password', (req, res) => {
                 id: foundUser.id
             }
             const token = jwt.sign(payload, secret, {expiresIn: '15m'});
-            // const link = `http://localhost:3000/reset-password/${foundUser.id}/${token}`;       // link to work locally
-            const link = `https://taxtds.herokuapp.com//reset-password/${foundUser.id}/${token}`;    // link for test deployment (heroku)
+            const link = `https://taxtds.herokuapp.com//reset-password/${foundUser.id}/${token}`;
+            // This link is to be sent to the user for forgot password (if deployed to another domain, change the domain here accordingly)
+            // Replace the 'taxtds.herokuapp.com' here with your website root url.
+            // If your website's root url is www.taxtds.com, the link would look like `https://www.taxtds.com//reset-password/${foundUser.id}/${token}`
+
+
             foundUser.link = link;
             email(foundUser, 'forgotPassword.ejs', 'Reset Password link');
             req.flash('success', 'Password reset link has been sent to your email');

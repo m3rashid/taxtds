@@ -60,3 +60,14 @@ The below data is for uploading the compressed images to cloudinary for easier a
 | CLOUDINARY_CLOUD_NAME | : | (cloudinary cloud name) |
 | CLOUDINARY_API_KEY | : | (Cloudinary api key) |
 | CLOUDINARY_API_SECRET | : | (cloudinary api secret) |
+
+<br>
+
+```
+#Read the lines 33 - 38 in the file 'routes/forgotPassword.js' 
+and update the link using the instructions given there. 
+
+This is an important step and if not done correctly, 
+users would not be able to get their reset link 
+in case they forget the password.
+```

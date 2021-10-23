@@ -52,7 +52,7 @@ The below data belong to owner of the Taxtds (and should be kept secret)
 <br>
 
 ```
-The below data is for uploading the compressed images to cloudinary for easier and bulk storage. All of it would be found in the [cloudinary.com](cloudinary.com) dashboard after making an account there.
+The below data is for uploading the compressed images to cloudinary for easier and bulk storage. All of it would be found in the [https://cloudinary.com/](https://cloudinary.com/) dashboard after making an account there.
 ```
 
 |  | |   |

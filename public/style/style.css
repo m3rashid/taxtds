@@ -648,33 +648,33 @@ footer div.actual-footer-one .container div.inner-container-two .social-icons-co
   text-decoration: none;
 }
 
-footer div.actual-footer-one .container div.inner-container-two .social-icons-container a:nth-child(1) {
-  color: #4267B2;
-}
-
-footer div.actual-footer-one .container div.inner-container-two .social-icons-container a:nth-child(2) {
-  color: #DD4B39;
-}
-
-footer div.actual-footer-one .container div.inner-container-two .social-icons-container a:nth-child(3) {
-  color: #1DA1F2;
-}
-
-footer div.actual-footer-one .container div.inner-container-two .social-icons-container a:nth-child(4) {
-  color: #2867B2;
-}
-
-footer div.actual-footer-one .container div.inner-container-two .social-icons-container a:nth-child(5) {
-  color: #FF0000;
-}
-
-footer div.actual-footer-one .container div.inner-container-two .social-icons-container a:nth-child(6) {
-  color: #25D366;
-}
-
 footer div.actual-footer-one .container div.inner-container-two .social-icons-container a i {
   font-size: 2rem;
   margin-right: 5px;
+}
+
+footer div.actual-footer-one .container div.inner-container-two .social-icons-container a.social-icon-facebook {
+  color: #4267B2;
+}
+
+footer div.actual-footer-one .container div.inner-container-two .social-icons-container a.social-icon-google-plus {
+  color: #DD4B39;
+}
+
+footer div.actual-footer-one .container div.inner-container-two .social-icons-container a.social-icon-twitter {
+  color: #1DA1F2;
+}
+
+footer div.actual-footer-one .container div.inner-container-two .social-icons-container a.social-icon-linkedin {
+  color: #2867B2;
+}
+
+footer div.actual-footer-one .container div.inner-container-two .social-icons-container a.social-icon-youtube {
+  color: #FF0000;
+}
+
+footer div.actual-footer-one .container div.inner-container-two .social-icons-container a.social-icon-whatsapp {
+  color: #25D366;
 }
 
 footer div.actual-footer-one .container p:first-child {

@@ -400,17 +400,17 @@ footer{
                     padding-top: 10px;
                     a{
                         text-decoration: none;
-                        &:nth-child(1){ color: #4267B2; }
-                        &:nth-child(2){ color: #DD4B39; }
-                        &:nth-child(3){ color: #1DA1F2; }
-                        &:nth-child(4){ color: #2867B2; }
-                        &:nth-child(5){ color: #FF0000; }
-                        &:nth-child(6){ color: #25D366; }
                         i{
                             font-size: 2rem;
                             margin-right: 5px;
                         }
                     }
+                    a.social-icon-facebook{ color: #4267B2; }
+                    a.social-icon-google-plus{ color: #DD4B39; }
+                    a.social-icon-twitter{ color: #1DA1F2; }
+                    a.social-icon-linkedin{ color: #2867B2; }
+                    a.social-icon-youtube{ color: #FF0000; }
+                    a.social-icon-whatsapp{ color: #25D366; }
                 }
             }
             p{

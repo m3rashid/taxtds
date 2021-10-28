@@ -108,6 +108,15 @@ router.post('/user/add-service', upload.fields([
                 services: servicesSanitized
             });
             await service.save();
+
+            // unlink the uploaded files from the file system after saving in the remote database
+            for(let i=0; i<3; i++){
+                fs.unlink(path.resolve(__dirname, `../uploads/resized/${gallery[i].filename}`), (err) => { if(err) console.log(err) });
+                fs.unlink(path.resolve(__dirname, `../uploads/${gallery[i].filename}`), (err) => { if(err) console.log(err) });
+            }
+            fs.unlink(path.resolve(__dirname, `../uploads/resized/${avatar.filename}`), (err) => { if(err) console.log(err) });
+            fs.unlink(path.resolve(__dirname, `../uploads/${avatar.filename}`), (err) => { if(err) console.log(err) });
+
             req.flash('success', 'Your service has been successfully registered in tax TDS');
             res.redirect('/user');
         }
